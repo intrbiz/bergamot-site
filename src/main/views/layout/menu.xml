@@ -1,0 +1,31 @@
+<!DOCTYPE balsa SYSTEM "http://balsa.intrbiz.net/balsa.dtd">
+<?RenderLibrary com.intrbiz.balsa?>
+<fragment xmlns="com.intrbiz.balsa">
+
+	<a href="/demo" class="button">
+		<small>View</small>
+		The Demo
+	</a>
+	
+	<a href="/faq" class="button">
+	    <small>Read</small>
+	    The F.A.Q
+	</a>
+	
+	<a href="/docs" class="button">
+	    <small>Read</small>
+	    The Docs
+	</a>
+	
+	<a href="/getit" class="button">
+	    <small>Get it...</small>
+	    Download
+	</a>
+	
+	<p class="repo-owner">
+        <a href="https://github.com/intrbiz/bergamot">Bergamot</a>
+         is maintained by 
+        <a href="https://github.com/intrbiz">Chris Ellis</a>
+	</p>
+	
+</fragment>

@@ -1,0 +1,53 @@
+<!DOCTYPE balsa SYSTEM "http://balsa.intrbiz.net/balsa.dtd">
+<?RenderLibrary com.intrbiz.balsa?>
+<html xmlns="com.intrbiz.balsa">
+
+    <head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+		<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'/>
+		<link rel="stylesheet" type="text/css" href="#{public('/stylesheets/stylesheet.css')}" media="screen" />
+		<link rel="stylesheet" type="text/css" href="#{public('/stylesheets/pygment_trac.css')}" media="screen" />
+		<link rel="stylesheet" type="text/css" href="#{public('/stylesheets/print.css')}" media="print" />
+		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/github.min.css" />
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script>
+		<script type="text/javascript">
+		    $(document).ready(function() {
+			$('pre').each(function(i, block) {
+			    hljs.highlightBlock(block);
+			});
+		    });
+		</script>
+		<title>Bergamot Monitoring</title>
+  	</head>
+  	
+  	<body>
+  	
+    	<header>
+			<div class="inner">
+	    		<a href="/">
+					<h1>Bergamot Monitoring</h1>
+	    		</a>
+	    		<a href="https://github.com/intrbiz/bergamot" class="button">
+	    			<small>View project on</small>
+	    			<span>GitHub</span>
+	    		</a>
+			</div>
+    	</header>
+    	
+    	<div id="content-wrapper">
+        	<div class="inner clearfix">        	
+				<section id="main-content">
+					<h1>#{title()}</h1>
+			    	<content/> 
+	    		</section>
+	    		
+	    		<aside id="sidebar">
+			    	<include view="layout/menu"/>
+				</aside>
+          	</div>
+        </div>
+          
+    </body>
+    
+</html>
