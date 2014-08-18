@@ -1,3 +1,8 @@
+---
+Author: Chris Ellis
+Date: 2014-08-17
+Code: xml
+---
 # Bergamot Check Configuration
 
 ## Introduction
