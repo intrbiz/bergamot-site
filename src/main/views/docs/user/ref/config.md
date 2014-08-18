@@ -38,7 +38,7 @@ Any object defined with the attribute `template="yes"` is only used for inherita
 not load loaded as a check.  You are perfectly able to inherit from an object which is not a template.
 
 It will pay off to get your head around inheritance early on, as it will make your live far easier in the future.
-Take a look at the example configurations, to see the reccomended approaches for configuring Bergamot.
+Take a look at the example configurations, to see the recommended approaches for configuring Bergamot.
 
 Take a look at this short example of how inheritance behaves:
 
@@ -75,7 +75,7 @@ will inherit the service `check_load`.  The notification and host check configur
 The service `check_load` would itself inherit from the service `generic-service`.  As such it would inherit the notification and 
 scheduling configuration from `generic-service`.
 
-## Reccomended Directory Structure
+## Recommended Configuration Directory Structure
 
     /site.name
 	/templates
@@ -228,16 +228,15 @@ be notified via multiple Notification Engines (email, sms, etc).
 You should define a generic Contact template, which contacts inherit from.  This template should define when and how a 
 contact is notified.  For example:
 
-
-    <contact name="generic-contact" template="yes">
-        <notifications enabled="yes" time-period="24x7"/>
-        <notification-engine engine="email" enabled="yes" time-period="workhours"/>
-        <notification-engine engine="sms" enabled="yes" time-period="out-of-hours"/>
+    <contact name="generic-contact" template="yes">        
+        <notifications enabled="yes" time-period="24x7" alerts="yes" recovery="yes">
+            <notification-engine engine="email" enabled="yes" time-period="24x7"/>
+            <notification-engine engine="sms" enabled="yes" time-period="24x7" alert="yes" recovery="no" ignore="pending, ok, warning"/>
+        </notifications>
     </contact>
 
 This would define a generic template which would be used by other Contacts.  Which sends notifications during the 
-time period `24x7`.  The contact would be notified by `email` during work hours.  The contact 
-would be notified by `sms` out side of work hours.
+time period `24x7`.  The contact would be notified by `email` during work hours.  The contact would be notified by `sms` out side of work hours.
 
 Now we can define a contact, as follows:
 
@@ -246,6 +245,23 @@ Now we can define a contact, as follows:
         <email>joe@example.com</email>
         <pager>+447000010203</pager>
     </contact>
+
+## Configuring Notifications
+
+Notification settings can be configured on contacts and checks.  The `notifications` element is used to define notification settings, 
+notification settings configured on a check take priority then followed by the settings for a contact.  Note notification settings of 
+a check cannot override the notification settings of a contact.
+
+The following is an example of notification settings:
+
+    <notifications enabled="yes" time-period="24x7" alerts="yes" recovery="yes">
+        <notification-engine engine="email" enabled="yes" time-period="24x7"/>
+        <notification-engine engine="sms" enabled="yes" time-period="24x7" alert="yes" recovery="no" ignore="pending, ok, warning"/>
+    </notifications>
+
+Bergamot supports multiple notification engines, a notification engine sends notifications via a particular method, be it email, SMS, etc. 
+Different settings can be applied to different notification engines, say sending SMSes outside of working hours for alerts but otherwise 
+sending emails.
 
 ## Configuring A Command
 
@@ -292,7 +308,21 @@ To make life easier, a more specific Command can be defined, for example:
         <parameter name="command">check_load</parameter>
     </command>
 
-## Configuring A Host
+## Configuring Checks
+
+Bergamot has a few different types of checks:
+
+* Hosts - a networked device which should be actively checked
+* Services - something running on a Host which should be actively checked
+* Traps - something running on a Host which is passively checked
+* Clusters - a virtual Host which is computed based on the state of multiple Hosts
+* Resources - a virtual Service which is computed from the state of multiple Services
+
+Checks fall into three categories: active, passive and virtual.  An active check is scheduled and executed (polled) by Bergamot.  
+A passive check is not scheduled and is not executed, instead it is watched by Bergamot.  A virtual check is computed from the 
+state of dependent checks, the state of a virtual check is computed when a dependent check changes state.
+
+### Configuring Hosts
 
 A Host, is some form of networked device which is to be monitored.  A Host is actively checked using a Command and contains 
 a set of Services and Traps which monitor what executes on the Host.
