@@ -7,24 +7,27 @@ Code: xml
 
 ## Introduction
 
-Bergamot currently uses XML to configure checks.  Hopefully, you will rarely need to interact with 
-the configuration format, as you can create and modify checks via the Web Interface or API.  The 
-check configuration is primarily used when importing from an existing Nagios installation or importing 
-from an existing Bergamot installation.
+Bergamot currently uses XML to configure checks.  Hopefully, you will rarely 
+need to interact with the configuration format, as you can create and modify 
+checks via the Web Interface or API.  The check configuration is primarily used 
+when importing from an existing Nagios installation or importing from an 
+existing Bergamot installation.
 
 ## General Structure
 
-Bergamot recursively loads any file ending in .xml within the configuration directory.  There is no 
-restriction on the layout of the configuration directory except that every XML file is valid.  Each XML
-file must start with the `<bergamot site="my.site.name">` root element, for example:
+Bergamot recursively loads any file ending in .xml within the configuration 
+directory.  There is no restriction on the layout of the configuration directory 
+except that every XML file is valid.  Each XML file must start with the 
+`<bergamot site="my.site.name">` root element, for example:
 
     <bergamot site="demo.bergamot-monitoring.org">
         <!-- Configuration elements here -->
     </bergamot>;
     
-The site attribute corellates configuration for a particular site.  One Bergamot instance is capable of 
-monitoring many, disconnected and isolated sites.  However, you cannot mix and match configuration for 
-different sites within the same configuration file.  The site name is usually the domain name for that site.
+The site attribute corellates configuration for a particular site.  One Bergamot 
+instance is capable of monitoring many, disconnected and isolated sites.  
+However, you cannot mix and match configuration for different sites within the 
+same configuration file.  The site name is usually the domain name for that site.
 
 ## Comments
 
@@ -323,14 +326,17 @@ Bergamot has a few different types of checks:
 * Clusters - a virtual Host which is computed based on the state of multiple Hosts
 * Resources - a virtual Service which is computed from the state of multiple Services
 
-Checks fall into three categories: active, passive and virtual.  An active check is scheduled and executed (polled) by Bergamot.  
-A passive check is not scheduled and is not executed, instead it is watched by Bergamot.  A virtual check is computed from the 
-state of dependent checks, the state of a virtual check is computed when a dependent check changes state.
+Checks fall into three categories: active, passive and virtual.  An active check 
+is scheduled and executed (polled) by Bergamot.  A passive check is not scheduled 
+and is not executed, instead it is watched by Bergamot.  A virtual check is 
+computed from the state of dependent checks, the state of a virtual check is 
+computed when a dependent check changes state.
 
 ### Configuring Hosts
 
-A Host, is some form of networked device which is to be monitored.  A Host is actively checked using a Command and contains 
-a set of Services and Traps which monitor what executes on the Host.
+A Host, is some form of networked device which is to be monitored.  A Host is 
+actively checked using a Command and contains a set of Services and Traps which 
+monitor what executes on the Host.
 
 
 
