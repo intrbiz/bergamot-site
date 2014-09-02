@@ -144,7 +144,7 @@ Bergamot repository:
 
 Install the Bergamot master components:
 
-    root@demo:~# zypper in bergamot-java bergamot-ui bergamot-notifier-email bergamot-notifier-sms
+    root@demo:~# zypper in bergamot-java bergamot-cli bergamot-ui bergamot-notifier-email bergamot-notifier-sms
 
 The packages will install default daemon configuration files for you and the 
 required nginx configuration.
@@ -274,3 +274,30 @@ it will look like:
 
 Again configure the RabbitMQ broker with the same syntax as used in the UI 
 configuration file.
+
+## Creating A Site
+
+Now that Bergamot is installed, we need to create a site before we can go much 
+further.  We can use the Bergamot admin CLI to create the site
+
+    root@demo:~# bergamot-cli admin create-site 'bergamot.local' 'Local Bergamot instance' 'bergamot'
+
+The above command create the site `bergamot.local` with the summary 
+`Local Bergamot instance` and with two aliases.  Aliases are alternative names 
+for a site, there is no limit on the number of aliases a site can have.  Note: 
+wild-card aliases are not supported.
+
+The site configuration will be created using the template configuration and 
+stored in `/etc/bergamot/config/bergamot.local/` where the site name is 
+`bergamot.local`.  This configuration is then imported into the database.
+
+Once a site is created the all Bergamot UI daemons will need to be restarted.
+
+You will need to update the `nginx` configuration with the site names / aliases. 
+To do this, edit the file: `/etc/nginx/vhosts.d/bergamot.conf` and update the 
+server name.  You may also want to add these aliases to `/etc/hosts` for local 
+testing purposes.
+
+You will now be able to login to the Bergamot site what was just created.  Point 
+your browser to `http://bergamot.local/` and login with `admin` `bergamot`.
+
