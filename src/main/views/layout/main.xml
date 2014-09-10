@@ -1,53 +1,67 @@
 <!DOCTYPE balsa SYSTEM "http://balsa.intrbiz.net/balsa.dtd">
 <?RenderLibrary com.intrbiz.balsa?>
+<!-- A template view, applied to all views -->
 <html xmlns="com.intrbiz.balsa">
-
-    <head>
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-		<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'/>
-		<link rel="stylesheet" type="text/css" href="#{public('/stylesheets/stylesheet.css')}" media="screen" />
-		<link rel="stylesheet" type="text/css" href="#{public('/stylesheets/pygment_trac.css')}" media="screen" />
-		<link rel="stylesheet" type="text/css" href="#{public('/stylesheets/print.css')}" media="print" />
-		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/github.min.css" />
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script>
-		<script type="text/javascript">
-		    $(document).ready(function() {
-			$('pre').each(function(i, block) {
-			    hljs.highlightBlock(block);
-			});
-		    });
-		</script>
-		<title>Bergamot Monitoring</title>
-  	</head>
-  	
-  	<body>
-  	
-    	<header>
-			<div class="inner">
-	    		<a href="/">
-					<h1>Bergamot Monitoring</h1>
-	    		</a>
-	    		<a href="https://github.com/intrbiz/bergamot" class="button">
-	    			<small>View project on</small>
-	    			<span>GitHub</span>
-	    		</a>
+	<head>
+		<title>Bergamot Monitoring - #{title()}</title>
+        <!-- Fonts -->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+		<link href='http://fonts.googleapis.com/css?family=Merriweather+Sans:400,700' rel='stylesheet' type='text/css' />
+		<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css' />
+		<!-- Main styling -->
+		<link rel="stylesheet" type="text/css" href="#{public('/style.css')}" />
+		<!-- Code Higligthing -->
+		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/ir_black.min.css" />
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('pre').each(function(i, block) {
+                    hljs.highlightBlock(block);
+                });
+            });
+        </script>
+	</head>
+	<body>
+        <!-- Header -->
+		<div id="header">
+			<div class="container">
+				<div id="logo">
+					<a href="/">
+                        <img src="#{public('/bergamot_5_h200.png')}" alt="Bergamot Monitoring"/>
+					</a>
+				</div>
+                <div id="menu" class="col2">
+                        <include view="layout/menu"/>
+                </div>
 			</div>
-    	</header>
-    	
-    	<div id="content-wrapper">
-        	<div class="inner clearfix">        	
-				<section id="main-content">
-					<h1>#{title()}</h1>
-			    	<content/> 
-	    		</section>
-	    		
-	    		<aside id="sidebar">
-			    	<include view="layout/menu"/>
-				</aside>
-          	</div>
+		</div>
+        <!-- Content -->
+		<div id="content">
+			<div class="container">
+                <h1>#{title()}</h1>
+                <content/>
+			</div>
+		</div>
+        <!-- Footer -->
+        <div id="footer">
+            <div class="container">
+                <div class="col3">
+                    <ul>
+                        <li><a href="https://twitter.com/bergamotmonitor">Follow us on Twitter @bergamotmonitor</a></li>
+                        <li><a href="https://github.com/intrbiz/bergamot">Fork us on GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="col3">
+                </div>
+                <div class="col3">
+                    <ul>
+                        <li>Bergamot Monitoring</li>
+                        <li>Copyright Chris Ellis 2014</li>
+                        <li><a href="#">Acknowledgements</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-          
-    </body>
-    
+	</body>
 </html>

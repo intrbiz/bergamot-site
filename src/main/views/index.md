@@ -9,7 +9,7 @@ configuration and is able to execute Nagios checks.
 ## Features
 
 * Nagios compatible - can import Nagios configuration and execute Nagios plugins
-* Native NRPE implementation - efficient and scalable NRPE check execution, without the need to fork
+* Native NRPE implementation - efficient and scalable NRPE check execution, no fork!
 * Notifications - email notifications when a check fails
 * Distributed - uses RabbitMQ to distribute checks among a pool of servers
 * Scalable - able to share load over a number of servers

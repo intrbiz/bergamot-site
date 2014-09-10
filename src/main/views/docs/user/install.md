@@ -95,7 +95,7 @@ Bergamot requires at least version 9.3 of PostgreSQL, therefore we need to add
 an additional repository from the openSUSE build service:
 
     root@demo:~ # zypper ar http://download.opensuse.org/repositories/server:/database:/postgresql/openSUSE_13.1/server:database:postgresql.repo
-    root@demo:~# zypper ref
+    root@demo:~ # zypper ref
 
 Now we can install PostgreSQL 9.3:
 
@@ -123,7 +123,7 @@ Then update the host based access:
 
 Reload these changes:
 
-    root@demo:~ # systemctl restart postgresql
+    root@demo:~# systemctl restart postgresql
 
 Lets create the user and database for bergamot:
 
@@ -137,27 +137,27 @@ Lets create the user and database for bergamot:
 Before we can install the individual Bergamot packages we need to add the 
 Bergamot repository:
 
-    root@demo:~# zypper ar http://obs.intrbiz.net:82/Bergamot/openSUSE_13.1/Bergamot.repo
-    root@demo:~# zypper ref
+    root@demo:~ # zypper ar http://obs.intrbiz.net:82/Bergamot/openSUSE_13.1/Bergamot.repo
+    root@demo:~ # zypper ref
 
 ### Installing A Bergamot Master Node
 
 Install the Bergamot master components:
 
-    root@demo:~# zypper in bergamot-java bergamot-cli bergamot-ui bergamot-notifier-email bergamot-notifier-sms
+    root@demo:~ # zypper in bergamot-java bergamot-cli bergamot-ui bergamot-notifier-email bergamot-notifier-sms
 
 The packages will install default daemon configuration files for you and the 
 required nginx configuration.
 
 You can start the Bergamot notification engines with:
 
-    root@demo:~# systemctl start bergamot-notifier-email
-    root@demo:~# systemctl start bergamot-notifier-sms
+    root@demo:~ # systemctl start bergamot-notifier-email
+    root@demo:~ # systemctl start bergamot-notifier-sms
 
 You can start the Bergamot web interface with:
 
-    root@demo:~# systemctl start bergamot-ui
-    root@demo:~# systemctl start nginx
+    root@demo:~ # systemctl start bergamot-ui
+    root@demo:~ # systemctl start nginx
 
 #### Configuring The UI Daemon
 
@@ -219,7 +219,7 @@ and SMS phone number.
 
 To install the Nagios / NRPE worker:
 
-    root@demo:~# zypper in bergamot-java bergamot-worker-nagios nagios-plugins-all
+    root@demo:~ # zypper in bergamot-java bergamot-worker-nagios nagios-plugins-all
 
 To install the SNMP worker and watcher:
 
@@ -227,15 +227,15 @@ demo:~# zypper in bergamot-java bergamot-worker-snmp bergamot-watcher-snmp
 
 You can start the Nagios / NRPE worker with:
 
-    root@demo:~# systemctl start bergamot-worker-nagios
+    root@demo:~ # systemctl start bergamot-worker-nagios
 
 You can start the SNMP worker with:
 
-    root@demo:~# systemctl start bergamot-worker-snmp
+    root@demo:~ # systemctl start bergamot-worker-snmp
 
 You can start the SNMP watcher with:
 
-    root@demo:~# systemctl start bergamot-watcher-snmp
+    root@demo:~ # systemctl start bergamot-watcher-snmp
 
 #### Configuring The Nagios Worker Daemon
 

@@ -1,20 +1,20 @@
 # FAQ
 
-## What is the current state of play?
+### What is the current state of play?
 
 Bergamot is currently in it's fledgling stages, only being a few days work so far.  It is 
 being actively developed at the moment and will evolve quickly.  As such it is very much an 
 alpha.  But please feel free to get involved, I'd be interested to hear people's toughts, 
 comments, ideas.  I'd be greatful for people willing to give it a try and provide feedback.
 
-## Is Bergamot a drop-in replacement for Nagios?
+### Is Bergamot a drop-in replacement for Nagios?
 
 That is the plan.  Bergamot is capable of importing Nagios configuration.  Bergamot does 
 not implement all the semantics of Nagios, so there will be some edge-cases where Bergamot 
 is not a drop-in replacement.  Bergamot is perfectly capable of executing Nagios plugins 
 (checks), so worst case you should only need to alter some configuration.
 
-## Why did you create Bergamot?
+### Why did you create Bergamot?
 
 Having used Nagios for a while, I've been frustrated by its number of shortcommings.  I 
 personally feel that Nagios is fundamentally broken.  This project was born out of a 
@@ -22,7 +22,7 @@ personally feel that Nagios is fundamentally broken.  This project was born out 
 it to execute the checks, etc.  I'm hoping that Bergamot can be an escape path for users 
 of Nagios.
 
-## Which shortcommings of Nagios does Bergamot address?
+### Which shortcommings of Nagios does Bergamot address?
 
 Personally I think Nagios has some fundamental architectural flaws.  Nagios is inherently 
 a single process, holding all state in memory, and constantly forking processes to execute 
@@ -35,7 +35,7 @@ the biggest failing of Nagios, granted this is partially tackled by Naemon.
 
 Read the developer docs, for more details.
 
-## Can Bergamot distribute / load-balance plugin execution?
+### Can Bergamot distribute / load-balance plugin execution?
 
 Yes.  Bergamot uses RabbitMQ by default to queue messages between the Bergamot Master daemon 
 and Bergamot worker daemons.  Routing of messages is flexible and configurable.  Therefore it 
@@ -43,19 +43,19 @@ is possible to have multiple workers executing checks (load-balancing) and also 
 checks between different queues (distributed monitoring).  There is no limit to the number of 
 workers which can be running, or to the number of queues which can be used.
 
-## Can Bergamot be configured live?
+### Can Bergamot be configured live?
 
 You bet ya (it will be able to soon).  You can add checks, live, via the UI.  There is no 
 need to restart Bergamot to load configuration changes.  Configuration and state is persisted 
 into a PostgreSQL database.  You will also be able to import configuration, whilst Bergamot 
 is running.  The aim is not never have to restart Bergamot.
 
-## Does Bergamot have an API?
+### Does Bergamot have an API?
 
 It will have.  Clients will be able to execute RPC calls and listen to events.  This will be 
 accessible over RabbitMQ and web-sockets.
 
-## Why did you write it in Java?
+### Why did you write it in Java?
 
 Well, first off, Java is my language of choice.  I like its clean syntax, while it can be 
 verbose at times, I find it to be very readable.  It is fast, being JITed it can get close to 
@@ -69,24 +69,24 @@ perceive Java to be memory hungry.  Java does have overheads because it is a vir
 Often it looks like Java is using alot of memory, due to the fact it avoid doing garbage 
 collection, why bother if you don't need to.  Also bear in mind, these days, memory is cheap!
 
-## Is Bergamot Free / Open Source Software?
+### Is Bergamot Free / Open Source Software?
 
 Yes.  It is licensed under the terms of the GNU Lesser General Public License (LGPL) V3.
 
-## Does Bergamot support Nagios Event Broker Modules?
+### Does Bergamot support Nagios Event Broker Modules?
 
 No and it probably never will.
 
-## Can Bergamot execute Nagios plugins (checks) ?
+### Can Bergamot execute Nagios plugins (checks) ?
 
 Yes.
 
-## Does Bergamot support Livestatus?
+### Does Bergamot support Livestatus?
 
 Not currently, however we might implement some form of support to allow UI's developed for 
 Nagios to be used with Bergamot.
 
-## Where did the name come from?
+### Where did the name come from?
 
 I quite like Earl Grey tea.
 

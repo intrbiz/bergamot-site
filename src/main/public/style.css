@@ -1,0 +1,317 @@
+/*
+ * Bergamot Monitoring Website Style
+ * 
+ * Copyright: Chris Ellis - 2014
+ */
+
+/* reset */
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+img {
+    border: none;
+}
+
+a:link,
+a:active,
+a:visited,
+a {
+    text-decoration: none;
+    color: #000;
+    outline: none;
+}
+
+/* force scrollbar */
+
+html {
+    overflow-y: scroll;
+}
+
+/* default page styles */
+
+body {
+	font-family: 'Open Sans',sans-serif;
+	font-size: 18px;
+	color: #2c2c2c;
+    background-color: #FFF;
+}
+
+/* layout */
+
+#header {
+    padding: 20px 0px;
+	height: 200px;
+	background-color: #2c2c2c;
+	color: #00BF00;
+	border-bottom: 4px solid #00BF00;
+}
+
+#header .container {
+    overflow: hidden;
+}
+
+#footer {
+    padding: 20px 0 10px 0;
+    background-color: #2c2c2c;
+    color: #00BF00;
+    border-top: 4px solid #00BF00;
+}
+
+#header a, #header a:visited, #header a:active,
+#footer a, #footer a:visited, #footer a:active {
+	color: #00BF00;
+	text-decoration: none;
+}
+
+#header a:hover,
+#footer a:hover {
+    color: #00FF00;
+    text-decoration: none;
+}
+
+#header .container,
+#footer .container {
+    width: 1295px;
+}
+
+#header ul li,
+#footer ul li {
+    margin: 10px 0;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+#header ul li {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#header ul li a,
+#footer ul li a {
+    text-decoration: underline;
+}
+
+#footer ul li {
+    font-size: 14px;
+}
+
+#menu {
+    position: absolute; 
+    top: 5px; 
+    right: 5px;
+}
+
+#content {
+	padding: 15px 0 30px 0;
+}
+
+/* grid stuff */
+
+.container {
+	width: 860px;
+	margin: 0 auto;
+	position: relative;
+	overflow: auto;
+}
+
+.full-width {
+	width: 850px;
+}
+
+.row {
+	float: left;
+	width: 850px;
+	margin-bottom: 20px;
+}
+
+.col1 {
+	float: left;
+	width: 125px;
+	padding: 5px;
+}
+
+.col2 {
+	float: left;
+	width: 270px;
+	padding: 5px;
+}
+
+.col3 {
+	float: left;
+	width: 415px;
+	padding: 5px;
+}
+
+.col4 {
+	float: left;
+	width: 560px;
+	padding: 5px;
+}
+
+.col5 {
+	float: left;
+	width: 705px;
+	padding: 5px;
+}
+
+.col6 {
+	float: left;
+	width: 850px;
+	padding: 5px;
+}
+
+.col7 {
+    float: left;
+    width: 995px;
+    padding: 5px;
+}
+
+.col8 {
+    float: left;
+    width: 1140px;
+    padding: 5px;
+}
+
+.col9 {
+    float: left;
+    width: 1285px;
+    padding: 5px;
+}
+
+/* headings */
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 30px;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-weight: bold;
+    color: #00BF00;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+h2 {
+    font-size: 40px;
+}
+
+h3 {
+    font-size: 32px;
+}
+
+h4 {
+    font-size: 24px;
+}
+
+h5 {
+    font-size: 20px;
+}
+
+h6 {
+    font-size: 20px;
+}
+
+/* tables */
+
+table {
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 5px 10px;
+    border: 1px solid #CCC;
+}
+
+table th {
+    background-color: #2c2c2c;
+    color: #00BF00;
+    border-bottom: 2px solid #CCC;
+}
+
+table tr:nth-child(odd) {
+    background-color: #EEEEEE;
+}
+
+table tr:hover {
+    background-color: #D9E1D9;
+}
+
+/* paras */
+
+p {
+    margin-bottom: 20px;
+}
+
+/* lists */
+
+ul, ol {
+    list-style: none;
+    margin: 10px 10px 20px 20px;
+}
+
+li > ul {
+    margin: 5px 10px 5px 20px;
+}
+
+#content ul li:before {
+    color: #00BF00;
+    content: "\2022";
+    font-size: 1.5em;
+    padding-right: .25em;
+    position: relative;
+    top: .1em;
+}
+
+/* Links */
+
+#content a {
+    text-decoration: underline;
+}
+
+#content a:hover {
+    color: #004D00;
+}
+
+/* code and pre */
+
+pre {
+    padding: 20px;
+    font-family: 'Inconsolata', monospace;
+    font-size: 16px;
+    background: #000;
+    color: #fafafa;
+    border: 1px dashed #DDD;
+    margin-bottom: 20px;
+    overflow: auto;
+}
+
+pre code {
+    overflow: visible;
+}
+
+pre.plain {
+    padding: 20px;
+    font-family: 'Inconsolata', monospace;
+    background: #f8f8f8;
+    color: #000;
+}
+
+/* Sections */
+
+.section-2, .section-3, .section-4, .section-5, .section-6 {
+    margin-bottom: 40px;
+}
+
+/* other bits */
+
+span.info {
+    background-color: #EEE;
+    border-radius: 3px;
+    padding: 0px 4px;
+}
+
+span.indent {
+    text-indent: 20px;
+}
