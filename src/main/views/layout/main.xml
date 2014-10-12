@@ -5,15 +5,15 @@
 	<head>
 		<title>Bergamot Monitoring - #{title()}</title>
         <!-- Fonts -->
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-		<link href='http://fonts.googleapis.com/css?family=Merriweather+Sans:400,700' rel='stylesheet' type='text/css' />
-		<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css' />
+		<link href='#{balsa().request.requestScheme}://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+		<link href='#{balsa().request.requestScheme}://fonts.googleapis.com/css?family=Merriweather+Sans:400,700' rel='stylesheet' type='text/css' />
+		<link href='#{balsa().request.requestScheme}://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css' />
 		<!-- Main styling -->
 		<link rel="stylesheet" type="text/css" href="#{public('/style.css')}" />
 		<!-- Code Higligthing -->
-		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/ir_black.min.css" />
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script>
+		<link rel="stylesheet" href="#{balsa().request.requestScheme}://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/ir_black.min.css" />
+        <script src="#{balsa().request.requestScheme}//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="#{balsa().request.requestScheme}://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
                 $('pre').each(function(i, block) {
