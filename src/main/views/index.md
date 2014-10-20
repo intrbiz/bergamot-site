@@ -1,19 +1,21 @@
-# What is Bergamot?
+# What is Bergamot Monitoring?
 
-Bergamot is a simple, scalable and distributed monitoring system which offers an easy migration path from Nagios.  
-Bergamot is written in Java and makes use of RabbitMQ to distribute checks.  It is able to read the Nagios object 
-configuration and is able to execute Nagios checks.
+Bergamot Monitoring is an Open Source distributed monitoring system which has an
+easy migration path from Nagios.  Bergamot Monitoring has a range of compelling 
+features which make it a ideal for modern cloud based infrastructures.
 
 ![Bergamot Dashboard Screenshot](/images/dashboard_sample.png)
 
-## Features
+[Screenshots](/screenshots)
 
-* Nagios compatible - can import Nagios configuration and execute Nagios plugins
-* Native NRPE implementation - efficient and scalable NRPE check execution, no fork!
-* Notifications - email notifications when a check fails
-* Distributed - uses RabbitMQ to distribute checks among a pool of servers
-* Scalable - able to share load over a number of servers
-* Modern - written in a safe, managed language, with a clean code base
+## Highlights
+
+* Nagios compatible - can execute Nagios plugins, can import Nagios configuration
+* Native NRPE implementation - efficient and scalable NRPE check execution, no forking!
+* Distributed - uses RabbitMQ to distribute checks among a pool of workers
+* Persistent - all state is stored persistently in PostgreSQL
+* Scalable - split all processing over multiple nodes
+* Modern - written in a safe, managed language
 * Modular - plugable check engine, notification engines, etc
 
 ## Mission
@@ -39,16 +41,12 @@ Bergamot is in it's early stages, but has the core fundamental elements of a mon
 currently able to import a Nagios configuration and execute Nagios checks, it has a very minimalist UI to view the 
 status of checks.
 
-## Roadmap
+## Test Drive
 
-To be viable, the following key features are missing:
+Try out our [demon instance](/demo)
 
-* Persistence - the core object model should be persisted into a database
-* Notifications - it's probably helpful to be able to send emails
-* UI - the current UI is minimalist to say the least
+## Give It A Go
 
-## Authors and Contributors
-
-Bergamot is a personal project of Chris Ellis [@intrbiz](https://twitter.com/intrbiz)
+Download our virtual appliance to get up and running immediately.
 
 

@@ -2,17 +2,22 @@
 
 ### What is the current state of play?
 
-Bergamot is currently in it's fledgling stages, only being a few days work so far.  It is 
-being actively developed at the moment and will evolve quickly.  As such it is very much an 
-alpha.  But please feel free to get involved, I'd be interested to hear people's toughts, 
-comments, ideas.  I'd be greatful for people willing to give it a try and provide feedback.
+Bergamot Monitoring is a version 1 release, at this stage the core architecture 
+of Bergamot Monitoring is stable but some features are lacking.  The version 1 
+release has all the basic featured needed for a monitoring system and would be 
+acceptable for deployment, feedback would be appreciated.  There will be on 
+going releases, hopefully on a relatively short release cycle, which will focus 
+on adding more features.
 
 ### Is Bergamot a drop-in replacement for Nagios?
 
-That is the plan.  Bergamot is capable of importing Nagios configuration.  Bergamot does 
-not implement all the semantics of Nagios, so there will be some edge-cases where Bergamot 
-is not a drop-in replacement.  Bergamot is perfectly capable of executing Nagios plugins 
-(checks), so worst case you should only need to alter some configuration.
+To an extent.  Bergamot Monitoring is capable of executing Nagios plugins and 
+of directly executing plugins via NRPE.  Bergamot Monitoring does not directly 
+utilise the Nagios configuration format, however a conversion tool can convert 
+a Nagios configuration to Bergamot Monitoring's configuration.  Bergamot 
+Monitoring also does not support Nagios Event Broker modules not does it support 
+LiveStatus.  Bergamot Monitoring has an easy migration path but is not a drop in 
+replacement.
 
 ### Why did you create Bergamot?
 
@@ -31,29 +36,31 @@ modern design, written in a safe, fast and clean language.
 
 Out of the box, Bergamot gives you distributed monitoring.  Workers are loosely coupled via 
 message queues to the core scheduling / result processing.  This single change solves 
-the biggest failing of Nagios, granted this is partially tackled by Naemon.
-
-Read the developer docs, for more details.
+the biggest failing of Nagios.
 
 ### Can Bergamot distribute / load-balance plugin execution?
 
-Yes.  Bergamot uses RabbitMQ by default to queue messages between the Bergamot Master daemon 
-and Bergamot worker daemons.  Routing of messages is flexible and configurable.  Therefore it 
+Yes.  Bergamot uses RabbitMQ by default to queue messages between the Bergamot Master nodes 
+and Bergamot worker nodes.  Routing of messages is flexible and configurable.  Therefore it 
 is possible to have multiple workers executing checks (load-balancing) and also to distribute 
 checks between different queues (distributed monitoring).  There is no limit to the number of 
 workers which can be running, or to the number of queues which can be used.
 
 ### Can Bergamot be configured live?
 
-You bet ya (it will be able to soon).  You can add checks, live, via the UI.  There is no 
-need to restart Bergamot to load configuration changes.  Configuration and state is persisted 
-into a PostgreSQL database.  You will also be able to import configuration, whilst Bergamot 
-is running.  The aim is not never have to restart Bergamot.
+You bet ya.  You can add checks, live, via the UI and API.  Effort is taken to apply 
+configuration changes atomically and with least impact.  The intention is to support small 
+and constant configuration changes.  Modern infrastructures are flexible and changing often, 
+a monitoring system need to cope with this.  Coupled with clustering of all Bergamot Monitoring 
+daemons and the lack of any single point of failure, the aim is not Bergamot Monitoring to have 
+high availability out of the box.
 
 ### Does Bergamot have an API?
 
-It will have.  Clients will be able to execute RPC calls and listen to events.  This will be 
-accessible over RabbitMQ and web-sockets.
+Yes.  Bergamot Monitoring has a rich REST based web services API.  The API can be used to 
+perform any action that can be performed via the web user interface.  In addition a webs socket 
+API can be used to receive realtime updates on checks.  Should more integration be required, 
+the message queues can be used where required.
 
 ### Why did you write it in Java?
 
@@ -75,16 +82,17 @@ Yes.  It is licensed under the terms of the GNU Lesser General Public License (L
 
 ### Does Bergamot support Nagios Event Broker Modules?
 
-No and it probably never will.
+No and it never will!
 
 ### Can Bergamot execute Nagios plugins (checks) ?
 
-Yes.
+Yes and it can talk NRPE natively.
 
 ### Does Bergamot support Livestatus?
 
-Not currently, however we might implement some form of support to allow UI's developed for 
-Nagios to be used with Bergamot.
+No and it probably will not.  It would require alot of work to map between the 
+Bergamot Monitoring data structures and that of Livestatus as well as some 
+differences in the semantic behaviour.
 
 ### Where did the name come from?
 

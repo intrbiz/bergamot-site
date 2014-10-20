@@ -22,7 +22,7 @@ except that every XML file is valid.  Each XML file must start with the
 
     <bergamot site="demo.bergamot-monitoring.org">
         <!-- Configuration elements here -->
-    </bergamot>;
+    </bergamot>
     
 The site attribute corellates configuration for a particular site.  One Bergamot 
 instance is capable of monitoring many, disconnected and isolated sites.  
@@ -83,31 +83,31 @@ will inherit the service `check_load`.  The notification and host check configur
 The service `check_load` would itself inherit from the service `generic-service`.  As such it would inherit the notification and 
 scheduling configuration from `generic-service`.
 
-## Recommended Configuration Directory Structure
+## Suggested Directory Structure
 
     /site.name
-	/templates
-	    /clusters.xml
-	    /commands.xml
-	    /contacts.xml
-	    /hosts.xml
-	    /resources.xml
-	    /services.xml
-	    /traps.xml
-	/global
-	    /contacts.xml
-	    /groups.xml
-	    /locations.xml
-	    /time-periods.xml
-	/some_service
-	    /templates
-		/clusters.xml
-		/hosts.xml
-		/resources.xml
-		/services.xml
-		/traps.xml
-	    /clusters.xml
-	    /hosts.xml
+        /global
+            /contacts.xml
+            /groups.xml
+            /locations.xml
+            /time-periods.xml
+            /templates
+                /clusters.xml
+                /commands.xml
+                /contacts.xml
+                /hosts.xml
+                /resources.xml
+                /services.xml
+                /traps.xml
+        /some_service
+            /templates
+            /clusters.xml
+            /hosts.xml
+            /resources.xml
+            /services.xml
+            /traps.xml
+            /clusters.xml
+            /hosts.xml
 
 ## Common Attributes and Elements
 
@@ -128,6 +128,10 @@ Every check configuration object has a set of common attributes and elements whi
 `<summary>...</summary>` The summary (name displayed within the Web Interface) of the object.
 
 `<description>...</description>` The long (multi-line) description of the object, used within the Web Interface.
+
+`<parameter name="...">...</parameter>` All configuration object can have arbitrary name value pair parameters defined, 
+these can then be referenced in value expressions, allowing for configuration to be defined where logical rather then 
+where it is defined.  
 
 ## Configuring A Location
 
@@ -316,6 +320,26 @@ To make life easier, a more specific Command can be defined, for example:
         <parameter name="command">check_load</parameter>
     </command>
 
+You can use the expression language to pull parameters from related objects and 
+to find the first non-null value.  For example, for SNMP checks we can define 
+the SNMP community name at the `<location>` level and use this as the default 
+for all hosts in that location, permitting overriding at the host level.
+
+    <location name="my-datacentre">
+        <parameter name="snmp_community">public</parameter>
+    </location>
+    
+    <host name="some-host" location="my-datacentre">
+    </host>
+    
+    <host name="another-host" location="my-datacentre">
+        <parameter name="snmp_community">private</parameter>
+    </host>
+    
+    <command name="check_snmp_name">
+        <parameter name="snmp_community">#{coalesce(host.getParameter('snmp_community'), host.location.getParameter('snmp_community'), 'public')}</parameter>
+    </command>
+
 ## Configuring Checks
 
 Bergamot has a few different types of checks:
@@ -340,7 +364,9 @@ monitor what executes on the Host.
 
 
 
+## Advice For Sane Configuration
 
+### Define 
 
 
 
