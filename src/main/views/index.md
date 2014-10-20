@@ -18,28 +18,15 @@ features which make it a ideal for modern cloud based infrastructures.
 * Modern - written in a safe, managed language
 * Modular - plugable check engine, notification engines, etc
 
-## Mission
+### Nagios Compatible
 
-Bergamot aims to be a simple, efficient, scalable and distributed monitoring system which is broadly compatible 
-with Nagios.
+Bergamot Monitoring is capable of executing Nagios plugins and can execute 
+checks via NRPE natively.  An existing Nagios configuration can be imported, 
+permitting an easy migration path.
 
-Bergamot should offer:
+### Distributed Monitoring
 
-* An easy migration path from Nagios
-* Simple - keep it simple stupid
-* Efficient - aim to move away from forking processes
-* Scalable - able to handle tens of thousands of checks without requiring complicated add-ons
-* Distributed - able to execute checks across different sites
-
-Whilst Bergamot can and will be able to import Nagios object configurations, it does not and probably never will 
-support all the 'features' of Nagios.  Bergamot should in no way be considered a port of Nagios, it is a clean 
-room implementation by people who have used Nagios in a number of large deployments.
-
-##  Current Progress
-
-Bergamot is in it's early stages, but has the core fundamental elements of a monitoring system implemented.  It is 
-currently able to import a Nagios configuration and execute Nagios checks, it has a very minimalist UI to view the 
-status of checks.
+RabbitMQ is used to distribute messages between 
 
 ## Test Drive
 
@@ -47,6 +34,6 @@ Try out our [demon instance](/demo)
 
 ## Give It A Go
 
-Download our virtual appliance to get up and running immediately.
+Download our [virtual appliance](/getit) to get up and running immediately.
 
 
