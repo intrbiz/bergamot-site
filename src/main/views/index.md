@@ -10,14 +10,6 @@ features which make it a ideal for modern cloud based infrastructures.
 
 ## Highlights
 
-* Nagios compatible - can execute Nagios plugins, can import Nagios configuration
-* Native NRPE implementation - efficient and scalable NRPE check execution, no forking!
-* Distributed - uses RabbitMQ to distribute checks among a pool of workers
-* Persistent - all state is stored persistently in PostgreSQL
-* Scalable - split all processing over multiple nodes
-* Modern - written in a safe, managed language
-* Modular - plugable check engine, notification engines, etc
-
 ### Nagios Compatible
 
 Bergamot Monitoring is capable of executing Nagios plugins and can execute 
@@ -26,7 +18,20 @@ permitting an easy migration path.
 
 ### Distributed Monitoring
 
-RabbitMQ is used to distribute messages between 
+RabbitMQ is used to distribute messages between
+
+### Scalable
+
+### Resilient
+
+### Modular
+
+### Persistent
+
+### Multi-tenanted
+
+
+### Interested?
 
 ## Test Drive
 
