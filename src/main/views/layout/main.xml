@@ -28,7 +28,7 @@
 			<div class="container">
 				<div id="logo">
 					<a href="/">
-                        <img src="#{public('/bergamot_7_h200.png')}" alt="Bergamot Monitoring"/>
+                        <img src="#{public('/logo/full/150/bergamot_h150.png')}" alt="Bergamot Monitoring"/>
 					</a>
 				</div>
                 <div id="menu" class="col2">
