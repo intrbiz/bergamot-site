@@ -50,19 +50,19 @@
 		<dependency>
 			<groupId>com.intrbiz.balsa</groupId>
 			<artifactId>balsa-core</artifactId>
-			<version>4.0.0-rc-1</version>
+			<version>4.0.0</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.intrbiz.balsa</groupId>
 			<artifactId>balsa-pegdown</artifactId>
-			<version>4.0.0-rc-1</version>
+			<version>4.0.0</version>
 		</dependency>
 		<dependency>
 		    <groupId>com.intrbiz.util</groupId>
 		    <artifactId>bootstrap</artifactId>
-		    <version>1.0.0-rc-1</version>
+		    <version>1.0.0</version>
 	    </dependency>
 	</dependencies>
 	
@@ -80,7 +80,7 @@
 			<plugin>
 				<groupId>com.intrbiz.util</groupId>
 				<artifactId>packaging</artifactId>
-				<version>1.0.0-rc-1</version>
+				<version>1.0.0</version>
 				<configuration>
 					<appClass>com.intrbiz.bergamot.site.BergamotSite</appClass>
 				</configuration>
