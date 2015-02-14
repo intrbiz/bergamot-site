@@ -17,7 +17,7 @@ Note: extracted the appliance is 4GiB in size and requires at least 2GiB of RAM.
 
 ## Packages
 
-You can download our RPMs from our OBS repository, we primarily provide packages 
+You can download RPMs from our OBS repository, we primarily provide packages 
 for openSUSE.  However untested packages are provided for: Centos 7, Red Hat 7.
 
 * [openSUSE 13.1](http://obs.intrbiz.net:82/Bergamot/openSUSE_13.1/)
@@ -70,9 +70,11 @@ need to add our Maven Repository to your POM.
 
 ## Source Code
 
-You can fine the source code to Bergamot Monitoring on GitHub: [https://github.com/intrbiz/bergamot](https://github.com/intrbiz/bergamot)
+You can find the source code to Bergamot Monitoring on GitHub: [https://github.com/intrbiz/bergamot](https://github.com/intrbiz/bergamot)
 
 To build Bergamot Monitoring, you will need Java 8 JDK and Apache Maven.  You 
 can use the Eclipse Maven extensions to import the project into Eclipse.  You 
 will probably also want PostgreSQL 9.3 and RabbitMQ installed on your development 
 machine.
+
+
