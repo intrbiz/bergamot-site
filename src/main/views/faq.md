@@ -40,7 +40,7 @@ the biggest failing of Nagios.
 
 ### Can Bergamot distribute / load-balance plugin execution?
 
-Yes.  Bergamot uses RabbitMQ by default to queue messages between the Bergamot Master nodes 
+Yes.  Bergamot is distributed by default using messages queues between the Bergamot master nodes 
 and Bergamot worker nodes.  Routing of messages is flexible and configurable.  Therefore it 
 is possible to have multiple workers executing checks (load-balancing) and also to distribute 
 checks between different queues (distributed monitoring).  There is no limit to the number of 
@@ -57,8 +57,8 @@ high availability out of the box.
 
 ### Does Bergamot have an API?
 
-Yes.  Bergamot Monitoring has a rich REST based web services API.  The API can be used to 
-perform any action that can be performed via the web user interface.  In addition a webs socket 
+Yes.  Bergamot Monitoring has a rich JSON REST web services API.  The API can be used to 
+perform any action that can be performed via the web user interface.  In addition a websocket 
 API can be used to receive realtime updates on checks.  Should more integration be required, 
 the message queues can be used where required.
 
@@ -70,29 +70,25 @@ if not faster than the performance of C.  A good standard library, with sane dat
 Popular, Java is the second most widely used language after C.  Java has great tooling, Eclipse 
 is a fantastic IDE, it has an excellent debugger built-in and profiling tools.
 
-Usually people are afraid of Java because they believe some myths about it.  Usually people 
-perceive Java to be memory hungry.  Java does have overheads because it is a virtual machine 
-(usually around 20MB), but ultimately an object isn't that different from a C structure.
-Often it looks like Java is using alot of memory, due to the fact it avoid doing garbage 
-collection, why bother if you don't need to.  Also bear in mind, these days, memory is cheap!
-
 ### Is Bergamot Free / Open Source Software?
 
 Yes.  It is licensed under the terms of the GNU Lesser General Public License (LGPL) V3.
+
+### Can Bergamot execute Nagios plugins (checks) ?
+
+Yes.  NRPE is natively supported, using non-blocking TCP sockets, no need to 
+fork a process to create a TCP connection.  You might also wish to look at the 
+Bergamot Agent, this provided a far better level of security than NRPE does.
 
 ### Does Bergamot support Nagios Event Broker Modules?
 
 No and it never will!
 
-### Can Bergamot execute Nagios plugins (checks) ?
-
-Yes and it can talk NRPE natively.
-
 ### Does Bergamot support Livestatus?
 
-No and it probably will not.  It would require alot of work to map between the 
-Bergamot Monitoring data structures and that of Livestatus as well as some 
-differences in the semantic behaviour.
+No.  It would require a reasonable amount of logic to map between LiveStatus 
+'tables' and Bergamot's object model.  Instead make use of the JSON REST API 
+provided by Bergamot.
 
 ### Where did the name come from?
 
