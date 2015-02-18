@@ -34,7 +34,7 @@ html {
 
 body {
 	font-family: 'Open Sans',sans-serif;
-	font-size: 18px;
+	font-size: 16px;
 	color: #2c2c2c;
     background-color: #FFF;
 }
@@ -42,8 +42,8 @@ body {
 /* layout */
 
 #header {
-    padding: 20px 0px;
-	height: 150px;
+    padding: 10px 0px;
+	height: 100px;
 	background-color: #2c2c2c;
 	color: #00BF00;
 	border-bottom: 4px solid #00BF00;
@@ -84,7 +84,7 @@ body {
 }
 
 #header ul li {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
 }
 
@@ -99,7 +99,7 @@ body {
 
 #menu {
     position: absolute; 
-    top: 0; 
+    top: -15px; 
     right: 0;
 }
 
@@ -183,34 +183,35 @@ body {
 /* headings */
 
 h1, h2, h3, h4, h5, h6 {
-    margin-bottom: 30px;
+	margin-top: 15px;
+    margin-bottom: 10px;
     font-family: 'Merriweather Sans', sans-serif;
     font-weight: bold;
     color: #00BF00;
 }
 
 h1 {
-    font-size: 48px;
-}
-
-h2 {
-    font-size: 40px;
-}
-
-h3 {
     font-size: 32px;
 }
 
+h2 {
+    font-size: 26px;
+}
+
+h3 {
+    font-size: 22px;
+}
+
 h4 {
-    font-size: 24px;
+    font-size: 18px;
 }
 
 h5 {
-    font-size: 20px;
+    font-size: 16px;
 }
 
 h6 {
-    font-size: 20px;
+    font-size: 16px;
 }
 
 /* tables */
@@ -301,11 +302,11 @@ pre.plain {
 /* Sections */
 
 .section-1 {
-    margin-bottom: 60px;
+    margin-bottom: 30px;
 }
 
 .section-2, .section-3, .section-4, .section-5, .section-6 {
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 /* other bits */
