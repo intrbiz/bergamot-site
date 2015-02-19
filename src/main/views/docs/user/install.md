@@ -8,18 +8,17 @@ Code: bash
 ## Introduction
 
 This guide details how to install Bergamot from scratch on a openSUSE 13.1 
-server.  This guide only covers getting a simple installation up and running, 
-with one UI / master server and multiple worker servers.  
+server.  This guide only covers getting a simple installation up and running.
 
 Currently we use an Open Build Service instance to offer packages for: 
 
- * openSUSE 13.1
+ * openSUSE 13.1, 13.2
  * Centos 7
  * Red Hat Enterprise Linux 7
  * Fedora 20
 
 Sadly we currently do not have packages for Debian or Ubuntu, primarily due to 
-a reliance on systemd, please feel free to contribute packages :).
+a preference for systemd, please feel free to contribute packages :).
 
 ### Core Components
 
