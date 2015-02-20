@@ -7,9 +7,9 @@ comes with everything you need and will work out of the box (just add a DNS
 entry).  The appliance is designed to run on LibVirt / KVM and comes with a disk 
 image and associated domain definition file.
 
-The appliance is based on openSUSE 13.1 and is perfect to get up and running 
+This appliance is based on openSUSE 13.1 and is perfect to get up and running 
 quickly it has all the required daemons pre-installed and is acceptable for 
-small deployments.  As everything is contained on one VM it offers no redundancy.
+small deployments.  As everything is contained in one VM it offers no redundancy.
 
 You can download the appliance from [https://downloads.bergamot-monitoring.org/img/bergamot-monitoring.tar.xz](https://downloads.bergamot-monitoring.org/img/bergamot-monitoring.tar.xz)
 
@@ -21,6 +21,7 @@ You can download RPMs from our OBS repository, we primarily provide packages
 for openSUSE.  However untested packages are provided for: Centos 7, Red Hat 7.
 
 * [openSUSE 13.1](http://obs.intrbiz.net:82/Bergamot/openSUSE_13.1/)
+* [openSUSE 13.2](http://obs.intrbiz.net:82/Bergamot/openSUSE_13.2/)
 * [Centos 7](http://obs.intrbiz.net:82/Bergamot/CentOS_7/)
 * [RHEL 7](http://obs.intrbiz.net:82/Bergamot/RHEL_7/)
 
