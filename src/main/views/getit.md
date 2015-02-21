@@ -22,6 +22,7 @@ for openSUSE.  However untested packages are provided for: Centos 7, Red Hat 7.
 
 * [openSUSE 13.1](http://obs.intrbiz.net:82/Bergamot/openSUSE_13.1/)
 * [openSUSE 13.2](http://obs.intrbiz.net:82/Bergamot/openSUSE_13.2/)
+* [openSUSE Tumbleweed](http://obs.intrbiz.net:82/Bergamot/openSUSE_Tumbleweed/)
 * [Centos 7](http://obs.intrbiz.net:82/Bergamot/CentOS_7/)
 * [RHEL 7](http://obs.intrbiz.net:82/Bergamot/RHEL_7/)
 
