@@ -33,6 +33,7 @@ You can download binary application archives from our download site: [https://do
 ### Bergamot Monitoring V1.0.0 - Latest
 
 * [Bergamot UI](https://downloads.bergamot-monitoring.org/app/1.0.0/bergamot-ui-1.0.0.app)
+* [Bergamot CLI](https://downloads.bergamot-monitoring.org/app/1.0.0/bergamot-cli-1.0.0.app)
 * [Bergamot Notifier Email](https://downloads.bergamot-monitoring.org/app/1.0.0/bergamot-notifier-email-1.0.0.app)
 * [Bergamot Notifier SMS](https://downloads.bergamot-monitoring.org/app/1.0.0/bergamot-notifier-sms-1.0.0.app)
 * [Bergamot Nagios Worker](https://downloads.bergamot-monitoring.org/app/1.0.0/bergamot-worker-nagios-1.0.0.app)
