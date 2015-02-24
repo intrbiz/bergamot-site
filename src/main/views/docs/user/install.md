@@ -10,14 +10,14 @@ Code: bash
 This guide details how to install Bergamot from scratch on a openSUSE 13.1 
 server.  This guide only covers getting a simple installation up and running.
 
-Currently we use an Open Build Service instance to offer packages for: 
+Currently an Open Build Service instance is used to build packages for:
 
- * openSUSE 13.1, 13.2
+ * openSUSE 13.1, 13.2, Tumbleweed
  * Centos 7
  * Red Hat Enterprise Linux 7
  * Fedora 20
 
-Sadly we currently do not have packages for Debian or Ubuntu, primarily due to 
+Sadly packages are not available for Debian or Ubuntu, primarily due to 
 a preference for systemd, please feel free to contribute packages :).
 
 ### Core Components
@@ -27,7 +27,7 @@ which need to be deployed:
 
  * Bergamot UI daemon
  * Bergamot email notification daemon
- * Bergamot sms notification daemon (optional)
+ * Bergamot SMS notification daemon (optional)
  * Bergamot nagios worker
  * Bergamot SNMP worker (optional)
  * Bergamot SNMP watcher (optional)
@@ -39,20 +39,22 @@ the master server:
 
  * Bergamot UI daemon
  * Bergamot email notification daemon
- * Bergamot sms notification daemon (optional)
+ * Bergamot SMS notification daemon (optional)
  * RabbitMQ server
  * PostgreSQL database server
 
-Then to deploy the worker daemons onto a separate server or many worker servers, 
+Then deploy the worker daemons onto a separate server or many worker servers, 
 it is acceptable to deploy all the worker components onto one worker server.
 
 ## Prerequisites
 
-Before we can install Bergamot we must install two key components that Bergamot 
-heavily relies upon: PostgreSQL and RabbitMQ.  Bergamot persists its state in a 
+Before installing Bergamot two key dependencies which are relied upon heavily 
+need to be installed: PostgreSQL and RabbitMQ.  Bergamot persists its state in a 
 PostgreSQL database and uses RabbitMQ to pass messages between various 
-components.  The PostgreSQL database server is only utilised by the Bergamot UI 
-daemons, the RabbitMQ server is used by all Bergamot daemons.
+components.
+
+The PostgreSQL database server is only utilised by the Bergamot UI daemons, the 
+RabbitMQ server is used by all Bergamot daemons.
 
 ### Installing RabbitMQ
 
@@ -67,6 +69,7 @@ Next we want to enable the RabbitMQ management plugin:
 
 Before we can configure users we need to start RabbitMQ:
 
+    root@demo:~ # systemctl enable rabbitmq-server
     root@demo:~ # systemctl start rabbitmq-server
 
 Now we can configure an admin user, we can use this to login to the web management 
@@ -102,6 +105,7 @@ Now we can install PostgreSQL 9.3:
 
 Once PostgreSQL is installed start it:
 
+    root@demo:~ # systemctl enable postgresql
     root@demo:~ # systemctl start postgresql
 
 Now alter a few PostgreSQL configuration settings:
@@ -133,8 +137,7 @@ Lets create the user and database for bergamot:
 
 ## Installing Bergamot
 
-Before we can install the individual Bergamot packages we need to add the 
-Bergamot repository:
+The Bergamot repository must be installed to provided the packages needed:
 
     root@demo:~ # zypper ar http://obs.intrbiz.net:82/Bergamot/openSUSE_13.1/Bergamot.repo
     root@demo:~ # zypper ref
@@ -143,18 +146,22 @@ Bergamot repository:
 
 Install the Bergamot master components:
 
-    root@demo:~ # zypper in bergamot-java bergamot-cli bergamot-ui bergamot-notifier-email bergamot-notifier-sms
+    root@demo:~ # zypper in nginx bergamot-java bergamot-cli bergamot-ui bergamot-notifier-email bergamot-notifier-sms
 
 The packages will install default daemon configuration files for you and the 
 required nginx configuration.
 
 You can start the Bergamot notification engines with:
 
+    root@demo:~ # systemctl enable bergamot-notifier-email
+    root@demo:~ # systemctl enable bergamot-notifier-sms
     root@demo:~ # systemctl start bergamot-notifier-email
     root@demo:~ # systemctl start bergamot-notifier-sms
 
 You can start the Bergamot web interface with:
 
+    root@demo:~ # systemctl enable bergamot-ui
+    root@demo:~ # systemctl enable nginx
     root@demo:~ # systemctl start bergamot-ui
     root@demo:~ # systemctl start nginx
 
@@ -171,7 +178,7 @@ will look like:
 You will need to alter the `password` attributes if you have used a different 
 password when creating the RabbitMQ user and the PostgreSQL user.  Otherwise 
 there is very little to configure.  If your RabbitMQ server or PostgreSQL server 
-is not local host, then update that as required.
+is not local, then update that as required.
 
 #### Configuring The Email Notification Daemon
 
@@ -200,8 +207,8 @@ it will look like:
     <notifier threads="1" name="sms.notifier.bergamot.local">
         <broker url="amqp://127.0.0.1" username="bergamot" password="bergamot"/>
         <notification-engine classname="com.intrbiz.bergamot.notification.engine.sms.SMSEngine">
-            <parameter name="twillo.account" value=""    description="The Twillo account SID"/>
-            <parameter name="twillo.token"   value=""    description="The Twillo auth token"/>
+            <parameter name="twilio.account" value=""    description="The Twilio account SID"/>
+            <parameter name="twilio.token"   value=""    description="The Twilio auth token"/>
             <parameter name="from"           value="+44" description="The from phone number"/>
         </notification-engine>
     </notifier>
@@ -209,8 +216,8 @@ it will look like:
 Again configure the RabbitMQ broker with the same syntax as used in the UI 
 configuration file.
 
-The SMS daemon uses the Twillo SMS gateway service, to be able to send SMS 
-notifications you will need to register for an account with Twillo.  Once you 
+The SMS daemon uses the Twilio SMS gateway service, to be able to send SMS 
+notifications you will need to register for an account with Twilio.  Once you 
 have a Twillio account update the configuration with: the account SID, auth token 
 and SMS phone number.
 
