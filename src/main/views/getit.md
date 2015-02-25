@@ -32,14 +32,14 @@ You can download binary application archives from our download site: [https://do
 
 ### Bergamot Monitoring V1.0.0 - Latest
 
-* [Bergamot UI](https://downloads.bergamot-monitoring.org/app/1.0.0/bergamot-ui-1.0.0.app)
-* [Bergamot CLI](https://downloads.bergamot-monitoring.org/app/1.0.0/bergamot-cli-1.0.0.app)
-* [Bergamot Notifier Email](https://downloads.bergamot-monitoring.org/app/1.0.0/bergamot-notifier-email-1.0.0.app)
-* [Bergamot Notifier SMS](https://downloads.bergamot-monitoring.org/app/1.0.0/bergamot-notifier-sms-1.0.0.app)
-* [Bergamot Nagios Worker](https://downloads.bergamot-monitoring.org/app/1.0.0/bergamot-worker-nagios-1.0.0.app)
-* [Bergamot SNMP Worker](https://downloads.bergamot-monitoring.org/app/1.0.0/bergamot-worker-snmp-1.0.0.app)
-* [Bergamot HTTP Worker](https://downloads.bergamot-monitoring.org/app/1.0.0/bergamot-worker-http-1.0.0.app)
-* [Bergamot SNMP Watcher](https://downloads.bergamot-monitoring.org/app/1.0.0/bergamot-watcher-snmp-1.0.0.app)
+* [Bergamot UI](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-ui-1.0.0.app)
+* [Bergamot CLI](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-cli-1.0.0.app)
+* [Bergamot Notifier Email](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-notification-engine-email-1.0.0.app)
+* [Bergamot Notifier SMS](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-notification-engine-sms-1.0.0.app)
+* [Bergamot Nagios Worker](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-worker-nagios-1.0.0.app)
+* [Bergamot SNMP Worker](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-worker-snmp-1.0.0.app)
+* [Bergamot HTTP Worker](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-worker-http-1.0.0.app)
+* [Bergamot SNMP Watcher](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-watcher-snmp-1.0.0.app)
 
 ## Maven Repository
 
