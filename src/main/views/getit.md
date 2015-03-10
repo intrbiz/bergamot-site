@@ -11,7 +11,7 @@ This appliance is based on openSUSE 13.1 and is perfect to get up and running
 quickly it has all the required daemons pre-installed and is acceptable for 
 small deployments.  As everything is contained in one VM it offers no redundancy.
 
-You can download the appliance from [https://downloads.bergamot-monitoring.org/img/bergamot-monitoring.tar.xz](https://downloads.bergamot-monitoring.org/img/bergamot-monitoring.tar.xz)
+You can download the appliance from [https://files.bergamot-monitoring.org/img/bergamot-monitoring.tar.xz](https://files.bergamot-monitoring.org/img/bergamot-monitoring.tar.xz)
 
 Note: extracted the appliance is 4GiB in size and requires at least 2GiB of RAM.
 
@@ -28,7 +28,7 @@ for openSUSE.  However untested packages are provided for: Centos 7, Red Hat 7.
 
 ## Binaries
 
-You can download binary application archives from our download site: [https://downloads.bergamot-monitoring.org/](https://downloads.bergamot-monitoring.org/)
+You can download binary application archives from our download site: [https://files.bergamot-monitoring.org/](https://files.bergamot-monitoring.org/)
 
 ### Bergamot Monitoring V1.0.0 - Latest
 
