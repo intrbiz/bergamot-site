@@ -18,7 +18,9 @@ Note: extracted the appliance is 4GiB in size and requires at least 2GiB of RAM.
 ## Packages
 
 You can download RPMs from our OBS repository, we primarily provide packages 
-for openSUSE.  However untested packages are provided for: Centos 7, Red Hat 7.
+for openSUSE, SLES 12.  Untested packages are provided for: Centos 7, Red Hat 7, 
+Scientific Linux and Fedora.
+
 
 * [openSUSE 13.1](http://obs.intrbiz.net:82/Bergamot/openSUSE_13.1/)
 * [openSUSE 13.2](http://obs.intrbiz.net:82/Bergamot/openSUSE_13.2/)
