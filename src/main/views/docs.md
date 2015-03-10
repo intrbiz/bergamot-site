@@ -18,3 +18,16 @@ the REST API and the worker APIs.
 ## For Contributors
 
 Documentation on the internals of Bergamot and how you can get involved.
+
+## Getting Help
+
+Should you run into a problem, want to discuss an issue, suggest something, then 
+try the following:
+
+### IRC
+
+Come to our IRC channel `#bergamot-monitoring` on Freenode (`irc.freenode.net`). 
+You can ask for help, report issues, suggest features, say nice things, what ever 
+really.  IRC is probably worth a first port of call if you have a simple issue 
+which can be answered quickly.
+

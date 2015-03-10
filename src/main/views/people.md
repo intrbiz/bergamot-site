@@ -10,6 +10,5 @@ Bergamot Monitoring was founded and is led by Chris Ellis [@intrbiz](https://twi
 
 ### IRC
 
-Join our channel `#bergamot-monitoring` on Freenode (`irc.freenode.net`) if you need 
-help deploying Bergamot Monitoring, want to discuss features or anything else you wish 
-to talk about.
+Join our channel `#bergamot-monitoring` on Freenode (`irc.freenode.net`) and 
+discuss Bergamot Monitoring with us.
