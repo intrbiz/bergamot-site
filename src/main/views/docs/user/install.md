@@ -242,7 +242,7 @@ To install the Nagios / NRPE worker:
 
 To install the SNMP worker and watcher:
 
-    demo:~# zypper in bergamot-java bergamot-worker-snmp bergamot-watcher-snmp
+    root@demo:~# zypper in bergamot-java bergamot-worker-snmp bergamot-watcher-snmp
 
 You can start the Nagios / NRPE worker with:
 
