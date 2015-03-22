@@ -12,7 +12,7 @@ server.  This guide only covers getting a simple installation up and running.
 
 Currently an Open Build Service instance is used to build packages for:
 
- * openSUSE 13.1, 13.2, Tumbleweed
+ * openSUSE 13.1, 13.2, Tumbleweed, SLE 12
  * Centos 7
  * Red Hat Enterprise Linux 7
  * Fedora 20
