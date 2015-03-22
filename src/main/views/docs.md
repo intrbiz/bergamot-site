@@ -6,6 +6,7 @@ Documentation about how to install and use Bergamot Monitoring
 
 * Quickstart Guide
 * [Installation Guide](/docs/user/install)
+* [Bergamot Agent Guide](/docs/user/agent)
 * Configuration Reference
     * [Bergamot Configuration](/docs/user/ref/config)
     * Migrating From Nagios
