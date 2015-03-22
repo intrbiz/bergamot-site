@@ -180,6 +180,19 @@ password when creating the RabbitMQ user and the PostgreSQL user.  Otherwise
 there is very little to configure.  If your RabbitMQ server or PostgreSQL server 
 is not local, then update that as required.
 
+Once you've created the basic UI daemon configuration file it is important to 
+generate a security key.  The security key is used to sign authentication tokens 
+issued by the the UI.  This key needs to remain static to avoid invalidating all 
+issued authentication tokens, it also needs to be the same across all UI servers 
+that are clustered.
+
+Generate and store the security token using the following Bergamot CLI command:
+
+    bergamot-cli admin security-key set
+
+This will generate a new security key and update the UI daemon configuration 
+file with it.
+
 #### Configuring The Email Notification Daemon
 
 The email notification daemon configuration file is: `/etc/bergamot/notifier/email.xml`, 
@@ -229,7 +242,7 @@ To install the Nagios / NRPE worker:
 
 To install the SNMP worker and watcher:
 
-demo:~# zypper in bergamot-java bergamot-worker-snmp bergamot-watcher-snmp
+    demo:~# zypper in bergamot-java bergamot-worker-snmp bergamot-watcher-snmp
 
 You can start the Nagios / NRPE worker with:
 
@@ -280,6 +293,50 @@ it will look like:
 
 Again configure the RabbitMQ broker with the same syntax as used in the UI 
 configuration file.
+
+#### Installing the Bergamot Agent Manager
+
+The Bergamot Agent Manager is responsible for signing TLS certificates.  This 
+daemon should ideally be deployed onto a dedicate server, to which access is 
+strictly controlled, as it contains private key material.  For small deployments 
+you can install the Bergamot Agent Manager onto the master server.
+
+If you don't intend to use the Bergamot Agent, then you can skip the install of 
+the Bergamot Agent Manager.
+
+Install the Bergamot Agent Manager components:
+
+    root@demo:~ # zypper in bergamot-java bergamot-agent-manager
+
+The packages will install default daemon configuration files, which you should 
+edit before starting the Bergamot Agent Manager.
+
+You can start the Bergamot Agent Manager with:
+
+    root@demo:~ # systemctl enable bergamot-agent-manager
+    root@demo:~ # systemctl start bergamot-agent-manager
+
+#### Configuring the Bergamot Agent Manager
+
+The Bergamot Agent Manager daemon configuration file is: `/etc/bergamot/agent-manager.xml`, 
+it will look like:
+
+    <bergamot-agent-manager>
+        <certificate-name country="GB" state="My County" locality="My City" organisation="My Org"/>
+        <file-key-store base="/var/opt/bergamot/agent-manager/certificates"/>
+        <broker password="bergamot" url="amqp://127.0.0.1" username="bergamot"/>
+    </bergamot-agent-manager>
+
+Configure the RabbitMQ broker with the same syntax as used in the UI 
+configuration file.  You should also set the `country`, `state`, `locality` and 
+`organisation` these values will be used to build a certificate distinguished 
+name.  Should you move the certificate repository path (IE: to an encrypted 
+disk), set the `path` attribute of the `file-key-store` element.
+
+By default the Bergamot Agent Manager will store private keys and certificates 
+under `/var/opt/bergamot/agent-manager/certificates`.  This will include the 
+private key for the root certificate authority and a private key per site 
+certificate authority.  No private key is stored per agent.
 
 ## Creating A Site
 
