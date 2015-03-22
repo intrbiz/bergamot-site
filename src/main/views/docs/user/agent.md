@@ -32,7 +32,7 @@ Fedora 20 and 21, openSuse 13.1, 13.2, Tumbleweed and SLE 12.
 
 You can install these packages using:
 
-    root@server:~ # zypper ar http://download.opensuse.org/repositories/server:/database:/postgresql/openSUSE_13.1/server:database:postgresql.repo
+    root@server:~ # zypper ar http://obs.intrbiz.net:82/Bergamot/openSUSE_13.1/Bergamot.repo
     root@server:~ # zypper ref
     root@server:~ # zypper in bergamot-java bergamot-agent
     
