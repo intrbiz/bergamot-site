@@ -30,7 +30,6 @@ which need to be deployed:
  * Bergamot SMS notification daemon (optional)
  * Bergamot nagios worker
  * Bergamot SNMP worker (optional)
- * Bergamot SNMP watcher (optional)
  * RabbitMQ server
  * PostgreSQL database server
 
@@ -234,66 +233,6 @@ notifications you will need to register for an account with Twilio.  Once you
 have a Twillio account update the configuration with: the account SID, auth token 
 and SMS phone number.
 
-### Installing A Bergamot Worker Node
-
-To install the Nagios / NRPE worker:
-
-    root@demo:~ # zypper in bergamot-java bergamot-worker-nagios nagios-plugins-all
-
-To install the SNMP worker and watcher:
-
-    root@demo:~# zypper in bergamot-java bergamot-worker-snmp bergamot-watcher-snmp
-
-You can start the Nagios / NRPE worker with:
-
-    root@demo:~ # systemctl start bergamot-worker-nagios
-
-You can start the SNMP worker with:
-
-    root@demo:~ # systemctl start bergamot-worker-snmp
-
-You can start the SNMP watcher with:
-
-    root@demo:~ # systemctl start bergamot-watcher-snmp
-
-#### Configuring The Nagios Worker Daemon
-
-The Nagios/NRPE worker daemon configuration file is: `/etc/bergamot/worker/nagios.xml`, 
-it will look like:
-
-    <worker name="nagios.worker.bergamot.local">
-        <broker url="amqp://127.0.0.1" username="bergamot" password="bergamot"/>
-    </worker>
-
-Again configure the RabbitMQ broker with the same syntax as used in the UI 
-configuration file.
-
-#### Configuring The SNMP Worker Daemon
-
-The SNMP worker daemon configuration file is: `/etc/bergamot/worker/snmp.xml`, 
-it will look like:
-
-    <worker name="snmp.worker.bergamot.local">
-        <broker url="amqp://127.0.0.1" username="bergamot" password="bergamot"/>
-        <parameter description="The port to send SNMP requests from" name="snmp-port">8161</parameter>
-    </worker>
-
-Again configure the RabbitMQ broker with the same syntax as used in the UI 
-configuration file.
-
-#### Configuring The SNMP Watcher Daemon
-
-The SNMP watcher daemon configuration file is: `/etc/bergamot/watcher/snmp.xml`, 
-it will look like:
-
-    <watcher name="snmp.watcher.bergamot.local" site="00000000-0000-0000-8000-000000000000">
-        <broker url="amqp://127.0.0.1" username="bergamot" password="bergamot"/>
-        <parameter description="The port to send SNMP requests from" name="snmp-port">8162</parameter>
-    </watcher>
-
-Again configure the RabbitMQ broker with the same syntax as used in the UI 
-configuration file.
-
 #### Installing the Bergamot Agent Manager
 
 The Bergamot Agent Manager is responsible for signing TLS certificates.  This 
@@ -337,6 +276,77 @@ By default the Bergamot Agent Manager will store private keys and certificates
 under `/var/opt/bergamot/agent-manager/certificates`.  This will include the 
 private key for the root certificate authority and a private key per site 
 certificate authority.  No private key is stored per agent.
+
+### Installing A Bergamot Worker Node
+
+To install the Nagios / NRPE worker:
+
+    root@demo:~ # zypper in bergamot-java bergamot-worker-nagios nagios-plugins-all
+
+To install the SNMP worker:
+
+    root@demo:~# zypper in bergamot-java bergamot-worker-snmp
+    
+To install the HTTP worker:
+
+    root@demo:~# zypper in bergamot-java bergamot-worker-http
+    
+To install the Bergamot Agent worker:
+
+    root@demo:~# zypper in bergamot-java bergamot-worker-agent
+
+You can start the Nagios / NRPE worker with:
+
+    root@demo:~ # systemctl start bergamot-worker-nagios
+
+You can start the SNMP worker with:
+
+    root@demo:~ # systemctl start bergamot-worker-snmp
+
+You can start the HTTP worker with:
+
+    root@demo:~ # systemctl start bergamot-worker-http
+
+You can start the Bergamot Agent worker with:
+
+    root@demo:~ # systemctl start bergamot-worker-agent
+
+#### Configuring The Nagios Worker Daemon
+
+The Nagios/NRPE worker daemon configuration file is: `/etc/bergamot/worker/nagios.xml`, 
+it will look like:
+
+    <worker name="nagios.worker.bergamot.local">
+        <broker url="amqp://127.0.0.1" username="bergamot" password="bergamot"/>
+    </worker>
+
+Again configure the RabbitMQ broker with the same syntax as used in the UI 
+configuration file.
+
+#### Configuring The SNMP Worker Daemon
+
+The SNMP worker daemon configuration file is: `/etc/bergamot/worker/snmp.xml`, 
+it will look like:
+
+    <worker name="snmp.worker.bergamot.local">
+        <broker url="amqp://127.0.0.1" username="bergamot" password="bergamot"/>
+        <parameter description="The port to send SNMP requests from" name="snmp-port">8161</parameter>
+    </worker>
+
+Again configure the RabbitMQ broker with the same syntax as used in the UI 
+configuration file.
+
+#### Configuring The HTTP Worker Daemon
+
+The HTTP worker daemon configuration file is: `/etc/bergamot/worker/http.xml`, 
+it will look like:
+
+    <worker name="http.worker.bergamot.local" threads="1">
+        <broker url="amqp://127.0.0.1" username="bergamot" password="bergamot"/>
+    </worker>
+
+Again configure the RabbitMQ broker with the same syntax as used in the UI 
+configuration file.
 
 ## Creating A Site
 
