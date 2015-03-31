@@ -7,11 +7,9 @@ Code: xml
 
 ## Introduction
 
-Bergamot currently uses XML to configure checks.  Hopefully, you will rarely 
-need to interact with the configuration format, as you can create and modify 
-checks via the Web Interface or API.  The check configuration is primarily used 
-when importing from an existing Nagios installation or importing from an 
-existing Bergamot installation.
+Bergamot currently uses XML to configure checks.  Configuration changes are made 
+online, without requiring a restart from the web user interface.  In the future 
+interaction with the XML configuration format will be reduced.
 
 ## General Structure
 
@@ -57,11 +55,6 @@ Take a look at this short example of how inheritance behaves:
         <schedule every="5" retry-every="1" time-period="24x7"/>
     </service>
     
-    <service name="check_load" extends="" template="yes">
-        <summary>Load Average</summary>
-        <command extends="check_load"/>
-    </service>
-    
     <host name="generic-host" template="yes" enabled="yes" suppressed="no">
         <notifications enabled="yes" time-period="24x7"/>
         <notify teams="admins"/>
@@ -71,43 +64,21 @@ Take a look at this short example of how inheritance behaves:
     </host>
     
     <host name="linux-server" extends="generic-host" template="yes">
-        <service extends="check_load" />
+        <service name="check_load" extends="generic-service">
+            <summary>Load Average</summary>
+            <command extends="check_load"/>
+        </service>
     </host>
     
     <host name="localhost" extends="linux-server">
     </host/>
- 
+
+
 The host `localhost` is a `linux-server` which in turn is a `generic-host`.  As such the host `localhost`
 will inherit the service `check_load`.  The notification and host check configuration would be inherited from `generic-host`.
 
 The service `check_load` would itself inherit from the service `generic-service`.  As such it would inherit the notification and 
 scheduling configuration from `generic-service`.
-
-## Suggested Directory Structure
-
-    /site.name
-        /global
-            /contacts.xml
-            /groups.xml
-            /locations.xml
-            /time-periods.xml
-            /templates
-                /clusters.xml
-                /commands.xml
-                /contacts.xml
-                /hosts.xml
-                /resources.xml
-                /services.xml
-                /traps.xml
-        /some_service
-            /templates
-            /clusters.xml
-            /hosts.xml
-            /resources.xml
-            /services.xml
-            /traps.xml
-            /clusters.xml
-            /hosts.xml
 
 ## Common Attributes and Elements
 
@@ -131,7 +102,18 @@ Every check configuration object has a set of common attributes and elements whi
 
 `<parameter name="...">...</parameter>` All configuration object can have arbitrary name value pair parameters defined, 
 these can then be referenced in value expressions, allowing for configuration to be defined where logical rather then 
-where it is defined.  
+where it is defined.
+
+## Common Parameters
+
+## `ui-icon`
+
+    <parameter name="ui-icon">/path/to/icon.png</parameter>
+
+Change the icon which is displayed in the user interface.  
+This can be specified on `command`, `host`, `service`, `trap`, `cluster`, `resource` objects.  The value should 
+be the URL path a 64px by 64px PNG icon.  Note: the icon should use transparency to allow the check status to 
+be visible.
 
 ## Configuring A Location
 
@@ -233,12 +215,15 @@ hours which is the inverse of work hours, as follows:
 
 ## Configuring A Contact
 
-A Contact represents someone (or thing) which should be notified when some thing goes wrong or recoverss.  A Contact 
-will be notified when a check alerts and recovers.  A Contact is only notified during a particular time period and can 
-be notified via multiple Notification Engines (email, sms, etc).
+A Contact represents someone (or thing) which should be notified when some thing goes wrong or recovers, as well as 
+controlling access to the user interface and API.
 
-You should define a generic Contact template, which contacts inherit from.  This template should define when and how a 
-contact is notified.  For example:
+A Contact will be notified when a check alerts and recovers, Bergamot Monitoring will only send one notification 
+for an alert and recovery.  A Contact is only notified during a particular time period and can be notified via 
+multiple Notification Engines (email, sms, etc).
+
+It is reccomended to define a generic Contact template, which contacts inherit from.  This template should define 
+when and how a contact is notified by default.  For example:
 
     <contact name="generic-contact" template="yes">        
         <notifications enabled="yes" time-period="24x7" alerts="yes" recovery="yes">
@@ -247,10 +232,9 @@ contact is notified.  For example:
         </notifications>
     </contact>
 
-This would define a generic template which would be used by other Contacts.  Which sends notifications during the 
-time period `24x7`.  The contact would be notified by `email` during work hours.  The contact would be notified by `sms` out side of work hours.
+This template would send notifications during the time period `24x7`.  The contact would be notified by `email` during work hours and would be notified by `sms` out side of work hours.
 
-Now we can define a contact, as follows:
+We can now define a contact, which inheirts all the default configuration, as follows:
 
     <contact name="joe.bloggs" extends="generic-contact">
         <summary>Joe Bloggs</summary>
@@ -340,6 +324,10 @@ for all hosts in that location, permitting overriding at the host level.
         <parameter name="snmp_community">#{coalesce(host.getParameter('snmp_community'), host.location.getParameter('snmp_community'), 'public')}</parameter>
     </command>
 
+The expression language can be used in the values of `command` and `check-command` parameters.  An expression is always starts 
+with `#{` and ends with `}`.  The expression language offers a powerful way to extract information from Bergamot objects, this 
+allows for configuration to be stored where it is semantically relevant.
+
 ## Configuring Checks
 
 Bergamot has a few different types of checks:
@@ -350,7 +338,7 @@ Bergamot has a few different types of checks:
 * Clusters - a virtual Host which is computed based on the state of multiple Hosts
 * Resources - a virtual Service which is computed from the state of multiple Services
 
-Checks fall into three categories: active, passive and virtual.  An active check 
+Checks fall into three types: active, passive and virtual.  An active check 
 is scheduled and executed (polled) by Bergamot.  A passive check is not scheduled 
 and is not executed, instead it is watched by Bergamot.  A virtual check is 
 computed from the state of dependent checks, the state of a virtual check is 
@@ -360,13 +348,249 @@ computed when a dependent check changes state.
 
 A Host, is some form of networked device which is to be monitored.  A Host is 
 actively checked using a Command and contains a set of Services and Traps which 
-monitor what executes on the Host.
+monitor a Host.
 
+For anyone used to Nagios, it is important to realise that Bergamot inherits 
+services from host templates.  Bergamot's configuration differs significantly from 
+Nagios in this regard, rather than defining services to hosts and host groups.
 
+This difference makes Bergamot's configuration more akin to how servers often 
+deployed, especially for environments which use automated deployment, via tools 
+such as Puppet or Ansible.
+
+Again it is recommended to make use of inheritance when defining hosts, first lets define a generic host template:
+
+    <host name="generic-host" template="yes">
+        <summary>Generic Host</summary>
+        <notifications enabled="yes" time-period="24x7" all-engines="yes"/>
+        <notify teams="admins"/>
+        <state failed-after="4" recovers-after="10"/>
+        <schedule every="5" retry-every="1" changing-every="1" time-period="24x7"/>
+        <check-command command="check-host-alive"/>
+        <description>A generic host template</description>
+    </host>
+
+This defines a generic template which contains the common check configuration.  We can break the above sample down as follows:
+
+    <notifications enabled="yes" time-period="24x7" all-engines="yes"/>
+
+The above configures when notifications will be sent for this check.  In this sample, the check will send notifications 
+as per the `24x7` time period and to all engines.  The notification settings of a contact always take priority over the notification 
+settings of a check.
+
+    <notify teams="admins"/>
+
+The `notify` element configures which teams and contacts should be notified for a given check.  Here notifications will be sent to 
+all contacts in the `admins` team.  Individual contacts can be specified using the `contacts` attribute.
+
+    <state failed-after="4" recovers-after="10"/>
+    
+The `state` element configures how the check will transition states.  It will take 4 non-ok check results before an alert is raised 
+for the check and it will take 10 ok check results before a recovery is raised.
+
+    <schedule every="5" retry-every="1" changing-every="1" time-period="24x7"/>
+
+The `schedule` element configures how often a check will be executed. In this example the check will be executed every 5 minutes, 
+under normal conditions.  Should the check be changing between state then it will be executed every 1 minute (as defined by the `changing-every` attribute.  If the check is in a hard non-ok state, then it will be executed every 1 minute (as defined by the 
+`retry-every` attribute.  The `time-period` attribute defines a time period during which a check will be executed.  The `every`, 
+`retry-every` and `changing-every` attributes configure a time interval, which defaults to minutes, other values maybe defined using 
+the suffixes: `s`, `m`, `h`.  For example `30s` for every 30 seconds, `5m` for every 5 minutes, `2h` for every hour.  Currently only simple intervals can be defined, in order to define a check which executes every 1.5 minutes you would use: `90s`.
+
+    <check-command command="check-host-alive"/>
+    
+The `check-command` element defines the command which will be executed in order to check this host, by default the `check-host-alive` 
+command.
+
+### Configuring Services
+
+TODO
+
+### Configuring Traps
+
+TODO
+
+### Configuring Clusters
+
+TODO
+
+### Configuring Resources
+
+TODO
 
 ## Advice For Sane Configuration
 
-### Define 
+### Define Commands
+
+Commands define how to check something, as such they naturally define a point 
+of reuse, many checks use the same command.  It is recomended to define a 
+command for each NRPE or Bergamot Agent command you may have.
+
+### Use Host Templates
+
+Most infrastructures have many hosts which follow similar patterns, be it lots 
+of web servers or lots of generic Linux servers.  As such it makes sense to 
+define templates for each of these patterns.  Apply these templates to individual 
+hosts and avoid duplicating configuration.  Remember a host can inheirt from 
+multiple templates, and remember that services are inheirted from templates.
+
+## FAQ
+
+TODO
+
+## Reference
+
+### Team
+
+    <team name="..." extends="..., ..." template="yes/no" teams="..., ..." grants="..., ..." revokes="..., ...">
+        <summary>...</summary>
+        <description>...</description>
+        <parameter description="..." name="...">...</parameter>
+    </team>
+
+### Contact
+
+    <contact name="..." extends="..., ..." template="yes/no" teams="..., ..." grants="..., ..." revokes="..., ...">
+        <summary>...</summary>
+        <description>...</description>
+        <first-name>...</first-name>
+        <preferred-name>...</preferred-name>
+        <family-name>...</family-name>
+        <full-name>...</full-name>
+        <email>...</email>
+        <pager>...</pager>
+        <mobile>...</mobile>
+        <phone>...</phone>
+        <im>...</im>
+        <notifications enabled="yes/no" time-period="..." alerts="yes/no" recovery="yes/no" ignore="..., ..." all-engines="yes/no">
+            <notification-engine engine="..." enabled="yes/no" time-period="..." alerts="yes/no" recovery="yes/no" ignore="..., ..."/>
+        </notifications>
+        <parameter description="..." name="...">...</parameter>
+    </contact>
+
+### Location
+
+    <location name="..." extends="..." template="yes/no" location="..." worker-pool="...">
+        <summary>...</summary>
+        <description>...</description>
+        <parameter description="..." name="...">...</parameter>
+    </location>
+
+### Group
+
+    <group name="..." extends="..." template="yes/no" groups="..., ...">
+        <summary>...</summary>
+        <description>...</description>
+        <parameter description="..." name="...">...</parameter>
+    </group>
+
+### Timeperiod
+
+    <time-period name="..." extends="..." template="yes/no" excludes="..., ...">
+        <summary>...</summary>
+        <description>...</description>
+        <time-zone id="(Europe/London|etc)"/>
+        <time-range>...</time-range>
+        <parameter description="..." name="...">...</parameter>
+    </time-period>
+
+### Command
+
+    <command name="..." extends="..." template="yes/no" engine="..." executor="...">
+        <summary>...</summary>
+        <description>...</description>
+        <parameter description="..." name="...">...</parameter>
+    </command>
+
+###  Host
+
+    <host name="..." extends="..." template="yes/no" suppressed="yes/no" enabled="yes/no" groups="..., ..." external-ref="..." worker-pool="..." agent-id="..." location="..." address="...">
+        <summary>...</summary>
+        <description>...</description>
+        <initially status="pending|info|ok|warning|critical|error|timeout|action|disconnected" output=".."/>
+        <notifications enabled="yes/no" time-period="..." alerts="yes/no" recovery="yes/no" ignore="..., ..." all-engines="yes/no">
+            <notification-engine engine="..." enabled="yes/no" time-period="..." alerts="yes/no" recovery="yes/no" ignore="..., ..."/>
+        </notifications>
+        <notify teams="..., ..." contacts="..., ..."/>
+        <state failed-after="[0-9]+" recovers-after="[0-9]+"/>
+        <schedule every="[0-9]+(s|m|h)?" changing-every="[0-9]+(s|m|h)?" retry-every="[0-9]+(s|m|h)?" time-period="..."/>
+        <check-command command="...">
+            <parameter description="..." name="...">...</parameter>
+        </check-command>
+        <parameter description="..." name="...">...</parameter>
+        <service>...</service>
+        <trap>...</trap>
+    </host>
+
+### Service
+
+    <service name="..." extends="..." template="yes/no" suppressed="yes/no" enabled="yes/no" groups="..., ..." external-ref="..." worker-pool="..." agent-id="...">
+        <summary>...</summary>
+        <description>...</description>
+        <initially status="pending|info|ok|warning|critical|error|timeout|action|disconnected" output=".."/>
+        <notifications enabled="yes/no" time-period="..." alerts="yes/no" recovery="yes/no" ignore="..., ..." all-engines="yes/no">
+            <notification-engine engine="..." enabled="yes/no" time-period="..." alerts="yes/no" recovery="yes/no" ignore="..., ..."/>
+        </notifications>
+        <notify teams="..., ..." contacts="..., ..."/>
+        <state failed-after="[0-9]+" recovers-after="[0-9]+"/>
+        <schedule every="[0-9]+(s|m|h)?" changing-every="[0-9]+(s|m|h)?" retry-every="[0-9]+(s|m|h)?" time-period="..."/>
+        <check-command command="...">
+            <parameter description="..." name="...">...</parameter>
+        </check-command>
+        <parameter description="..." name="...">...</parameter>
+    </service>
+
+### Trap
+
+    <trap name="..." extends="..." template="yes/no" suppressed="yes/no" enabled="yes/no" groups="..., ..." external-ref="...">
+        <summary>...</summary>
+        <description>...</description>
+        <initially status="pending|info|ok|warning|critical|error|timeout|action|disconnected" output=".."/>
+        <notifications enabled="yes/no" time-period="..." alerts="yes/no" recovery="yes/no" ignore="..., ..." all-engines="yes/no">
+            <notification-engine engine="..." enabled="yes/no" time-period="..." alerts="yes/no" recovery="yes/no" ignore="..., ..."/>
+        </notifications>
+        <notify teams="..., ..." contacts="..., ..."/>
+        <state failed-after="[0-9]+" recovers-after="[0-9]+"/>
+        <check-command command="...">
+            <parameter description="..." name="...">...</parameter>
+        </check-command>
+        <parameter description="..." name="...">...</parameter>
+    </trap>
+
+###  Cluster
+
+    <cluster name="..." extends="..." template="yes/no" suppressed="yes/no" enabled="yes/no" groups="..., ..." external-ref="...">
+        <summary>...</summary>
+        <description>...</description>
+        <initially status="pending|info|ok|warning|critical|error|timeout|action|disconnected" output=".."/>
+        <notifications enabled="yes/no" time-period="..." alerts="yes/no" recovery="yes/no" ignore="..., ..." all-engines="yes/no">
+            <notification-engine engine="..." enabled="yes/no" time-period="..." alerts="yes/no" recovery="yes/no" ignore="..., ..."/>
+        </notifications>
+        <notify teams="..., ..." contacts="..., ..."/>
+        <condition>...</condition>
+        <parameter description="..." name="...">...</parameter>
+        <resource>...</resource>
+    </cluster>
+
+###  Resource
+
+    <resource name="..." extends="..." template="yes/no" suppressed="yes/no" enabled="yes/no" groups="..., ..." external-ref="...">
+        <summary>...</summary>
+        <description>...</description>
+        <initially status="pending|info|ok|warning|critical|error|timeout|action|disconnected" output=".."/>
+        <notifications enabled="yes/no" time-period="..." alerts="yes/no" recovery="yes/no" ignore="..., ..." all-engines="yes/no">
+            <notification-engine engine="..." enabled="yes/no" time-period="..." alerts="yes/no" recovery="yes/no" ignore="..., ..."/>
+        </notifications>
+        <notify teams="..., ..." contacts="..., ..."/>
+        <condition>...</condition>
+        <parameter description="..." name="...">...</parameter>
+    </resource>
+
+
+
+
+
+
+
 
 
 
