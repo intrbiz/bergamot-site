@@ -3,10 +3,8 @@
 <fragment xmlns="com.intrbiz.balsa">
 
     <ul>
-        <li><a href="/faq">F.A.Q</a></li>
         <li><a href="/docs">Documentation</a></li>
-        <li><a href="/demo">Demo</a></li>
-        <li><a href="/getit">Download</a></li>
+        <li><a href="/getit">Get It</a></li>
     </ul>
 
 </fragment>

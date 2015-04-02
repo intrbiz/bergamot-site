@@ -1,5 +1,9 @@
 # Documentation
 
+## General
+
+* [F.A.Q.](/docs/faq)
+
 ## For Users
 
 Documentation about how to install and use Bergamot Monitoring

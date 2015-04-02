@@ -401,6 +401,29 @@ the suffixes: `s`, `m`, `h`.  For example `30s` for every 30 seconds, `5m` for e
 The `check-command` element defines the command which will be executed in order to check this host, by default the `check-host-alive` 
 command.
 
+With the above generic host template defined, the simplest host can be defined as follows:
+
+    <host name="gateway.local" address="192.168.1.1" location="office" groups="routers" extends="generic-host">
+        <summary>Local Gateway</summary>
+    </host>
+    
+The real power comes from being able to define services within host templates, for example:
+
+    <host name="linux-server-nrpe" extends="generic-host" template="yes" groups="linux-servers">
+        <summary>Linux Server (NRPE)</summary>
+        <notify teams="linux-admins"/>
+        <description>Default Linux server checked via NRPE template</description>
+        <service extends="linux-service" name="load" groups="linux-services">
+            <summary>Load</summary>
+            <check-command command="check_nrpe_load"/>
+        </service>
+    </host>
+    
+The above example defines a host template with one services, which checks the host load average via 
+NRPE.
+
+
+
 ### Configuring Services
 
 TODO
