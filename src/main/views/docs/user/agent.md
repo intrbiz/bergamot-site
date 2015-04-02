@@ -30,7 +30,7 @@ connects out to a know hub, rather than accepting connections.
 We currently have packages available for: CentOS 7, RedHat 7, Scientific Linux 7, 
 Fedora 20 and 21, openSuse 13.1, 13.2, Tumbleweed and SLE 12.
 
-You can install these packages using:
+On openSuse 13.1, you can install these packages using:
 
     root@server:~ # zypper ar http://obs.intrbiz.net:82/Bergamot/openSUSE_13.1/Bergamot.repo
     root@server:~ # zypper ref
