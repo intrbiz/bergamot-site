@@ -7,7 +7,7 @@ Code: bash
 
 ## Introduction
 
-This guide details how to install Bergamot from scratch on a openSUSE 13.1 
+This guide details how to install Bergamot from scratch on a openSUSE 13.2 
 server.  This guide only covers getting a simple installation up and running.
 
 Currently an Open Build Service instance is used to build packages for:
@@ -28,8 +28,11 @@ which need to be deployed:
  * Bergamot UI daemon
  * Bergamot email notification daemon
  * Bergamot SMS notification daemon (optional)
+ * Bergamot Agent Manager
  * Bergamot nagios worker
- * Bergamot SNMP worker (optional)
+ * Bergamot SNMP worker
+ * Bergamot HTTP worker
+ * Bergamot Agent worker
  * RabbitMQ server
  * PostgreSQL database server
 
@@ -39,11 +42,15 @@ the master server:
  * Bergamot UI daemon
  * Bergamot email notification daemon
  * Bergamot SMS notification daemon (optional)
+ * Bergamot Agent Manager
  * RabbitMQ server
  * PostgreSQL database server
 
 Then deploy the worker daemons onto a separate server or many worker servers, 
 it is acceptable to deploy all the worker components onto one worker server.
+
+For a high availability deployment, you will need to cluster the PostgreSQL 
+and RabbitMQ servers.
 
 ## Prerequisites
 
@@ -88,14 +95,14 @@ Finally we have no need for the guest account so lets remove it:
     root@demo:~ # rabbitmqctl delete_user guest
 
 You can access the web management interface by pointing your browser to: 
-http://my-server:15672 and logging in with the admin account we created above.
+`http://my-server:15672` and logging in with the admin account we created above.
 
 ### Installing PostgreSQL
 
 Bergamot requires at least version 9.3 of PostgreSQL, therefore we need to add 
 an additional repository from the openSUSE build service:
 
-    root@demo:~ # zypper ar http://download.opensuse.org/repositories/server:/database:/postgresql/openSUSE_13.1/server:database:postgresql.repo
+    root@demo:~ # zypper ar http://download.opensuse.org/repositories/server:/database:/postgresql/openSUSE_13.2/server:database:postgresql.repo
     root@demo:~ # zypper ref
 
 Now we can install PostgreSQL 9.3:
@@ -134,11 +141,41 @@ Lets create the user and database for bergamot:
     postgres=# CREATE DATABASE bergamot WITH OWNER = bergamot ENCODING = 'UTF8';
     postgres=# \q
 
+### Installing Nginx
+
+The Bergamot UI uses Nginx as a web server, handling serving plain content and communicating 
+to the Bergamot UI application server using SCGI.  This makes it possible to have multiple 
+load balanced application servers.  While these application servers share session state which 
+maintains user sessions should an application server fail, sticky session load balancing must 
+be used.
+
+With openSUSE 13.2 Nginx has moved into a different repository, so we need to add that repository:
+
+    root@demo:~ # zypper ar http://download.opensuse.org/repositories/server:/http/openSUSE_13.2/server:http.repo
+    root@demo:~ # zypper ref
+    
+We can now (optionally) install Nginx with:
+
+    root@demo:~ # zypper in nginx
+    
+### Installing Monitoring Plugins
+
+While not strictly required it is handy to have the core Monitoring Plugins available.
+
+Again with openSUSE 13.2 these are in a dedicated repository, which we need to add:
+
+    root@demo:~ # zypper ar http://download.opensuse.org/repositories/server:/monitoring/openSUSE_13.2/server:monitoring.repo
+    root@demo:~ # zypper ref
+    
+We can now (optionally) install the Monitoring Plugins with:
+
+    root@demo:~ # zypper in monitoring-plugins
+    
 ## Installing Bergamot
 
 The Bergamot repository must be installed to provided the packages needed:
 
-    root@demo:~ # zypper ar http://obs.intrbiz.net:82/Bergamot/openSUSE_13.1/Bergamot.repo
+    root@demo:~ # zypper ar http://obs.intrbiz.net:82/Bergamot/openSUSE_13.2/Bergamot.repo
     root@demo:~ # zypper ref
 
 ### Installing A Bergamot Master Node
@@ -159,9 +196,9 @@ You can start the Bergamot notification engines with:
 
 You can start the Bergamot web interface with:
 
-    root@demo:~ # systemctl enable bergamot-ui
+    root@demo:~ # systemctl enable bergamot-ui-cluster@node1
     root@demo:~ # systemctl enable nginx
-    root@demo:~ # systemctl start bergamot-ui
+    root@demo:~ # systemctl start bergamot-ui-cluster@node1
     root@demo:~ # systemctl start nginx
 
 #### Configuring The UI Daemon
@@ -281,7 +318,7 @@ certificate authority.  No private key is stored per agent.
 
 To install the Nagios / NRPE worker:
 
-    root@demo:~ # zypper in bergamot-java bergamot-worker-nagios nagios-plugins-all
+    root@demo:~ # zypper in bergamot-java bergamot-worker-nagios monitoring-plugins
 
 To install the SNMP worker:
 
