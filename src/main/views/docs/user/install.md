@@ -385,6 +385,44 @@ it will look like:
 Again configure the RabbitMQ broker with the same syntax as used in the UI 
 configuration file.
 
+#### Configuring The Agent Worker Daemon
+
+The Agent worker daemon configuration file is: `/etc/bergamot/worker/agent.xml`, 
+by default it will look like:
+
+    <worker name="agent.bergamot.local">
+        <broker password="bergamot" url="amqp://127.0.0.1" username="bergamot"/>
+        <bergamot-agent-server port="15443">
+            <ca-certificate></ca-certificate>
+            <key></key>
+            <certificate></certificate>
+        </bergamot-agent-server>
+    </worker>
+
+Again configure the RabbitMQ broker with the same syntax as used in the UI 
+configuration file.
+
+The Bergamot Agent Worker, listens (by default on port 15443) for connections 
+from agents.  Bergamot Agents communication with the monitoring cluster are 
+secured using TLS, this requires managing server and client certificates.
+
+The Bergamot Agent Manager service is responsible for signing certificates used 
+by Bergamot Agent.  Before we can generate a Bergamot Agent server certificate 
+for our worker, we need to make sure the Bergamot Agent Manager service is 
+running.
+
+The `bergamot-cli` can then be used to generate a Bergamot Agent server 
+configuration block, using:
+
+    root@demo:~# bergamot-cli admin server generate hub.bergamot.local
+
+The output of the above command should be merged into the default configuration, 
+replacing the empty `bergamot-agent-server` element.
+
+As the Bergamot Agent relies on TLS client authentication, the Bergamot Agent 
+worker cannot be placed behind a TLS offload device or Layer 7 load balancer.  
+Load balancing will need to be done at Layer 4, IE: a pure TCP load balancer.
+
 ## Creating A Site
 
 Now that Bergamot is installed, we need to create a site before we can go much 
