@@ -6,10 +6,10 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonTypeName("version-check")
 public class VersionCheck extends APIResponse
 {
-    @JsonProperty("upto-date")
+    @JsonProperty("upto_date")
     private boolean uptoDate;
     
-    @JsonProperty("currentVersion")
+    @JsonProperty("current_version")
     private String currentVersion;
     
     public VersionCheck()
