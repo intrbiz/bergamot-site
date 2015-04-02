@@ -97,7 +97,7 @@ or even better to work with us.
 
 ## Take it for a spin
 
-Try out our [demo instance](/demo)
+Try out our [demo instance](/getit)
 
 ## Deploy it
 
