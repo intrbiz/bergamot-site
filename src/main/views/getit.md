@@ -39,7 +39,7 @@ Scientific Linux and Fedora.
 
 You can download binary application archives from our download site: [https://files.bergamot-monitoring.org/](https://files.bergamot-monitoring.org/)
 
-### Bergamot Monitoring V1.0.0 - Latest
+### Bergamot Monitoring V1.0.0 - Latest Stable
 
 * [Bergamot UI](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-ui-1.0.0.app)
 * [Bergamot CLI](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-cli-1.0.0.app)
@@ -48,7 +48,9 @@ You can download binary application archives from our download site: [https://fi
 * [Bergamot Nagios Worker](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-worker-nagios-1.0.0.app)
 * [Bergamot SNMP Worker](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-worker-snmp-1.0.0.app)
 * [Bergamot HTTP Worker](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-worker-http-1.0.0.app)
-* [Bergamot SNMP Watcher](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-watcher-snmp-1.0.0.app)
+* [Bergamot Agent Worker](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-worker-agent-1.0.0.app)
+* [Bergamot Agent Manager](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-agent-manager-1.0.0.app)
+* [Bergamot Agent](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-agent-1.0.0.app)
 
 ## Maven Repository
 
