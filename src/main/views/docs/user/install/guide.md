@@ -1,6 +1,6 @@
 ---
 Author: Chris Ellis
-Date: 2014-08-26
+Date: 2015-04-05
 Code: bash
 ---
 # Bergamot Install Guide

@@ -422,11 +422,23 @@ The real power comes from being able to define services within host templates, f
 The above example defines a host template with one services, which checks the host load average via 
 NRPE.
 
+The above template can then be used as follows:
 
+    <host name="a.linux.server" address="127.0.0.1" location="office" extends="linux-server-nrpe">
+        <summary>A Linux Server</summary>
+    </host>
 
 ### Configuring Services
 
-TODO
+Services are configured much the same as host, being active checks they share a lot of the same 
+configuration options.  Services maybe defined within a host or at the top level, any services 
+defined at the top level must be templates.  Services define within  a host do not need to 
+specify if they are templates or not, this is specified from the host they are contained by.
+
+It is recommended to define a generic service template that all services will inheirt from, this 
+generic template will define common configuration options:
+
+
 
 ### Configuring Traps
 
