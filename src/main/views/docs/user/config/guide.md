@@ -389,7 +389,7 @@ check is computed when a dependent check changes state.
 
 A Host, is some form of networked device which is to be monitored.  A Host is 
 actively checked using a Command and contains a set of Services and Traps which 
-monitor a Host.
+monitor the Host.
 
 For anyone used to Nagios, it is important to realise that Bergamot inherits 
 services from host templates.  Bergamot's configuration differs significantly 
@@ -487,6 +487,12 @@ The above template can then be used as follows:
 
 ### Configuring Services
 
+A Service is some specific aspect of a host which must be monitored.  This 
+could be a process which should be running, a TCP socket which should be 
+listening, the free space of a file system, etc.  Services are actively checked 
+using a command, Bergamot Monitoring schedules and executes services 
+periodically.
+
 Services are configured much the same as host, being active checks they share a 
 lot of the same configuration options.  Services maybe defined within a host or 
 at the top level, any services defined at the top level must be templates.
@@ -570,7 +576,88 @@ as follows:
 
 ### Configuring Traps
 
-TODO
+A trap is an aspect of a host which should be monitored passively.  Traps are 
+similar to services with one big difference, a trap watches something rather 
+than actively polling something.  Traps are NOT scheduled or executed, instead 
+some external input pushes information into Bergamot Monitoring.  The best 
+example of traps are SNMP traps sent by networking devices.
+
+Traps are passive checks and share some core options with services. Like 
+services, traps are defined within hosts with templates being defined at the 
+top level.  Traps defined within a host do not need to specify if they are 
+templates or not, this is specified from the host they are contained by.
+
+It is recommended to define a generic trap template that all traps will inherit 
+from, this generic template will define common configuration options:
+
+    <trap template="yes" name="generic-trap">
+        <summary>Generic Trap</summary>
+        <notifications enabled="yes" time-period="24x7" all-engines="yes"/>
+        <notify teams="admins"/>
+        <state failed-after="1" recovers-after="1"/>
+        <initially status="ok" output="OK"/>
+        <description>A generic trap template</description>
+    </trap>
+
+This defines a generic template which contains the common check configuration.
+We can break the above sample down as follows:
+
+    <notifications enabled="yes" time-period="24x7" all-engines="yes"/>
+
+The above configures when notifications will be sent for this check.  In this 
+sample, the check will send notifications as per the `24x7` time period and to 
+all engines.  The notification settings of a contact always take priority over 
+the notification settings of a check.
+
+    <notify teams="admins"/>
+
+The `notify` element configures which teams and contacts should be notified for 
+a given check.  Here notifications will be sent to all contacts in the `admins` 
+team.  Individual contacts can be specified using the `contacts` attribute.
+
+    <state failed-after="4" recovers-after="10"/>
+    
+The `state` element configures how the check will transition states.  It will 
+take 4 non-ok check results before an alert is raised for the check and it will 
+take 10 ok check results before a recovery is raised.
+
+    <initially status="ok" output="OK"/>
+
+The `initially` element defines the initial status for a check.  This is 
+important for traps, as a result might never be received.  Checks default to 
+being `pending` initially, for a Trap we usually want to set this to `ok`. The 
+`status` attribute set the initial status of the check, this can be one 
+of: `pending`, `info`, `ok`, `warning`, `critical`, `unknown`, `timeout`, 
+`error`, `disconnected`, `action`.  The `output` attribute specified the 
+textual output which will be displayed initially.
+
+Because traps are configured as part of hosts, it makes more sense to 
+concentrate effort on creating host templates for your infrastructure.  You 
+can define trap template for each trap you will have, however this might 
+result in too much overhead to be easily maintainable.
+
+It is suggested to define specific trap template for each grouping of 
+traps you have.  For example define trap templates for each combination 
+of grouping and notification teams you have:
+
+    <trap name="network-trap" extends="generic-trap" template="yes">
+        <notify teams="network-admins"/>
+    </trap>
+
+The above would define a generic network trap, which by default places checks 
+into the group `network-services` and will notify the `network-admins` team.
+
+You can then make use of these templates when defining a trap on a host 
+as follows:
+
+    <host>
+        <trap name="port-E/01/01" extends="network-trap">
+            <summary>Port E/01/01</summary>
+            <check-command command="snmp-link-trap">
+                <parameter name="interface-name">E/1/01</parameter>
+            </check-command>
+        </service>    
+    </host>
 
 ### Configuring Clusters
 
