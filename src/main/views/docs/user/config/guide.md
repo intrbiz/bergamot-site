@@ -325,9 +325,11 @@ the command line which will be executed.
         <parameter name="command_line" >#{nagios.path}/check_ping -H #{host.address} -w #{warning} -c #{critical} -p #{packets}</parameter>
     </command>
 
-Bergamot provides a specific check engine for NRPE checks, the `nrpe` check engine.  This check engine does not require 
-forking of a process to execute an NRPE check, this is lighter-weight and more efficient to installations which primarily check hosts 
-via NRPE.  A generic check_nrpe command can be defined as follows:
+Bergamot provides a specific check engine for NRPE checks, the `nrpe` check 
+engine.  This check engine does not require forking of a process to execute an 
+NRPE check, this is lighter-weight and more efficient to installations which 
+primarily check hosts via NRPE.  A generic check_nrpe command can be defined 
+as follows:
 
     <command engine="nrpe" name="check_nrpe">
         <parameter name="command" description="The NRPE command, eg: check_load"></parameter>
@@ -361,9 +363,11 @@ for all hosts in that location, permitting overriding at the host level.
         <parameter name="snmp_community">#{coalesce(host.getParameter('snmp_community'), host.location.getParameter('snmp_community'), 'public')}</parameter>
     </command>
 
-The expression language can be used in the values of `command` and `check-command` parameters.  An expression is always starts 
-with `#{` and ends with `}`.  The expression language offers a powerful way to extract information from Bergamot objects, this 
-allows for configuration to be stored where it is semantically relevant.
+The expression language can be used in the values of `command` and 
+`check-command` parameters.  An expression is always starts with `#{` and ends 
+with `}`.  The expression language offers a powerful way to extract 
+information from Bergamot objects, this allows for configuration to be stored 
+where it is semantically relevant.
 
 ## Configuring Checks
 
@@ -376,10 +380,10 @@ Bergamot has a few different types of checks:
 * Resources - a virtual Service which is computed from the state of multiple Services
 
 Checks fall into three types: active, passive and virtual.  An active check 
-is scheduled and executed (polled) by Bergamot.  A passive check is not scheduled 
-and is not executed, instead it is watched by Bergamot.  A virtual check is 
-computed from the state of dependent checks, the state of a virtual check is 
-computed when a dependent check changes state.
+is scheduled and executed (polled) by Bergamot.  A passive check is not 
+scheduled and is not executed, instead it is watched by Bergamot.  A virtual 
+check is computed from the state of dependent checks, the state of a virtual 
+check is computed when a dependent check changes state.
 
 ### Configuring Hosts
 
@@ -388,14 +392,16 @@ actively checked using a Command and contains a set of Services and Traps which
 monitor a Host.
 
 For anyone used to Nagios, it is important to realise that Bergamot inherits 
-services from host templates.  Bergamot's configuration differs significantly from 
-Nagios in this regard, rather than defining services to hosts and host groups.
+services from host templates.  Bergamot's configuration differs significantly 
+from Nagios in this regard, rather than defining services to hosts and host 
+groups.
 
 This difference makes Bergamot's configuration more akin to how servers often 
 deployed, especially for environments which use automated deployment, via tools 
 such as Puppet or Ansible.
 
-Again it is recommended to make use of inheritance when defining hosts, first lets define a generic host template:
+Again it is recommended to make use of inheritance when defining hosts, first 
+lets define a generic host template:
 
     <host name="generic-host" template="yes">
         <summary>Generic Host</summary>
@@ -407,44 +413,58 @@ Again it is recommended to make use of inheritance when defining hosts, first le
         <description>A generic host template</description>
     </host>
 
-This defines a generic template which contains the common check configuration.  We can break the above sample down as follows:
+This defines a generic template which contains the common check configuration.
+We can break the above sample down as follows:
 
     <notifications enabled="yes" time-period="24x7" all-engines="yes"/>
 
-The above configures when notifications will be sent for this check.  In this sample, the check will send notifications 
-as per the `24x7` time period and to all engines.  The notification settings of a contact always take priority over the notification 
-settings of a check.
+The above configures when notifications will be sent for this check.  In this 
+sample, the check will send notifications as per the `24x7` time period and to 
+all engines.  The notification settings of a contact always take priority over 
+the notification settings of a check.
 
     <notify teams="admins"/>
 
-The `notify` element configures which teams and contacts should be notified for a given check.  Here notifications will be sent to 
-all contacts in the `admins` team.  Individual contacts can be specified using the `contacts` attribute.
+The `notify` element configures which teams and contacts should be notified for 
+a given check.  Here notifications will be sent to all contacts in the `admins` 
+team.  Individual contacts can be specified using the `contacts` attribute.
 
     <state failed-after="4" recovers-after="10"/>
     
-The `state` element configures how the check will transition states.  It will take 4 non-ok check results before an alert is raised 
-for the check and it will take 10 ok check results before a recovery is raised.
+The `state` element configures how the check will transition states.  It will 
+take 4 non-ok check results before an alert is raised for the check and it will 
+take 10 ok check results before a recovery is raised.
 
     <schedule every="5" retry-every="1" changing-every="1" time-period="24x7"/>
 
-The `schedule` element configures how often a check will be executed. In this example the check will be executed every 5 minutes, 
-under normal conditions.  Should the check be changing between state then it will be executed every 1 minute (as defined by the `changing-every` attribute.  If the check is in a hard non-ok state, then it will be executed every 1 minute (as defined by the 
-`retry-every` attribute.  The `time-period` attribute defines a time period during which a check will be executed.  The `every`, 
-`retry-every` and `changing-every` attributes configure a time interval, which defaults to minutes, other values maybe defined using 
-the suffixes: `s`, `m`, `h`.  For example `30s` for every 30 seconds, `5m` for every 5 minutes, `2h` for every hour.  Currently only simple intervals can be defined, in order to define a check which executes every 1.5 minutes you would use: `90s`.
+The `schedule` element configures how often a check will be executed. In this 
+example the check will be executed every 5 minutes, under normal conditions. 
+Should the check be changing between state then it will be executed every 1 
+minute (as defined by the `changing-every` attribute.  If the check is in a 
+hard non-ok state, then it will be executed every 1 minute (as defined by the 
+`retry-every` attribute.  The `time-period` attribute defines a time period 
+during which a check will be executed.  The `every`, `retry-every` and 
+`changing-every` attributes configure a time interval, which defaults to 
+minutes, other values maybe defined using the suffixes: `s`, `m`, `h`.  For 
+example `30s` for every 30 seconds, `5m` for every 5 minutes, `2h` for every 
+hour.  Currently only simple intervals can be defined, in order to define a 
+check which executes every 1.5 minutes you would use: `90s`.
 
     <check-command command="check-host-alive"/>
     
-The `check-command` element defines the command which will be executed in order to check this host, by default the `check-host-alive` 
+The `check-command` element defines the command which will be executed in order 
+to check this host, by default the `check-host-alive` 
 command.
 
-With the above generic host template defined, the simplest host can be defined as follows:
+With the above generic host template defined, the simplest host can be defined 
+as follows:
 
     <host name="gateway.local" address="192.168.1.1" location="office" groups="routers" extends="generic-host">
         <summary>Local Gateway</summary>
     </host>
     
-The real power comes from being able to define services within host templates, for example:
+The real power comes from being able to define services within host templates, 
+for example:
 
     <host name="linux-server-nrpe" extends="generic-host" template="yes" groups="linux-servers">
         <summary>Linux Server (NRPE)</summary>
@@ -456,8 +476,8 @@ The real power comes from being able to define services within host templates, f
         </service>
     </host>
     
-The above example defines a host template with one services, which checks the host load average via 
-NRPE.
+The above example defines a host template with one services, which checks the 
+host load average via NRPE.
 
 The above template can then be used as follows:
 
@@ -467,15 +487,86 @@ The above template can then be used as follows:
 
 ### Configuring Services
 
-Services are configured much the same as host, being active checks they share a lot of the same 
-configuration options.  Services maybe defined within a host or at the top level, any services 
-defined at the top level must be templates.  Services define within  a host do not need to 
-specify if they are templates or not, this is specified from the host they are contained by.
+Services are configured much the same as host, being active checks they share a 
+lot of the same configuration options.  Services maybe defined within a host or 
+at the top level, any services defined at the top level must be templates.
+Services define within  a host do not need to specify if they are templates or 
+not, this is specified from the host they are contained by.
 
-It is recommended to define a generic service template that all services will inheirt from, this 
-generic template will define common configuration options:
+It is recommended to define a generic service template that all services will 
+inherit from, this generic template will define common configuration options:
 
+    <service template="yes" name="generic-service">
+        <summary>Generic Service</summary>
+        <notifications enabled="yes" time-period="24x7" all-engines="yes"/>
+        <notify teams="admins"/>
+        <state failed-after="4" recovers-after="10"/>
+        <schedule every="5" retry-every="1" time-period="24x7"/>
+        <description>A generic service template</description>
+    </service>
 
+This defines a generic template which contains the common check configuration.
+We can break the above sample down as follows:
+
+    <notifications enabled="yes" time-period="24x7" all-engines="yes"/>
+
+The above configures when notifications will be sent for this check.  In this 
+sample, the check will send notifications as per the `24x7` time period and to 
+all engines.  The notification settings of a contact always take priority over 
+the notification settings of a check.
+
+    <notify teams="admins"/>
+
+The `notify` element configures which teams and contacts should be notified for 
+a given check.  Here notifications will be sent to all contacts in the `admins` 
+team.  Individual contacts can be specified using the `contacts` attribute.
+
+    <state failed-after="4" recovers-after="10"/>
+    
+The `state` element configures how the check will transition states.  It will 
+take 4 non-ok check results before an alert is raised for the check and it will 
+take 10 ok check results before a recovery is raised.
+
+    <schedule every="5" retry-every="1" changing-every="1" time-period="24x7"/>
+
+The `schedule` element configures how often a check will be executed. In this 
+example the check will be executed every 5 minutes, under normal conditions. 
+Should the check be changing between state then it will be executed every 1 
+minute (as defined by the `changing-every` attribute.  If the check is in a 
+hard non-ok state, then it will be executed every 1 minute (as defined by the 
+`retry-every` attribute.  The `time-period` attribute defines a time period 
+during which a check will be executed.  The `every`, `retry-every` and 
+`changing-every` attributes configure a time interval, which defaults to 
+minutes, other values maybe defined using the suffixes: `s`, `m`, `h`.  For 
+example `30s` for every 30 seconds, `5m` for every 5 minutes, `2h` for every 
+hour.  Currently only simple intervals can be defined, in order to define a 
+check which executes every 1.5 minutes you would use: `90s`.
+
+Because services are configured as part of hosts, it makes more sense to 
+concentrate effort on creating host templates for your infrastructure.  You 
+can define service template for each service you will have, however this might 
+result in too much overhead to be easily maintainable.
+
+It is suggested to define specific service template for each grouping of 
+services you have.  For example define service templates for each combination 
+of grouping and notification teams you have:
+
+    <service name="linux-service" groups="linux-services" extends="generic-service" template="yes">
+        <notify teams="linux-admins"/>
+    </service>
+
+The above would define a generic Linux service, which by default places checks 
+into the group `linux-services` and will notify the `linux-admins` team.
+
+You can then make use of these templates when defining a service on a host 
+as follows:
+
+    <host>
+        <service name="nginx" extends="linux-service">
+            <summary>Nginx Web Server</summary>
+            <check-command command="check_process_nginx" />
+        </service>    
+    </host>
 
 ### Configuring Traps
 
