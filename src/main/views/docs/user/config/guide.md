@@ -661,7 +661,60 @@ as follows:
 
 ### Configuring Clusters
 
-TODO
+Clusters represent a cooperative set of hosts.  Clusters are designed to 
+monitor, high availability clusters, whereby a set of hosts provide something.
+
+Clusters are virtual checks, they do not actually check anything.  Instead the 
+state of a cluster is computed from the state of a set of dependent hosts, this 
+calculation is made when ever a dependent host changes state.
+
+Imagine a highly available website or database hosted by a number of servers.
+As long as at least one host is ok, then the cluster is ok.
+
+It is recommended to define a generic cluster template that all traps will inherit 
+from, this generic template will define common configuration options:
+
+    <cluster template="yes" name="generic-cluster">
+        <summary>Generic Cluster</summary>
+        <notifications time-period="24x7"/>
+        <notify teams="admins"/>
+        <description>A generic cluster template</description>
+    </cluster>
+
+This defines a generic template which contains the common check configuration.
+We can break the above sample down as follows:
+
+    <notifications enabled="yes" time-period="24x7" all-engines="yes"/>
+
+The above configures when notifications will be sent for this check.  In this 
+sample, the check will send notifications as per the `24x7` time period and to 
+all engines.  The notification settings of a contact always take priority over 
+the notification settings of a check.
+
+    <notify teams="admins"/>
+
+The `notify` element configures which teams and contacts should be notified for 
+a given check.  Here notifications will be sent to all contacts in the `admins` 
+team.  Individual contacts can be specified using the `contacts` attribute.
+
+The above template can then be used as follows:
+
+    <cluster name="pgsql.cluster" extends="generic-cluster">
+        <summary>PostgreSQL Cluster</summary>
+        <condition>host 'pgsql1.local' or host 'pgsql2.local'</condition>
+        <resource name="listener-pgsql" extends="generic-resource">
+            <summary>Listener: PostgreSQL</summary>
+            <condition>service 'listener-pgsql' on host 'pgsql1.local' or service 'listener-pgsql' on host 'pgsql2.local'</condition>
+        </resource>
+    </cluster>
+
+Sadly with clusters inheritance is only really useful for managing the 
+notification settings.
+
+The actual logic of a cluster is specified by the `condition` element, this 
+defines the virtual check expression which is used to compute the state of the 
+cluster.  In the above example the cluster is based on the `or` relationship of 
+two hosts, IE: it represents the best case of the two hosts.
 
 ### Configuring Resources
 
@@ -672,7 +725,7 @@ TODO
 ### Define Commands
 
 Commands define how to check something, as such they naturally define a point 
-of reuse, many checks use the same command.  It is recomended to define a 
+of reuse, many checks use the same command.  It is recommended to define a 
 command for each NRPE or Bergamot Agent command you may have.
 
 ### Use Host Templates
@@ -680,8 +733,8 @@ command for each NRPE or Bergamot Agent command you may have.
 Most infrastructures have many hosts which follow similar patterns, be it lots 
 of web servers or lots of generic Linux servers.  As such it makes sense to 
 define templates for each of these patterns.  Apply these templates to individual 
-hosts and avoid duplicating configuration.  Remember a host can inheirt from 
-multiple templates, and remember that services are inheirted from templates.
+hosts and avoid duplicating configuration.  Remember a host can inherit from 
+multiple templates, and remember that services are inherited from templates.
 
 ## FAQ
 
