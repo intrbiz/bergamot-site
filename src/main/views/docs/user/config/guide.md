@@ -671,8 +671,8 @@ calculation is made when ever a dependent host changes state.
 Imagine a highly available website or database hosted by a number of servers.
 As long as at least one host is ok, then the cluster is ok.
 
-It is recommended to define a generic cluster template that all traps will inherit 
-from, this generic template will define common configuration options:
+It is recommended to define a generic cluster template that all clusters will 
+inherit from, this generic template will define common configuration options:
 
     <cluster template="yes" name="generic-cluster">
         <summary>Generic Cluster</summary>
@@ -718,7 +718,28 @@ two hosts, IE: it represents the best case of the two hosts.
 
 ### Configuring Resources
 
-TODO
+Resources represent a cooperative set of services or traps.  Resources are 
+designed to monitor, high availability clustered services, whereby a set of 
+services across a set of hosts provide something.
+
+Resources are virtual checks, they do not actually check anything.  Instead the 
+state of a resource is computed from the state of a set of dependent services 
+and traps, this calculation is made when ever a dependent check changes state.
+
+Imagine a highly available website or database hosted by a number of servers.
+As long as the web server or database is running on at least one server then 
+the resource is ok.
+
+It is recommended to define a generic resource template that all resources 
+will inherit from, this generic template will define common configuration 
+options:
+
+    <resource template="yes" name="generic-resource">
+        <summary>Generic Resource</summary>
+        <notifications enabled="yes" time-period="24x7" all-engines="yes"/>
+        <notify teams="admins"/>
+        <description>A generic resource template</description>
+    </resource>
 
 ## Advice For Sane Configuration
 
