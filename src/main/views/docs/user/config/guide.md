@@ -741,6 +741,29 @@ options:
         <description>A generic resource template</description>
     </resource>
 
+This defines a generic template which contains the common check configuration.
+We can break the above sample down as follows:
+
+    <notifications enabled="yes" time-period="24x7" all-engines="yes"/>
+
+The above configures when notifications will be sent for this check.  In this 
+sample, the check will send notifications as per the `24x7` time period and to 
+all engines.  The notification settings of a contact always take priority over 
+the notification settings of a check.
+
+    <notify teams="admins"/>
+
+The `notify` element configures which teams and contacts should be notified for 
+a given check.  Here notifications will be sent to all contacts in the `admins` 
+team.  Individual contacts can be specified using the `contacts` attribute.
+
+The above template can then be used as follows:
+
+    <resource name="listener-pgsql" extends="generic-resource">
+        <summary>Listener: PostgreSQL</summary>
+        <condition>service 'listener-pgsql' on host 'pgsql1.local' or service 'listener-pgsql' on host 'pgsql2.local'</condition>
+    </resource>
+
 ## Advice For Sane Configuration
 
 ### Define Commands
