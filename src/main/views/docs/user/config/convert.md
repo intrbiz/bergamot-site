@@ -37,6 +37,8 @@ the site wide parameters that are in use.  It will also output files in
 The converter won't output a Bergamot configuration file for every file, if a 
 file only contains services applied to hostgroups and hosts.
 
+### Generated Host Templates
+
 The converter will map services into Bergamot host templates.  Where services 
 are applied via hostgroups, a template for that hostgroup will be created which 
 the services are added to.  Where a service is applied to a set of hosts a host 
@@ -75,6 +77,43 @@ Would be converted to the following:
     <host address="1.2.3.4" groups="vm-servers" extends="linux-server, vm-servers-template" name="vm1">
         <summary>VM1</summary>
     </host>
+
+### NRPE Commands
+
+If you have a command called `check_nrpe`, this will be automatically converted 
+to the Bergamot equivalent.  This definition will execute NRPE checks via 
+Bergamot's dedicated NRPE engine, which is far more efficient.
+
+The converted command will be moved to the generated `nrpe_commands.xml` file. 
+This file will also contain commands for any NRPE commands which the converter 
+has detected are in use through out your configuration.
+
+The converter will auto-generate a specific NRPE command definition when it 
+spots a service using the `check_nrpe` command with a **single** argument.
+
+Given the following Nagios service definition:
+
+    define service {
+        use                        local-service
+        hostgroup_name             vm-servers
+        service_description        Load
+        check_command              check_nrpe!check_load
+        servicegroups              vm-host-services
+    }
+
+The following command definition would be generated:
+
+    <command extends="check_nrpe" name="check_nrpe_check_load">
+        <parameter name="command">check_load</parameter>
+        <summary>Check NRPE: check_load</summary>
+    </command>
+
+With the following converted service definition:
+
+    <service groups="vm-host-services" extends="local-service">
+        <summary>Load</summary>
+        <check-command command="check_nrpe_check_load"/>
+    </service>
 
 ## Manual Tweaking
 
