@@ -14,4 +14,4 @@ You can find RPMs and packages available on our [download page](/getit)
 
 To install Bergamot Monitoring please refer to the [install guide](/docs/user/install/guide)
 
-Should you need the source code, see the (1.0.0 tag in Github)[https://github.com/intrbiz/bergamot/releases/tag/1.0.0]
+Should you need the source code, see the [1.0.0 tag in Github](https://github.com/intrbiz/bergamot/releases/tag/1.0.0)
