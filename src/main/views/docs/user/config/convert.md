@@ -11,7 +11,7 @@ While Bergamot Monitoring has a different configuration format, a different
 configuration model and a different check model to that of Nagios. There is a 
 tool which will convert a Nagios configuration to a Bergamot configuration.
 
-The configuration conversion tool makes migrating from Nagios to Bertgamot 
+The configuration conversion tool makes migrating from Nagios to Bergamot 
 easier than needing to rewrite your entire configuration.  There are some 
 configuration changes you will want to make by hand.
 
