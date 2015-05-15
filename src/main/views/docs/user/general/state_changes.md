@@ -7,7 +7,7 @@ Code: bash
 
 Bergamot Monitoring has configurable thresholds for transitioning from ok to 
 non-ok states and back.  Bergamot Monitoring also has hysteresis as the check 
-period changed based on the state of the check.
+period changes based on the state of the check.
 
 This allows for checks to be configured to fail fast and recovery slowly.  Using 
 a small `failed-after` threshold a check will fail fast, especially when 
