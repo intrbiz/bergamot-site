@@ -95,11 +95,11 @@ or even better to work with us.
 
 # Interested?
 
-## Take it for a spin
+## Try it out
 
 Try out our [demo instance](/getit)
 
-## Deploy it
+## Spin it up
 
 Download our [virtual appliance](/getit) to get up and running immediately.
 
