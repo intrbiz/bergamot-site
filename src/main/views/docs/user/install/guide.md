@@ -169,7 +169,7 @@ Again with openSUSE 13.2 these are in a dedicated repository, which we need to a
     
 We can now (optionally) install the Monitoring Plugins with:
 
-    root@demo:~ # zypper in monitoring-plugins
+    root@demo:~ # zypper in --no-recommends monitoring-plugins-all
     
 ## Installing Bergamot
 
