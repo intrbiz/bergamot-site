@@ -125,12 +125,12 @@ which will need fixing up or changing manually.
 
 The conversion tool does not read the `resources.cfg` Nagios configuration file 
 and as such does not know the value of user defined Nagios macros.  However 
-which user macros in user are known, these are mapped to `nagios.user[0-9]+` 
-site parameters.  These will be defined in the generated `parameters.xml`, you 
-will need to manually fill in the correct parameter values.
+which user macros in use are known, these are mapped to `nagios.user[0-9]+` 
+site parameters.  Which will be defined in the generated `parameters.xml` file, 
+you will need to manually fill in the correct parameter values.
 
-By default the `USER1` Nagios macro will be assumed to be the Nagios plugin 
-path.  This will be translated to the `nagios.path` site parameter and will 
+By default the `USER1` Nagios macro is assumed to be the Nagios plugin 
+path.  This will be translated to the `nagios.path` site parameter, which will 
 default to `/usr/lib/nagios/plugins`.  Again this will be defined in the 
 generated `parameters.xml` file and will need to be set correctly.
 
