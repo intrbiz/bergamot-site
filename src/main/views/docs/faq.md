@@ -101,5 +101,7 @@ provided by Bergamot.
 
 ### Where did the name come from?
 
-I quite like Earl Grey tea.
+I quite like Earl Grey tea.  Earl Grey tea is flavoured with oil extracted 
+from the skin of the [Bergamot Orange](https://en.wikipedia.org/wiki/Bergamot_orange), 
+a citrus fruit.
 
