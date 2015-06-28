@@ -28,6 +28,8 @@ the REST API and the worker APIs.
 
 Documentation on the internals of Bergamot and how you can get involved.
 
+* [Contributors Guide](/docs/contributors/guide)
+
 ## Getting Help
 
 Should you run into a problem, want to discuss an issue, suggest something, then 
