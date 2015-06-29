@@ -64,6 +64,31 @@
 		    <artifactId>bootstrap</artifactId>
 		    <version>1.0.0</version>
 	    </dependency>
+	    <dependency>
+  			<groupId>com.sun.mail</groupId>
+  			<artifactId>javax.mail</artifactId>
+  			<version>1.5.2</version>
+  		</dependency>
+	    <dependency>
+	    	<groupId>com.intrbiz.util</groupId>
+	    	<artifactId>data-manager</artifactId>
+	    	<version>1.0.1</version>
+	    </dependency>
+	    <dependency>
+	    	<groupId>com.intrbiz.util</groupId>
+	    	<artifactId>data-database-adapter-compiler</artifactId>
+	    	<version>1.0.1</version>
+	    </dependency>
+	    <dependency>
+	    	<groupId>org.mindrot</groupId>
+	    	<artifactId>jbcrypt</artifactId>
+	    	<version>0.3m</version>
+	    </dependency>
+	    <dependency>
+	    	<groupId>com.intrbiz.balsa</groupId>
+	    	<artifactId>balsa-data</artifactId>
+	    	<version>4.0.0</version>
+	    </dependency>
 	</dependencies>
 	
 	<build>

@@ -1,0 +1,68 @@
+<!DOCTYPE balsa SYSTEM "http://balsa.intrbiz.net/balsa.dtd">
+<?RenderLibrary com.intrbiz.balsa?>
+<!-- The index view -->
+<fragment xmlns="com.intrbiz.balsa" title="Discussion: #{discussion.summary}">
+    
+    <div>
+		<form action="#{path('discuss/admin/discussion/' + discussion.id + '/update')}" method="post">
+			<p>
+				<h4>
+					<label for="summary">Discussion Summary</label>
+				</h4>
+				<input type="text" name="summary" value="#{discussion.summary}" style="width: 400px"/>
+			</p>
+			<p>
+				<h4>
+					<label for="name">Discussion Name</label>
+				</h4>
+				<input type="text" name="name" value="#{discussion.name}" style="width: 400px"/>
+			</p>
+			<p>
+				<h4>
+					<label for="email">Discussion Email Address</label>
+				</h4>
+				<input type="text" name="email" value="#{discussion.email}" style="width: 400px"/>
+			</p>
+			<p>
+				<h4>
+					<label for="description">Discussion Description</label>
+				</h4>
+				<textarea name="description" style="width: 800px; height: 200px; padding: 5px;">#{discussion.description}</textarea>
+			</p>
+			<p>
+				<h4>
+					<label for="content">Discussion Content</label>
+				</h4>
+				<textarea name="content" style="width: 800px; height: 400px; padding: 5px;">#{discussion.content}</textarea>
+			</p>
+			<p>
+				<input type="submit" name="do_update" value="Update Discussion" style="padding: 5px; font-weight: bold; font-size: 16px;"/>
+			</p>
+		</form>
+    </div>
+    
+    <div>
+    	<h2>Members</h2>
+    	<table>
+    		<tr>
+    			<th>Name</th>
+    			<th>Email</th>
+    			<th>Registered</th>
+    			<th>Role</th>
+    			<th>Locked</th>
+    			<th>Verified</th>
+    		</tr>
+    		<data-set var="user" value="#{users}">
+    			<tr>
+    				<td>#{user.displayName}</td>
+    				<td>#{user.email}</td>
+    				<td>#{dateformat('EEEE dd/MM/yyyy', user.registered)  + ' at ' + dateformat('HH:mm:ss', user.registered)}</td>
+    				<td>#{user.role}</td>
+    				<td>#{if(user.locked, 'yes', 'no')}</td>
+    				<td>#{if(user.verified, 'yes', 'no')}</td>
+    			</tr>
+    		</data-set>
+    	</table>
+    </div>
+    
+</fragment>

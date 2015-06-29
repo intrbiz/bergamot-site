@@ -1,0 +1,30 @@
+<!DOCTYPE balsa SYSTEM "http://balsa.intrbiz.net/balsa.dtd">
+<?RenderLibrary com.intrbiz.balsa?>
+<!-- The index view -->
+<fragment xmlns="com.intrbiz.balsa" title="Discussions">
+    
+    <include view="discuss/admin/include/menu"/>
+    
+    <div>
+    	<table>
+    		<tr>
+    			<th>Name</th>
+    			<th>Email Address</th>
+    			<th>Display Name</th>
+    			<th>Created</th>
+    		</tr>
+    		<data-set var="discussion" value="#{discussions}">
+    			<tr>
+    				<td><a href="discuss/admin/discussion/#{discussion.id}/">#{discussion.name}</a></td>
+    				<td>#{discussion.email}</td>
+    				<td>#{discussion.summary}</td>
+    				<td>#{dateformat('EEEE dd/MM/yyyy', discussion.created)  + ' at ' + dateformat('HH:mm:ss', discussion.created)}</td>
+    			</tr>
+    		</data-set>
+    	</table>
+    	<p style="padding-top: 20px;">
+    		<a href="discuss/admin/discussion/create">Create Discussion</a>
+    	</p>
+    </div>
+    
+</fragment>

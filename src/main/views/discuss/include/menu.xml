@@ -1,0 +1,22 @@
+<!DOCTYPE balsa SYSTEM "http://balsa.intrbiz.net/balsa.dtd">
+<?RenderLibrary com.intrbiz.balsa?>
+<!-- The index view -->
+<fragment xmlns="com.intrbiz.balsa">
+    
+    <div style="height: 100px; position: relative;">
+	    <div style="float: right; text-align: right;">
+	    	<container rendered="#{balsa().currentPrincipal() == null}">
+		    	<a href="discuss/login" style="margin-left: 20px;">Login</a>
+		    	<a href="discuss/register" style="margin-left: 20px;">Register</a>
+	    	</container>
+	    	<container rendered="#{balsa().currentPrincipal() != null}">
+	    		<a href="discuss/profile">
+	    			<h5>Hello #{balsa().currentPrincipal().displayName}</h5>
+	    		</a>
+	    		<a href="discuss/admin/" rendered="#{balsa().permission('discuss.admin')}" style="margin-left: 20px;">Admin</a>
+	    		<a href="discuss/logout" style="margin-left: 20px;">Logout</a>
+	    	</container>
+	    </div>
+    </div>
+    
+</fragment>

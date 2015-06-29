@@ -1,0 +1,58 @@
+<!DOCTYPE balsa SYSTEM "http://balsa.intrbiz.net/balsa.dtd">
+<?RenderLibrary com.intrbiz.balsa?>
+<!-- The index view -->
+<fragment xmlns="com.intrbiz.balsa" title="Discussion #{discussion.summary}">
+    
+    <include view="discuss/include/menu"/>
+    
+    <div style="height: 50px; position: relative;">
+	    <div style="float: right; text-align: right;">
+    		<a href="discuss/">Back to Discussions</a>
+    	</div>
+    </div>
+    
+	<div style="margin-bottom: 50px;">
+		<p>#{coalesce(discussion.content, '')}</p>
+	</div>
+	
+	<data-set var="thread" value="#{threads}">
+		<div id="thread-#{thread.threadId}" style="border-bottom: 1px dashed #000;">
+			<a href="discuss/discussion/#{discussion.id}/thread/#{thread.threadId}/">
+				<h4>#{thread.summary}</h4>
+			</a>
+			<p>
+				Created by #{thread.fromUser.displayName} on #{dateformat('EEEE dd/MM/yyyy', thread.created)  + ' at ' + dateformat('HH:mm', thread.created)}, updated #{dateformat('EEEE dd/MM/yyyy', thread.updated)  + ' at ' + dateformat('HH:mm', thread.updated)}, #{thread.posts} posts.
+			</p>
+			<p>#{coalesce(thread.description, '')}</p>
+		</div>
+	</data-set>
+	
+		
+	<div rendered="#{isMember}" style="margin-top: 50px;">
+		<h3>Create Thread</h3>
+		<p>
+			<span>You can contribute to this discussion by emailing </span><code>#{discussion.email}</code><span>.</span>
+		</p>
+		<p>
+			<span>Or by creating a thread here</span>
+		</p>
+		<form action="#{path('discuss/discussion/' + discussion.id + '/thread/create')}" method="post">
+			<p>
+				<h4>
+					<label for="summary">Subject</label>
+				</h4>
+				<input type="text" name="summary" placeholder="How can I do..." style="width: 400px"/>
+			</p>
+			<p>
+				<h4>
+					<label for="description">Description</label>
+				</h4>
+				<textarea name="description" style="width: 800px; height: 100px; padding: 5px;"></textarea>
+			</p>
+			<p>
+				<input type="submit" name="do_create_thread" value="Create Thread" style="padding: 5px; font-weight: bold; font-size: 16px;"/>
+			</p>
+		</form>
+	</div>
+    
+</fragment>

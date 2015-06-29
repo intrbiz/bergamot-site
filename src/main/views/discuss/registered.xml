@@ -1,0 +1,33 @@
+<!DOCTYPE balsa SYSTEM "http://balsa.intrbiz.net/balsa.dtd">
+<?RenderLibrary com.intrbiz.balsa?>
+<!-- The index view -->
+<fragment xmlns="com.intrbiz.balsa" title="Account Registered">
+    
+    <div>
+		<h3>Hello #{user.displayName}</h3>
+		<p>
+			Thank you for registering with Bergamot Discuss.
+		</p>
+		<p>
+			You will recieve an email to verify your membership, please 
+			follow the instructions in that email.
+		</p>
+		<p>
+			Once you have verified your email address.  You will be able 
+			to contribute to discussions using email or on this site.
+		</p>
+		<p>
+			Please be aware, that any emails sent to the discussion address, 
+			will be publicly logged.
+		</p>
+		<p>
+			You have joined the following discussions:
+		</p>
+		<data-set var="discussion" value="#{discussions}">
+			<h5>#{discussion.summary}</h5>
+			<p>#{discussion.description}</p>
+			<p><span>To post email: </span><code>#{discussion.email}</code></p>
+		</data-set>
+	</div>
+    
+</fragment>

@@ -2,10 +2,11 @@
 <?RenderLibrary com.intrbiz.balsa?>
 <fragment xmlns="com.intrbiz.balsa">
 
-    <ul>
-        <li><a href="/news/index">News</a></li>
-        <li><a href="/docs">Documentation</a></li>
-        <li><a href="/getit">Get It</a></li>
-    </ul>
+	<ul>
+		<li><a href="/news/index">News</a></li>
+		<li><a href="/getit">Get It</a></li>
+		<li><a href="/docs">Documentation</a></li>
+		<li><a href="/discuss/">Discussions</a></li>
+	</ul>
 
 </fragment>

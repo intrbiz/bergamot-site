@@ -1,0 +1,56 @@
+<!DOCTYPE balsa SYSTEM "http://balsa.intrbiz.net/balsa.dtd">
+<?RenderLibrary com.intrbiz.balsa?>
+<!-- The index view -->
+<fragment xmlns="com.intrbiz.balsa" title="Register Account">
+    
+    <div>
+    	<p>
+    		By registering you will be able to post messages to discussions and 
+    		will receive messages from other members of the discussion.  You will 
+    		only be able to post messages and receive messages from discussions that
+    		you have joined.
+    	</p>
+		<form action="#{path('discuss/register')}" method="post">
+			<p>
+				<h4>
+					<label for="display_name">Your Display Name</label>
+				</h4>
+				<input type="text" name="display_name" placeholder="George Smiley" style="width: 400px"/>
+			</p>
+			<p>
+				<h4>
+					<label for="email">Your Email Address</label>
+				</h4>
+				<p>This must be the email address you will use to post to discussions</p>
+				<input type="text" name="email" placeholder="george@smiley.com" style="width: 400px"/>
+			</p>
+			<p>
+				<h4>
+					<label for="password">Your Password</label>
+				</h4>
+				<input type="password" name="password" style="width: 400px"/>
+			</p>
+			<p>
+				<h4>
+					<label for="password_confirm">Confirm Your Password</label>
+				</h4>
+				<input type="password" name="password_confirm" style="width: 400px"/>
+			</p>
+			<p>
+				<h4>
+					<label for="join">Discussions To Join</label>
+				</h4>
+				<p>Please select as many as you wish</p>
+				<select multiple="multiple" name="join" style="width: 400px">
+				 	<data-set var="discussion" value="#{discussions}">
+				  		<option value="#{discussion.id}">#{discussion.summary}</option>
+				  	</data-set>
+				</select>
+			</p>
+			<p>
+				<input type="submit" name="do_register" value="Register" style="padding: 5px; font-weight: bold; font-size: 16px;"/>
+			</p>
+		</form>
+	</div>
+    
+</fragment>

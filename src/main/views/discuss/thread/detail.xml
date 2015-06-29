@@ -1,0 +1,58 @@
+<!DOCTYPE balsa SYSTEM "http://balsa.intrbiz.net/balsa.dtd">
+<?RenderLibrary com.intrbiz.balsa?>
+<!-- The index view -->
+<fragment xmlns="com.intrbiz.balsa" title="Thread #{thread.summary}">
+    
+    <include view="discuss/include/menu"/>
+    
+	<div style="height: 50px; position: relative;">
+	    <div style="float: right; text-align: right;">
+	    	<a href="discuss/discussion/#{discussion.id}/">Back to Discussion #{discussion.summary}</a>
+	    </div>
+    </div>
+    
+	<div style="margin-bottom: 50px;">
+		<p>#{coalesce(thread.description, '')}</p>
+	</div>
+	
+	<data-set var="post" value="#{posts}">
+		<div id="post-#{post.id}">
+			<h4>#{post.summary}</h4>
+			<p>
+				<span>From </span>
+				<span>#{post.fromUser.displayName}</span>
+				<span> on</span>
+				<span>#{dateformat('EEEE dd/MM/yyyy', post.created)  + ' at ' + dateformat('HH:mm', post.created)}</span>
+			</p>
+			<pre>#{coalesce(post.content, '')}</pre>
+		</div>
+	</data-set>
+	
+	<div rendered="#{isMember}" style="margin-top: 50px;">
+		<h3>Post</h3>
+		<p>
+			<span>You can contribute to this thread by replying to an existing email.</span>
+		</p>
+		<p>
+			<span>Or by posting here</span>
+		</p>
+		<form action="#{path('discuss/discussion/' + discussion.id + '/thread/' + thread.threadId + '/post')}" method="post">
+			<p>
+				<h4>
+					<label for="subject">Subject</label>
+				</h4>
+				<input type="text" name="subject" placeholder="How can I do..." style="width: 400px"/>
+			</p>
+			<p>
+				<h4>
+					<label for="message">Message</label>
+				</h4>
+				<textarea name="message" style="width: 800px; height: 300px; padding: 5px;"></textarea>
+			</p>
+			<p>
+				<input type="submit" name="do_post" value="Post" style="padding: 5px; font-weight: bold; font-size: 16px;"/>
+			</p>
+		</form>
+	</div>
+    
+</fragment>

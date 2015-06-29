@@ -1,0 +1,23 @@
+<!DOCTYPE balsa SYSTEM "http://balsa.intrbiz.net/balsa.dtd">
+<?RenderLibrary com.intrbiz.balsa?>
+<!-- The index view -->
+<fragment xmlns="com.intrbiz.balsa" title="Account Verified">
+
+	<include view="discuss/include/menu"/>
+    
+    <div>
+		<h3>Hello #{user.displayName}</h3>
+		<p>
+			Your account has been verified and can now be used.
+		</p>
+		<p>
+			You can now post messages to:
+		</p>
+		<data-set var="discussion" value="#{discussions}">
+			<h5>#{discussion.summary}</h5>
+			<p>#{discussion.description}</p>
+			<p><span>To post email: </span><code>#{discussion.email}</code></p>
+		</data-set>
+	</div>
+    
+</fragment>

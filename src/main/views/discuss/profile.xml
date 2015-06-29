@@ -1,0 +1,70 @@
+<!DOCTYPE balsa SYSTEM "http://balsa.intrbiz.net/balsa.dtd">
+<?RenderLibrary com.intrbiz.balsa?>
+<!-- The index view -->
+<fragment xmlns="com.intrbiz.balsa" title="Discuss - Profile">
+    
+    <div>
+		<h3>Hello #{user.displayName}</h3>
+		<p>
+			<span>Email address: </span><span>#{user.email}</span>
+		</p>
+	</div>
+	
+	<div>
+		<h3>Change Password</h3>
+		<p rendered="#{password_changed}">
+			Password successfully updated
+		</p>
+		<p rendered="#{password_change_error == 'mismatch'}">
+			Cannot update password, mismatch.
+		</p>
+		<form action="#{path('discuss/changepassword')}" method="post">
+			<p>
+				<h4>
+					<label for="password">Your Password</label>
+				</h4>
+				<input type="password" name="password" style="width: 400px"/>
+			</p>
+			<p>
+				<h4>
+					<label for="password_confirm">Confirm Your Password</label>
+				</h4>
+				<input type="password" name="password_confirm" style="width: 400px"/>
+			</p>
+			<p>
+				<input type="submit" name="do_change_password" value="Change Password" style="padding: 5px; font-weight: bold; font-size: 16px;"/>
+			</p>
+		</form>
+	</div>
+	
+	<div>
+		<h4>Joined Discussions</h4>
+		<p>
+			You are a member of the following discussions:
+		</p>
+		<data-set var="discussion" value="#{joined}">
+			<h5>#{discussion.summary}</h5>
+			<p>#{discussion.description}</p>
+			<p><span>To post email: </span><code>#{discussion.email}</code></p>
+			<p><a href="discuss/leave/#{discussion.id}">Leave this discussion</a></p>
+		</data-set>
+	</div>
+	
+	<form action="#{path('discuss/join')}" method="post">
+		<p>
+			<h4>
+				<label for="join">Discussions To Join</label>
+			</h4>
+			<p>Please select as many as you wish</p>
+			<select multiple="multiple" name="join" style="width: 400px">
+			 	<data-set var="discussion" value="#{discussions}">
+			  		<option value="#{discussion.id}">#{discussion.summary}</option>
+			  	</data-set>
+			</select>
+		</p>
+		<p>
+			<input type="submit" name="do_join" value="Join" style="padding: 5px; font-weight: bold; font-size: 16px;"/>
+		</p>
+	</form>
+    
+</fragment>

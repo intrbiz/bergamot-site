@@ -1,0 +1,17 @@
+<!DOCTYPE balsa SYSTEM "http://balsa.intrbiz.net/balsa.dtd">
+<?RenderLibrary com.intrbiz.balsa?>
+<!-- The index view -->
+<fragment xmlns="com.intrbiz.balsa" title="Discussions">
+    
+    <include view="discuss/include/menu"/>
+    
+	<data-set var="discussion" value="#{discussions}">
+		<div id="discussion-#{discussion.id}">
+			<a href="discuss/discussion/#{discussion.id}/">
+				<h3>#{discussion.summary}</h3>
+			</a>
+			<p>#{discussion.description}</p>
+		</div>
+	</data-set>
+    
+</fragment>

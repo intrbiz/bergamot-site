@@ -12,7 +12,7 @@
 		<link rel="stylesheet" type="text/css" href="#{public('/style_v140.css')}" />
 		<!-- Code Higligthing -->
 		<link rel="stylesheet" href="#{balsa().request.requestScheme}://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/ir_black.min.css" />
-        <script src="#{balsa().request.requestScheme}//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="#{balsa().request.requestScheme}://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="#{balsa().request.requestScheme}://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {

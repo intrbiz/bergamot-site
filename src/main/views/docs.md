@@ -2,6 +2,7 @@
 
 ## General
 
+* [About Bergamot Monitoring](/docs/about)
 * [F.A.Q.](/docs/faq)
 
 ## For Users
@@ -29,6 +30,7 @@ the REST API and the worker APIs.
 Documentation on the internals of Bergamot and how you can get involved.
 
 * [Contributors Guide](/docs/contributors/guide)
+* [Contributors](/people)
 
 ## Getting Help
 
@@ -41,4 +43,11 @@ Come to our IRC channel `#bergamot-monitoring` on Freenode (`irc.freenode.net`).
 You can ask for help, report issues, suggest features, say nice things, what ever 
 really.  IRC is probably worth a first port of call if you have a simple issue 
 which can be answered quickly.
+
+### Discussions
+
+Discuss is your mailing list system.  Simply register for an account and select 
+the lists you wish to subscribe to.  Messages can be posted either by email (plain 
+text) or online.  All messages are publicly archived here on the site for people 
+to read and reference.
 

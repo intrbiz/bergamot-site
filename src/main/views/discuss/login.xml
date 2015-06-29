@@ -1,0 +1,22 @@
+<!DOCTYPE balsa SYSTEM "http://balsa.intrbiz.net/balsa.dtd">
+<?RenderLibrary com.intrbiz.balsa?>
+<!-- The index view -->
+<fragment xmlns="com.intrbiz.balsa" title="Discuss Login">
+    
+    <div>
+    	<p>Welcome to the Bergamot Discuss</p>
+    	<p>Please login to continue</p>
+    	<form action="#{path('discuss/login')}" method="post">
+    		<p>
+    			<input type="text" id="email" name="email" placeholder="Email Address"/>
+    		</p>
+    		<p>
+    			<input type="password" id="password" name="password"/>
+    		</p>
+    		<p>
+    			<input type="submit" id="do_login" name="do_login" value="Login"/>
+    		</p>
+    	</form>
+    </div>
+    
+</fragment>

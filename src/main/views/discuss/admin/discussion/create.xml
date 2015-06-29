@@ -1,0 +1,44 @@
+<!DOCTYPE balsa SYSTEM "http://balsa.intrbiz.net/balsa.dtd">
+<?RenderLibrary com.intrbiz.balsa?>
+<!-- The index view -->
+<fragment xmlns="com.intrbiz.balsa" title="Create Discussion">
+    
+    <div>
+		<form action="#{path('discuss/admin/discussion/create')}" method="post">
+			<p>
+				<h4>
+					<label for="summary">Discussion Summary</label>
+				</h4>
+				<input type="text" name="summary" placeholder="Bergamot Monitoring Users" style="width: 400px"/>
+			</p>
+			<p>
+				<h4>
+					<label for="name">Discussion Name</label>
+				</h4>
+				<input type="text" name="name" placeholder="bergamot-user" style="width: 400px"/>
+			</p>
+			<p>
+				<h4>
+					<label for="email">Discussion Email Address</label>
+				</h4>
+				<input type="text" name="email" placeholder="bergamot-user@bergamot-monitoring.org" style="width: 400px"/>
+			</p>
+			<p>
+				<h4>
+					<label for="description">Discussion Description</label>
+				</h4>
+				<textarea name="description" style="width: 800px; height: 200px; padding: 5px;"></textarea>
+			</p>
+			<p>
+				<h4>
+					<label for="content">Discussion Content</label>
+				</h4>
+				<textarea name="content" style="width: 800px; height: 400px; padding: 5px;"></textarea>
+			</p>
+			<p>
+				<input type="submit" name="do_create" value="Create Discussion" style="padding: 5px; font-weight: bold; font-size: 16px;"/>
+			</p>
+		</form>
+    </div>
+    
+</fragment>
