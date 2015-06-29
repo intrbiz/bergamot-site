@@ -46,8 +46,8 @@ which can be answered quickly.
 
 ### Discussions
 
-Discuss is your mailing list system.  Simply register for an account and select 
-the lists you wish to subscribe to.  Messages can be posted either by email (plain 
-text) or online.  All messages are publicly archived here on the site for people 
-to read and reference.
+Discuss is your mailing list system.  Simply [register](/discuss/register) for an 
+account and select the lists you wish to subscribe to.  Messages can be posted 
+either by email (plain text) or online.  All messages are publicly archived here 
+on the site for people to read and reference.
 
