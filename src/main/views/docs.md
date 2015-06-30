@@ -37,7 +37,7 @@ Documentation on the internals of Bergamot and how you can get involved.
 I've given a couple of talks to local groups about Bergamot Monitoring and 
 technologies it uses.
 
-* Monitoring Complexity - [SLUG 25/06/2015](https://shropshirelug.wordpress.com/2015/06/22/meeting-25th-june-chris-ellis-talks-monitoring-with-bergamot/) [View Online](https://docs.google.com/presentation/d/1u1mSojHiBZNMlnyshryMTSDI1x6CrFMUX66T7zVWdLg/pub?start=false&loop=false&delayms=10000&slide=id.ga21379c4a_1_1)
+* Monitoring Complexity - [SLUG 25/06/2015](https://shropshirelug.wordpress.com/2015/06/22/meeting-25th-june-chris-ellis-talks-monitoring-with-bergamot/) [View Online](https://docs.google.com/presentation/d/1u1mSojHiBZNMlnyshryMTSDI1x6CrFMUX66T7zVWdLg/pub?start=false&loop=false&delayms=10000&slide=id.ga21379c4a_1_1) [Download PDF](/talks/Monitoring_Complexity.pdf)
 
 ## Getting Help
 
