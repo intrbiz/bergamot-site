@@ -263,7 +263,7 @@ It is reccomended to define a generic Contact template, which contacts inherit f
 when and how a contact is notified by default.  For example:
 
     <contact name="generic-contact" template="yes">        
-        <notifications enabled="yes" time-period="24x7" alerts="yes" recovery="yes">
+        <notifications enabled="yes" time-period="24x7" alerts="yes" recovery="yes" acknowledge="yes">
             <notification-engine engine="email" enabled="yes" time-period="24x7"/>
             <notification-engine engine="sms" enabled="yes" time-period="24x7" alert="yes" recovery="no" ignore="pending, ok, warning"/>
         </notifications>
@@ -368,6 +368,24 @@ The expression language can be used in the values of `command` and
 with `}`.  The expression language offers a powerful way to extract 
 information from Bergamot objects, this allows for configuration to be stored 
 where it is semantically relevant.
+
+Commands can also be tagged with a category and application.  This organisation 
+is then reflected when viewing a host or cluster.  This tagging groups checks 
+by category and application within the user interface, making it easier to 
+navigate checks.  The category and application tags defined on a command 
+can be overriden at the service, trap or resource level.
+
+These tags are compared in lower case, so: `System` and `system` are the same.  There 
+is also no requirement to provided either of the tags.  You can safely provide neither, 
+both or just one.
+
+Consider the following command:
+
+    <command category="System" application="SSH" name="check_sshd" extends="check_nrpe">
+        <parameter name="command">check_sshd</parameter>
+    </command>
+
+Would default to being placed in the `SSH` application with in the `System` category.
 
 ## Configuring Checks
 
@@ -574,6 +592,22 @@ as follows:
         </service>    
     </host>
 
+When services are displayed on a host, they can be grouped by category and application tags, 
+allowing similar checks to be displayed together, improving navigation around the UI.  These 
+tags will default to what is defined by the command which is used to check this service.
+
+Consider the following service:
+
+    <service category="Web Server" application="Nginx" name="nginx" extends="linux-service">
+        <summary>Nginx Web Server</summary>
+        <check-command command="check_process_nginx" />
+    </service>
+
+It would be displayed under the `Nginx` application with in the `Web Server` category.  Tags 
+are compared in lower case when computing which checks are in what groupings, 
+so: `Nginx` and `nginx` are the same.  There is no requirement to provide either of the 
+category or application tags, you can safely ignore either of them, or only provide one.
+
 ### Configuring Traps
 
 A trap is an aspect of a host which should be monitored passively.  Traps are 
@@ -656,8 +690,25 @@ as follows:
             <check-command command="snmp-link-trap">
                 <parameter name="interface-name">E/1/01</parameter>
             </check-command>
-        </service>    
+        </trap>    
     </host>
+
+When traps are displayed on a host, they can be grouped by category and application tags, 
+allowing similar checks to be displayed together, improving navigation around the UI.  These 
+tags will default to what is defined by the command which is used to check this trap.
+
+Consider the following trap:
+
+    <trap category="Link State" name="port-E/01/01" extends="network-trap">
+        <summary>Port E/01/01</summary>
+        <check-command command="snmp-link-trap">
+            <parameter name="interface-name">E/1/01</parameter>
+        </check-command>
+    </trap>
+
+It would be displayed under the `Link State` category.  Tags are compared in lower case 
+when computing which checks are in what groupings, so: `Link State` and `link state` are 
+the same.
 
 ### Configuring Clusters
 
@@ -764,6 +815,21 @@ The above template can then be used as follows:
         <condition>service 'listener-pgsql' on host 'pgsql1.local' or service 'listener-pgsql' on host 'pgsql2.local'</condition>
     </resource>
 
+When resources are displayed on a cluster, they can be grouped by category and application tags, 
+allowing similar checks to be displayed together, improving navigation around the UI.
+
+Consider the following service:
+
+    <resource category="Database" application="PostgreSQL" name="listener-pgsql" extends="generic-resource">
+        <summary>Listener: PostgreSQL</summary>
+        <condition>service 'listener-pgsql' on host 'pgsql1.local' or service 'listener-pgsql' on host 'pgsql2.local'</condition>
+    </resource>
+
+It would be displayed under the `PostgreSQL` application with in the `Database` category.  Tags 
+are compared in lower case when computing which checks are in what groupings, 
+so: `PostgreSQL` and `postgresql` are the same.  There is no requirement to provide either of the 
+category or application tags, you can safely ignore either of them, or only provide one.
+
 ## Advice For Sane Configuration
 
 ### Define Commands
@@ -779,10 +845,6 @@ of web servers or lots of generic Linux servers.  As such it makes sense to
 define templates for each of these patterns.  Apply these templates to individual 
 hosts and avoid duplicating configuration.  Remember a host can inherit from 
 multiple templates, and remember that services are inherited from templates.
-
-## FAQ
-
-TODO
 
 
 
