@@ -12,13 +12,25 @@ Documentation about how to install and use Bergamot Monitoring
 * Quickstart Guide
 * [Installation Guide](/docs/user/install/guide)
 * [Bergamot Agent Guide](/docs/user/agent/guide)
+* Deployment Guide
 * Configuration
     * [Bergamot Configuration Guide](/docs/user/config/guide)
     * [Bergamot Configuration Reference](/docs/user/config/reference)
     * [Migrating From Nagios](/docs/user/config/convert)
-* General Information
+* Bergamot Core (Scheduling, Result Processing)
     * [Scheduling](/docs/user/general/scheduling)
     * [State Changes](/docs/user/general/state_changes)
+    * Bergamot Agent Manager
+* Notifiers
+    * Email
+    * SMS
+    * WebHook
+* Workers
+    * Agent
+    * SNMP
+    * HTTP
+    * Nagios / NRPE
+    * Dummy
 
 ## For Developers
 
