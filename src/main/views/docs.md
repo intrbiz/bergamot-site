@@ -20,7 +20,7 @@ Documentation about how to install and use Bergamot Monitoring
 * Bergamot Core (Scheduling, Result Processing)
     * [Scheduling](/docs/user/general/scheduling)
     * [State Changes](/docs/user/general/state_changes)
-    * Bergamot Agent Manager
+    * [Bergamot Agent Manager](/docs/user/general/agent_manager)
 * Notifiers
     * Email
     * SMS
