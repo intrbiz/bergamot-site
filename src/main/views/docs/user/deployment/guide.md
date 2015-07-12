@@ -7,10 +7,11 @@ Code: bash
 
 ## Introduction
 
-This guide aims to outline the best ways to deploy Bergamot monitoring and the 
-things you need to consider when you do.
+Bergamot Monitoring is split into a number of decoupled services.  After the core 
+services (UI and Agent Manager), these fall into two categories: notifiers and 
+workers.
 
-### Typical Deployment
+![Bergamot Monitoring Architecture](/images/docs/BergamotMonitoringArchitecture.svg)
 
 When deploying Bergamot Monitoring, you should focus on redundancy, attempting to 
 remove all single points of failure. Usually this consists on ensuring you run 
