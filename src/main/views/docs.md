@@ -13,6 +13,7 @@ Documentation about how to install and use Bergamot Monitoring
 * [Installation Guide](/docs/user/install/guide)
 * [Bergamot Agent Guide](/docs/user/agent/guide)
 * [Deployment Guide](/docs/user/deployment/guide)
+* CLI Guide
 * Configuration
     * [Bergamot Configuration Guide](/docs/user/config/guide)
     * [Bergamot Configuration Reference](/docs/user/config/reference)
