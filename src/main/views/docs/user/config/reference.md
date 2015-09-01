@@ -45,8 +45,8 @@ level.
     <team name="..." extends="..., ..." template="yes/no" teams="..., ..." grants="..., ..." revokes="..., ..." security-domains="...[, ...]">
         <summary>...</summary>
         <description>...</description>
-        <parameter description="..." name="...">...</parameter>
         <access-control security-domain="..." grants="...[, ...]" revokes="...[, ...]"/>
+        <parameter description="..." name="...">...</parameter>
     </team>
     
 ### Attributes
@@ -89,6 +89,10 @@ The displayed name of this team.
 
 An optional long, multi-line description of this team.
 
+    <access-control security-domain="..." grants="...[, ...]" revokes="...[, ...]"/>
+
+Define permissions over a specific domain of objects.
+
     <parameter description="..." name="...">...</parameter>
 
 An arbitrary name value pair.  The parameter name is given by the `name` attribute.  
@@ -118,6 +122,7 @@ wrong (or goes right).  Contacts are also users of the user interface and or API
         <notifications enabled="yes/no" time-period="..." alerts="yes/no" recovery="yes/no" ignore="..., ..." all-engines="yes/no">
             <notification-engine engine="..." enabled="yes/no" time-period="..." alerts="yes/no" recovery="yes/no" ignore="..., ..."/>
         </notifications>
+        <access-control security-domain="..." grants="...[, ...]" revokes="...[, ...]"/>
         <parameter description="..." name="...">...</parameter>
     </contact>
 
@@ -201,6 +206,10 @@ A phone number for this contact, not currently used to send notifications too.
     <im>...</im>
 
 The instance messaging address for this contact, not currently used.
+
+    <access-control security-domain="..." grants="...[, ...]" revokes="...[, ...]"/>
+
+Define permissions over a specific domain of objects.
 
     <notifications enabled="yes/no" time-period="..." alerts="yes/no" recovery="yes/no" ignore="..., ..." all-engines="yes/no">
         <notification-engine engine="..." enabled="yes/no" time-period="..." alerts="yes/no" recovery="yes/no" ignore="..., ..."/>
