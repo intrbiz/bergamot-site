@@ -8,6 +8,7 @@ Code: xml
 <p><a id="contents"></a></p>
 ## Contents
 
+* [Security Domain](#security_domain)
 * [Team](#team)
 * [Contact](#contact)
 * [Location](#location)
@@ -20,6 +21,18 @@ Code: xml
 * [Cluster](#cluster)
 * [Resource](#resource)
 
+<p><a id="security_domain"></a></p>
+## Security domain
+
+[Back to contents](#contents)
+
+A security domain defines a set of checks which share common access controls.
+
+    <security-domain name="...">
+        <summary>...</summary>
+        <description>...</description>
+    </security-domain>
+
 <p><a id="team"></a></p>
 ## Team
 
@@ -29,10 +42,11 @@ A team contains multiple contacts, making it easy to send notifications to
 multiple contacts.  Permissions can also be granted and revoked at the team 
 level.
 
-    <team name="..." extends="..., ..." template="yes/no" teams="..., ..." grants="..., ..." revokes="..., ...">
+    <team name="..." extends="..., ..." template="yes/no" teams="..., ..." grants="..., ..." revokes="..., ..." security-domains="...[, ...]">
         <summary>...</summary>
         <description>...</description>
         <parameter description="..." name="...">...</parameter>
+        <access-control security-domain="..." grants="...[, ...]" revokes="...[, ...]"/>
     </team>
     
 ### Attributes
@@ -61,6 +75,10 @@ A comma separated list of permissions which are granted to all members in this t
 
 A comma separated list of permissions which are revoked (not granted) to all members in this team.
 
+     security-domains="...[, ...]"
+
+A comma separated list of security domain names which this team is in.
+
 ### Elements
 
     <summary>...</summary>
@@ -85,7 +103,7 @@ Optionally a description of the parameter maybe given using the `description` at
 Contacts are people (or machines) which should be notified when something goes 
 wrong (or goes right).  Contacts are also users of the user interface and or API.
 
-    <contact name="..." extends="..., ..." template="yes/no" teams="..., ..." grants="..., ..." revokes="..., ...">
+    <contact name="..." extends="..., ..." template="yes/no" teams="..., ..." grants="..., ..." revokes="..., ..." security-domains="...[, ...]">
         <summary>...</summary>
         <description>...</description>
         <first-name>...</first-name>
@@ -124,6 +142,10 @@ A comma separated list of permissions which are granted to this contact.
     revokes="..., ..."
 
 A comma separated list of permissions which are revoked (not granted) to this contact.
+
+     security-domains="...[, ...]"
+
+A comma separated list of security domain names which this contact is in.
 
 ### Elements
 
@@ -262,7 +284,7 @@ Locations are physical locations which contain hosts, this could be an office,
 a data centre.  Locations can also be contained in larger locations, it could be 
 that an office is located in the UK.
 
-    <location name="..." extends="..." template="yes/no" location="..." worker-pool="...">
+    <location name="..." extends="..." template="yes/no" location="..." worker-pool="..." security-domains="...[, ...]">
         <summary>...</summary>
         <description>...</description>
         <parameter description="..." name="...">...</parameter>
@@ -292,6 +314,10 @@ location.
 The tag of a worker pool which checks all hosts that are in this location.  This 
 attribute is optional and used for advanced routing of check executions.
 
+     security-domains="...[, ...]"
+
+A comma separated list of security domain names which this location is in.
+
 ### Elements
 
     <summary>...</summary>
@@ -317,7 +343,7 @@ A group is a grouping of checks, which logically belong together.  This could
 be checks for a specific service area.  Groups can contain any type of check, 
 there are no specialised host or service groups.
 
-    <group name="..." extends="..." template="yes/no" groups="..., ...">
+    <group name="..." extends="..." template="yes/no" groups="..., ..." security-domains="...[, ...]">
         <summary>...</summary>
         <description>...</description>
         <parameter description="..." name="...">...</parameter>
@@ -341,6 +367,10 @@ Is this a template: yes / no.
 
 A comma separated list of group names which this group is in, this defines 
 parent groups which contain this group.
+
+     security-domains="...[, ...]"
+
+A comma separated list of security domain names which this group is in.
 
 ### Elements
 
@@ -368,7 +398,7 @@ not happen.  Time periods are essentially named calendars which are used by
 various other configuration object.  For example controlling when notifications 
 could be sent or when a check should be executed.
 
-    <time-period name="..." extends="..." template="yes/no" excludes="..., ...">
+    <time-period name="..." extends="..." template="yes/no" excludes="..., ..." security-domains="...[, ...]">
         <summary>...</summary>
         <description>...</description>
         <time-zone id="(Europe/London|etc)"/>
@@ -396,6 +426,10 @@ A comma separated list of time periods which this time period will exclude.  If
 a point in time is valid for any of the excluded time periods then it is not 
 valid for this time period.  As such excluding a time period in essence inverses 
 said time period.
+
+     security-domains="...[, ...]"
+
+A comma separated list of security domain names which this time-period is in.
 
 ### Elements
 
@@ -472,7 +506,7 @@ fairly loosely defined, their structure is mostly defined by the engine used to
 execute them.  Primarily a command is a set of arbitrary name value pair 
 parameters
 
-    <command name="..." extends="..." template="yes/no" engine="..." executor="...">
+    <command name="..." extends="..." template="yes/no" engine="..." executor="..." security-domains="...[, ...]">
         <summary>...</summary>
         <description>...</description>
         <parameter description="..." name="...">...</parameter>
@@ -501,6 +535,10 @@ like: `nagios`, `nrpe`, `snmp`, `http`, `agent`
 
 A specific command executor within an engine which will execute this command.
 
+     security-domains="...[, ...]"
+
+A comma separated list of security domain names which this command is in.
+
 ### Elements
 
     <summary>...</summary>
@@ -525,7 +563,7 @@ Optionally a description of the parameter maybe given using the `description` at
 A host represents a networked device which should be checked.  This is often a 
 server providing some service which is part of your infrastructure.
 
-    <host name="..." extends="..." template="yes/no" suppressed="yes/no" enabled="yes/no" groups="..., ..." external-ref="..." worker-pool="..." agent-id="..." location="..." address="...">
+    <host name="..." extends="..." template="yes/no" suppressed="yes/no" enabled="yes/no" groups="..., ..." external-ref="..." worker-pool="..." agent-id="..." location="..." address="..." security-domains="...[, ...]">
         <summary>...</summary>
         <description>...</description>
         <initially status="pending|info|ok|warning|critical|error|timeout|action|disconnected" output=".."/>
@@ -594,6 +632,10 @@ The name of the location which contains this host.
 
 The IP address of this host, can be a DNS name, this is often used by commands 
 as the name / address to communicate with.
+
+     security-domains="...[, ...]"
+
+A comma separated list of security domain names which this host is in.
 
 ### Elements
 
@@ -749,7 +791,7 @@ A service represents something running on a host which should be checked, this
 could be a file system, a process, free memory.  Just like hosts, services are 
 actively checked.
 
-    <service name="..." extends="..." template="yes/no" suppressed="yes/no" enabled="yes/no" groups="..., ..." external-ref="..." worker-pool="..." agent-id="...">
+    <service name="..." extends="..." template="yes/no" suppressed="yes/no" enabled="yes/no" groups="..., ..." external-ref="..." worker-pool="..." agent-id="..." security-domains="...[, ...]">
         <summary>...</summary>
         <description>...</description>
         <initially status="pending|info|ok|warning|critical|error|timeout|action|disconnected" output=".."/>
@@ -809,6 +851,10 @@ for this host.
 The UUID of the Bergamot Agent deployed for this service, only required if 
 different from the UUID of the host agent.  This is currently unimplemented and 
 is designed for services which are running an embedded agent.
+
+     security-domains="...[, ...]"
+
+A comma separated list of security domain names which this service is in.
 
 ### Elements
 
@@ -953,7 +999,7 @@ passively checked.  No check executions will be scheduled or even executed from
 a trap, instead results are triggered from some kind of external system.  A 
 good example of a trap are SNMP traps raised from networking devices.
 
-    <trap name="..." extends="..." template="yes/no" suppressed="yes/no" enabled="yes/no" groups="..., ..." external-ref="...">
+    <trap name="..." extends="..." template="yes/no" suppressed="yes/no" enabled="yes/no" groups="..., ..." external-ref="..." security-domains="...[, ...]">
         <summary>...</summary>
         <description>...</description>
         <initially status="pending|info|ok|warning|critical|error|timeout|action|disconnected" output=".."/>
@@ -1000,6 +1046,10 @@ A comma separated list of group names that this check is a member of.
 
 An arbitrary textual external reference which might be used to lookup this host, 
 optional.
+
+     security-domains="...[, ...]"
+
+A comma separated list of security domain names which this trap is in.
 
 ### Elements
 
@@ -1139,7 +1189,7 @@ Virtual checks are not scheduled and are not passively checked, rather they are
 composed from a set of checks.  The state of a virtual check is computed each 
 time a dependent check changes state.
 
-    <cluster name="..." extends="..." template="yes/no" suppressed="yes/no" enabled="yes/no" groups="..., ..." external-ref="...">
+    <cluster name="..." extends="..." template="yes/no" suppressed="yes/no" enabled="yes/no" groups="..., ..." external-ref="..." security-domains="...[, ...]">
         <summary>...</summary>
         <description>...</description>
         <initially status="pending|info|ok|warning|critical|error|timeout|action|disconnected" output=".."/>
@@ -1184,6 +1234,10 @@ A comma separated list of group names that this check is a member of.
 
 An arbitrary textual external reference which might be used to lookup this host, 
 optional.
+
+     security-domains="...[, ...]"
+
+A comma separated list of security domain names which this cluster is in.
 
 ### Elements
 
@@ -1322,7 +1376,7 @@ Virtual checks are not scheduled and are not passively checked, rather they are
 composed from a set of checks.  The state of a virtual check is computed each 
 time a dependent check changes state.
 
-    <resource name="..." extends="..." template="yes/no" suppressed="yes/no" enabled="yes/no" groups="..., ..." external-ref="...">
+    <resource name="..." extends="..." template="yes/no" suppressed="yes/no" enabled="yes/no" groups="..., ..." external-ref="..." security-domains="...[, ...]">
         <summary>...</summary>
         <description>...</description>
         <initially status="pending|info|ok|warning|critical|error|timeout|action|disconnected" output=".."/>
@@ -1366,6 +1420,10 @@ A comma separated list of group names that this check is a member of.
 
 An arbitrary textual external reference which might be used to lookup this host, 
 optional.
+
+     security-domains="...[, ...]"
+
+A comma separated list of security domain names which this resource is in.
 
 ### Elements
 
