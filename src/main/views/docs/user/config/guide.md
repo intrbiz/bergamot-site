@@ -168,8 +168,9 @@ that one exists, as follows:
 Checks are placed into security domains using the `security-domains` attribute, 
 which should contain a comma separated list of security domain names.
 
-Security domains can be defined upon: `command`, `group`, `location`, `host`, 
-`service`, `trap`, `cluster`, `resource` objects. For example:
+Security domains can be defined upon: `team`, `contact`, `command`, 
+`time-period`, `group`, `location`, `host`, `service`, `trap`, `cluster`, 
+`resource` objects. For example:
 
     <host security-domains="networks" name="network-device" template="yes"/>
     <group security-domains="networks" name="switches"/>
