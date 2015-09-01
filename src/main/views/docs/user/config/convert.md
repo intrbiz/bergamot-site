@@ -175,4 +175,15 @@ Note: the value of the `command` parameter will by default use the value of the
 `arg1` parameter.  This allows you to improve the command definition without 
 needing to alter everything which uses the command definition.
 
+### Security
 
+Bergamot Monitoring and Nagios have completely differing security models.  Nagios 
+has a course and ridiged model, where as Bergamot Monitoring provides a fine grained, 
+flexible permissions model offering full role based access control.
+
+Due to these inherent incompatibilities, you will need to manually configure permissions 
+when converting from Nagios to Bergamot Monitoring.
+
+This will involve adding security domains to your configuration.  Placing checks into 
+the relevant security domains.  Finally setting the level of access contacts and teams 
+should have.

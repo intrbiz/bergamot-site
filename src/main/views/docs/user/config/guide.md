@@ -118,6 +118,8 @@ order (left to right) of importance.
 `template="yes/no"` Is this object a template or should it be imported into 
 Bergamot
 
+`security-domains="...[, ...]"` The security domains for this object.
+
 ### Elements
 
 `<summary>...</summary>` The summary (name displayed within the Web Interface) 
@@ -141,6 +143,36 @@ Change the icon which is displayed in the user interface.
 This can be specified on `command`, `host`, `service`, `trap`, `cluster`, 
 `resource` objects.  The value should be the URL path a 64px by 64px PNG icon.  
 Note: the icon should use transparency to allow the check status to be visible.
+
+## Configuring Security Domains
+
+To provide a fine gained access control system, Bergamot Monitoring uses the 
+concept of a security domain as a set of checks which should have the same 
+access controls applied to them.  Security domains exist to provide groupings 
+based upon commonality of user permissions.  This approach makes it easy to 
+add and modify the permissions that contacts and teams have over checks.
+
+When defining security domains you should think about the trust domains 
+within your infrastructure.  Define domains based on which checks are 
+logically grouped together.  For example: networking devices, web servers, 
+database servers, etc.
+
+Defining a security domain is simply a case of telling Bergamot Monitoring 
+that one exists, as follows:
+
+    <security-domain name="networks">
+        <summary>Networks</summary
+        <description>Access Controls for Networking Devices</description>
+    </security-domain>
+
+Checks are placed into security domains using the `security-domains` attribute, 
+which should contain a comma separated list of security domain names.
+
+Security domains can be defined upon: `command`, `group`, `location`, `host`, 
+`service`, `trap`, `cluster`, `resource` objects. For example:
+
+    <host security-domains="networks" name="network-device" template="yes"/>
+    <group security-domains="networks" name="switches"/>
 
 ## Configuring A Location
 
@@ -181,13 +213,42 @@ Teams group Contacts, usually a Team mirrors a team of people within your
 organisation.  Teams may contain many sub teams and a team may be a member of 
 many teams.  Teams are defined as follows:
 
+    <team name="everyone" grants="ui.access, ui.view.*, api.access" revokes="">
+        <summary>Everyone</summary>
+        <access-control security-domain="global" grants="read, read.*, acknowledge, write.comment, write.downtime, remove.comment, remove.downtime" revokes=""/>
+    </team>
+
     <team name="admins" teams="everyone">
         <summary>Admins</summary>
+        <access-control security-domain="global" grants="*" revokes=""/>
+    </team>
+    
+    <team name="network-admins" teams="admins">
+        <summary>Network Admins</summary>
+        <access-control security-domain="networks" grants="*" revokes=""/>
+    </team>
+    
+    <team name="bergamot-admins" teams="admins" grants="*">
+        <summary>Bergamot Admins</summary>
     </team>
 
 This would define the team `admins` as a child of the team `everyone`.
 The title in the web interface would be `Admins`.  Should you wish for a team 
 not to be a member of another team, simply do not specify the `teams` attribute.
+
+[Permissions](../general/bergamot_permissions) are granted or revoked using 
+the `grants` and `revokes` attributes. Permissions cascade down the team 
+heirarchy. In the above example, all teams (and therefore all contacts in 
+those teams) get the `ui.access, ui.view.*` permissions.
+
+A `*` can be used at the end of a permission to denote that prefix matching 
+should be used. For example `ui.view.*` would match `ui.view.readings`.  Note 
+that the `*` must be the last character of the permission.
+
+The `access-control` element is used to grant or revoke permissions to a 
+specific set of checks.  In our above example everyone is granted read only 
+access to global objects, network admins have full control over networking 
+devices and bergamot admins have full control over everything.
 
 ## Configuring A Time Period
 
