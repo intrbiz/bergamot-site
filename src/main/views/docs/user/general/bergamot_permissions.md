@@ -22,7 +22,6 @@
 * read.comment     - read the comments on an object
 * read.downtime    - read the downtimes on an object
 * read.readings    - read the readings (graphs) of an object
-
 * enable           - enable a check
 * disable          - disable a check
 * execute          - execute a check
@@ -30,13 +29,10 @@
 * unsuppress       - unsuppress a check
 * submit           - submit a passive result
 * acknowledge      - acknowledge an alert of a check
-
 * write            - modify an object
 * write.comment    - add a comment to an object
 * write.downtime   - add a downtime to an object
-
 * create           - create an object
-
 * remove           - remove an object
 * remove.comment   - remove a comment from an object
 * remove.downtime  - remove a downtime from an object
