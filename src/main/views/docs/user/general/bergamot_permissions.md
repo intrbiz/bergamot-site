@@ -9,6 +9,7 @@
 * ui.sign.agent             - allow the signing of Agent certificates
 * ui.generate.agent         - allow the generation of Agent key pairs
 * ui.admin                  - allow access to the admin ui
+* ui.create                 - allow access to the quick object creation UI
 
 ## API Specific
 
