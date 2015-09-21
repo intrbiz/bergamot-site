@@ -18,7 +18,7 @@ import com.intrbiz.metadata.Prefix;
 @Prefix("/api")
 public class APIRouter extends Router<BergamotSite>
 {   
-    public static final String CURRENT_VERSION = "1.0.0";
+    public static final String CURRENT_VERSION = "2.0.0";
     
     private Logger logger = Logger.getLogger(APIRouter.class);
     
