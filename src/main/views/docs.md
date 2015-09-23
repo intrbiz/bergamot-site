@@ -52,6 +52,7 @@ I've given a couple of talks to local groups about Bergamot Monitoring and
 technologies it uses.
 
 * Monitoring Complexity - [SLUG 25/06/2015](https://shropshirelug.wordpress.com/2015/06/22/meeting-25th-june-chris-ellis-talks-monitoring-with-bergamot/) - [View Online](https://docs.google.com/presentation/d/1u1mSojHiBZNMlnyshryMTSDI1x6CrFMUX66T7zVWdLg/pub?start=false&loop=false&delayms=10000&slide=id.ga21379c4a_1_1) - [Download PDF](/talks/Monitoring_Complexity.pdf)
+* Bergamot Monitoring 2.0.0 - Rugby LUG 21/09/2015 - [View Online](https://docs.google.com/presentation/d/1UaadhX_8aHRXipL2osZsfxqoojc3INTFF_gKzZS7dG0/pub?start=false&loop=false&delayms=10000) - [Download PDF](/talks/Bergamot_Monitorng_2_0_0_Open_Distributed_Monitoring.pdf)
 
 ## Getting Help
 
