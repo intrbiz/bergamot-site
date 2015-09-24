@@ -46,16 +46,16 @@ You can download binary application archives from our download site: [https://fi
 
 ### Bergamot Monitoring V1.0.0 - Latest Stable
 
-* [Bergamot UI](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-ui-1.0.0.app)
-* [Bergamot CLI](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-cli-1.0.0.app)
-* [Bergamot Notifier Email](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-notification-engine-email-1.0.0.app)
-* [Bergamot Notifier SMS](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-notification-engine-sms-1.0.0.app)
-* [Bergamot Nagios Worker](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-worker-nagios-1.0.0.app)
-* [Bergamot SNMP Worker](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-worker-snmp-1.0.0.app)
-* [Bergamot HTTP Worker](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-worker-http-1.0.0.app)
-* [Bergamot Agent Worker](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-worker-agent-1.0.0.app)
-* [Bergamot Agent Manager](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-agent-manager-1.0.0.app)
-* [Bergamot Agent](https://files.bergamot-monitoring.org/app/1.0.0/bergamot-agent-1.0.0.app)
+* [Bergamot UI](https://files.bergamot-monitoring.org/app/2.0.0/bergamot-ui-2.0.0.app)
+* [Bergamot CLI](https://files.bergamot-monitoring.org/app/2.0.0/bergamot-cli-2.0.0.app)
+* [Bergamot Notifier Email](https://files.bergamot-monitoring.org/app/2.0.0/bergamot-notification-engine-email-2.0.0.app)
+* [Bergamot Notifier SMS](https://files.bergamot-monitoring.org/app/2.0.0/bergamot-notification-engine-sms-2.0.0.app)
+* [Bergamot Nagios Worker](https://files.bergamot-monitoring.org/app/2.0.0/bergamot-worker-nagios-2.0.0.app)
+* [Bergamot SNMP Worker](https://files.bergamot-monitoring.org/app/2.0.0/bergamot-worker-snmp-2.0.0.app)
+* [Bergamot HTTP Worker](https://files.bergamot-monitoring.org/app/2.0.0/bergamot-worker-http-2.0.0.app)
+* [Bergamot Agent Worker](https://files.bergamot-monitoring.org/app/2.0.0/bergamot-worker-agent-2.0.0.app)
+* [Bergamot Agent Manager](https://files.bergamot-monitoring.org/app/2.0.0/bergamot-agent-manager-2.0.0.app)
+* [Bergamot Agent](https://files.bergamot-monitoring.org/app/2.0.0/bergamot-agent-2.0.0.app)
 
 ## Maven Repository
 
