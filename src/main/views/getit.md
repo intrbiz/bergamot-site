@@ -44,15 +44,17 @@ Scientific Linux and Fedora.
 
 You can download binary application archives from our download site: [https://files.bergamot-monitoring.org/](https://files.bergamot-monitoring.org/)
 
-### Bergamot Monitoring V1.0.0 - Latest Stable
+### Bergamot Monitoring V2.0.0 - Latest Stable
 
 * [Bergamot UI](https://files.bergamot-monitoring.org/app/2.0.0/bergamot-ui-2.0.0.app)
 * [Bergamot CLI](https://files.bergamot-monitoring.org/app/2.0.0/bergamot-cli-2.0.0.app)
 * [Bergamot Notifier Email](https://files.bergamot-monitoring.org/app/2.0.0/bergamot-notification-engine-email-2.0.0.app)
 * [Bergamot Notifier SMS](https://files.bergamot-monitoring.org/app/2.0.0/bergamot-notification-engine-sms-2.0.0.app)
+* [Bergamot Notifier WebHook](https://files.bergamot-monitoring.org/app/2.0.0/bergamot-notifier-webhook-2.0.0.app)
 * [Bergamot Nagios Worker](https://files.bergamot-monitoring.org/app/2.0.0/bergamot-worker-nagios-2.0.0.app)
 * [Bergamot SNMP Worker](https://files.bergamot-monitoring.org/app/2.0.0/bergamot-worker-snmp-2.0.0.app)
 * [Bergamot HTTP Worker](https://files.bergamot-monitoring.org/app/2.0.0/bergamot-worker-http-2.0.0.app)
+* [Bergamot JDBC Worker](https://files.bergamot-monitoring.org/app/2.0.0/bergamot-worker-jdbc-2.0.0.app)
 * [Bergamot Agent Worker](https://files.bergamot-monitoring.org/app/2.0.0/bergamot-worker-agent-2.0.0.app)
 * [Bergamot Agent Manager](https://files.bergamot-monitoring.org/app/2.0.0/bergamot-agent-manager-2.0.0.app)
 * [Bergamot Agent](https://files.bergamot-monitoring.org/app/2.0.0/bergamot-agent-2.0.0.app)
