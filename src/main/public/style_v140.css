@@ -312,6 +312,15 @@ pre.plain {
     color: #000;
 }
 
+code {
+    background-color: #777;
+    border-radius: 4px;
+    color: #00BF00;
+    font-weight: bold;
+    padding: 2px 5px;
+    font-family: 'Inconsolata', monospace;
+}
+
 /* Sections */
 
 .section-1 {
