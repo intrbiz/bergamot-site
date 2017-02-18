@@ -1,15 +1,5 @@
 # FAQ
 
-### What is the current state of play?
-
-Bergamot Monitoring is a version 1 release, at this stage the core architecture 
-of Bergamot Monitoring is stable but some features are lacking.  The version 1 
-release has all the basic featured needed for a monitoring system and would be 
-acceptable for deployment, feedback is appreciated.
-
-There will be on going releases, on a short release cycle, which will focus on 
-adding more features.
-
 ### Is Bergamot a drop-in replacement for Nagios?
 
 To an extent.  Bergamot Monitoring is capable of executing Nagios plugins and 
