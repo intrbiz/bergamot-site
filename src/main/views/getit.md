@@ -12,33 +12,21 @@ Feel free to log into our demo instance of Bergamot Monitoring: [https://demo.be
 You will need to login with the username `op` and the password `Bergamot123!` this account has 
 restricted permissions and does not have access to all the functionality of Bergamot Monitoring.
 
-## Virtual Appliance
+## Docker Images
 
-You can download a pre-installed Bergamot Monitoring appliance.  This appliance 
-comes with everything you need and will work out of the box (just add a DNS 
-entry).  The appliance is designed to run on LibVirt / KVM and comes with a disk 
-image and associated domain definition file.
+Docker images for Bergamot Monitoring can be found on Docker Hub: [https://hub.docker.com/r/bergamotmonitoring](https://hub.docker.com/r/bergamotmonitoring).
 
-This appliance is based on openSUSE 13.1 and is perfect to get up and running 
-quickly it has all the required daemons pre-installed and is acceptable for 
-small deployments.  As everything is contained in one VM it offers no redundancy.
-
-You can download the appliance from [https://files.bergamot-monitoring.org/img/bergamot-monitoring.tar.xz](https://files.bergamot-monitoring.org/img/bergamot-monitoring.tar.xz)
-
-Note: extracted the appliance is 4GiB in size and requires at least 2GiB of RAM.
+Using Docker should be by far the easiest way to deploy Bergamot Monitoring, a Docker Compose file is currently in progress.
 
 ## Packages
 
 You can download RPMs from our OBS repository, we primarily provide packages 
-for openSUSE, SLES 12.  Untested packages are provided for: Centos 7, Red Hat 7, 
-Scientific Linux and Fedora.
+for openSUSE, SLES 12.  These packages currently only support our older release.
 
 
 * [openSUSE 13.1](http://obs.intrbiz.net:82/Bergamot/openSUSE_13.1/)
 * [openSUSE 13.2](http://obs.intrbiz.net:82/Bergamot/openSUSE_13.2/)
 * [openSUSE Tumbleweed](http://obs.intrbiz.net:82/Bergamot/openSUSE_Tumbleweed/)
-* [Centos 7](http://obs.intrbiz.net:82/Bergamot/CentOS_7/)
-* [RHEL 7](http://obs.intrbiz.net:82/Bergamot/RHEL_7/)
 
 ## Binaries
 
