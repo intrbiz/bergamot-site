@@ -5,22 +5,34 @@ Code: bash
 ---
 # Bergamot Monitoring API Reference
 
+* [AlertsAPIRouter](#alertsapirouter)
+* [HostAPIRouter](#hostapirouter)
+* [LocationAPIRouter](#locationapirouter)
+* [GroupAPIRouter](#groupapirouter)
+* [ClusterAPIRouter](#clusterapirouter)
+* [ServiceAPIRouter](#serviceapirouter)
+* [TrapAPIRouter](#trapapirouter)
+* [ResourceAPIRouter](#resourceapirouter)
+* [TimePeriodAPIRouter](#timeperiodapirouter)
+* [CommandAPIRouter](#commandapirouter)
+* [ContactAPIRouter](#contactapirouter)
+* [TeamAPIRouter](#teamapirouter)
+* [CommentsAPIRouter](#commentsapirouter)
+* [DowntimeAPIRouter](#downtimeapirouter)
+* [ConfigAPIRouter](#configapirouter)
+* [StatsAPIRouter](#statsapirouter)
+* [UtilAPIRouter](#utilapirouter)
+* [LamplighterAPIRouter](#lamplighterapirouter)
 
+<p><a id="alertsapirouter"></a></p>
 ## AlertsAPIRouter
-
-### GET `/api/alert/`
-
-getAlerts
-
-#### Example
-
-    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/alert/
 
 ### GET `/api/alert/id/:id`
 
 getAlert
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -32,6 +44,7 @@ getAlert
 getAlertsForCheck
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -43,6 +56,7 @@ getAlertsForCheck
 getCurrentAlertForCheck
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -54,6 +68,7 @@ getCurrentAlertForCheck
 acknowledgeAlert
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 * `summary` (type: String) (provided as a query parameter)
 * `comment` (type: String) (provided as a query parameter)
@@ -62,24 +77,23 @@ acknowledgeAlert
 
     curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/alert/id/:id/acknowledge?summary=&comment=
 
-## HostAPIRouter
+### GET `/api/alert/`
 
-### GET `/api/host/id/:id`
-
-getHost
-
-#### Parameters
-* `id` (type: UUID) (provided in the URL path)
+getAlerts
 
 #### Example
 
-    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/host/id/:id
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/alert/
+
+<p><a id="hostapirouter"></a></p>
+## HostAPIRouter
 
 ### GET `/api/host/name/:name`
 
 getHostByName
 
 #### Parameters
+
 * `name` (type: String) (provided in the URL path)
 
 #### Example
@@ -91,6 +105,7 @@ getHostByName
 executeHost
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -102,6 +117,7 @@ executeHost
 executeServicesOnHost
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -113,6 +129,7 @@ executeServicesOnHost
 suppressServicesOnHost
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -124,6 +141,7 @@ suppressServicesOnHost
 unsuppressServicesOnHost
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -143,6 +161,7 @@ getHosts
 suppress
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -154,6 +173,7 @@ suppress
 unsuppress
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -165,6 +185,7 @@ unsuppress
 getHostStateByName
 
 #### Parameters
+
 * `name` (type: String) (provided in the URL path)
 
 #### Example
@@ -176,6 +197,7 @@ getHostStateByName
 getHostState
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -187,6 +209,7 @@ getHostState
 getHostServicesByName
 
 #### Parameters
+
 * `name` (type: String) (provided in the URL path)
 
 #### Example
@@ -198,6 +221,7 @@ getHostServicesByName
 getHostServices
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -209,6 +233,7 @@ getHostServices
 getHostTrapsByName
 
 #### Parameters
+
 * `name` (type: String) (provided in the URL path)
 
 #### Example
@@ -220,6 +245,7 @@ getHostTrapsByName
 getHostTraps
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -231,6 +257,7 @@ getHostTraps
 suppressTrapsOnHost
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -242,6 +269,7 @@ suppressTrapsOnHost
 unsuppressTrapsOnHost
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -253,6 +281,7 @@ unsuppressTrapsOnHost
 suppressAllOnHost
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -264,24 +293,27 @@ suppressAllOnHost
 unsuppressAllOnHost
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
 
     curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/host/id/:id/unsuppress-all
 
-## LocationAPIRouter
+### GET `/api/host/id/:id`
 
-### GET `/api/location/id/:id`
-
-getLocation
+getHost
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
 
-    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/location/id/:id
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/host/id/:id
+
+<p><a id="locationapirouter"></a></p>
+## LocationAPIRouter
 
 ### GET `/api/location/roots`
 
@@ -296,6 +328,7 @@ getRootLocations
 getLocationByName
 
 #### Parameters
+
 * `name` (type: String) (provided in the URL path)
 
 #### Example
@@ -307,6 +340,7 @@ getLocationByName
 executeHostsInLocation
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -326,6 +360,7 @@ getLocations
 getLocationChildrenByName
 
 #### Parameters
+
 * `name` (type: String) (provided in the URL path)
 
 #### Example
@@ -337,6 +372,7 @@ getLocationChildrenByName
 getLocationHostsByName
 
 #### Parameters
+
 * `name` (type: String) (provided in the URL path)
 
 #### Example
@@ -348,6 +384,7 @@ getLocationHostsByName
 getLocationChildren
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -359,12 +396,26 @@ getLocationChildren
 getLocationHosts
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
 
     curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/location/id/:id/hosts
 
+### GET `/api/location/id/:id`
+
+getLocation
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/location/id/:id
+
+<p><a id="groupapirouter"></a></p>
 ## GroupAPIRouter
 
 ### GET `/api/group/roots`
@@ -380,6 +431,7 @@ getRootGroups
 getGroupByName
 
 #### Parameters
+
 * `name` (type: String) (provided in the URL path)
 
 #### Example
@@ -391,6 +443,7 @@ getGroupByName
 getGroup
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -402,6 +455,7 @@ getGroup
 executeChecksInGroup
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -421,6 +475,7 @@ getGroups
 getGroupChildrenByName
 
 #### Parameters
+
 * `name` (type: String) (provided in the URL path)
 
 #### Example
@@ -432,6 +487,7 @@ getGroupChildrenByName
 getGroupChecksByName
 
 #### Parameters
+
 * `name` (type: String) (provided in the URL path)
 
 #### Example
@@ -443,6 +499,7 @@ getGroupChecksByName
 getGroupChildren
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -454,12 +511,14 @@ getGroupChildren
 getGroupChecks
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
 
     curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/group/id/:id/checks
 
+<p><a id="clusterapirouter"></a></p>
 ## ClusterAPIRouter
 
 ### GET `/api/cluster/name/:name`
@@ -467,6 +526,7 @@ getGroupChecks
 getClusterByName
 
 #### Parameters
+
 * `name` (type: String) (provided in the URL path)
 
 #### Example
@@ -478,6 +538,7 @@ getClusterByName
 getCluster
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -489,6 +550,7 @@ getCluster
 suppressCluster
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -500,6 +562,7 @@ suppressCluster
 unsuppressCluster
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -519,6 +582,7 @@ getClusters
 getClusterStateByName
 
 #### Parameters
+
 * `name` (type: String) (provided in the URL path)
 
 #### Example
@@ -530,6 +594,7 @@ getClusterStateByName
 getClusterState
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -541,6 +606,7 @@ getClusterState
 getClusterResourcesByName
 
 #### Parameters
+
 * `name` (type: String) (provided in the URL path)
 
 #### Example
@@ -552,6 +618,7 @@ getClusterResourcesByName
 getClusterResources
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -563,6 +630,7 @@ getClusterResources
 getClusterReferencesByName
 
 #### Parameters
+
 * `name` (type: String) (provided in the URL path)
 
 #### Example
@@ -574,6 +642,7 @@ getClusterReferencesByName
 getClusterReferences
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -585,6 +654,7 @@ getClusterReferences
 suppressResourcesOnCluster
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -596,12 +666,14 @@ suppressResourcesOnCluster
 unsuppressResourcesOnCluster
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
 
     curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/cluster/id/:id/unsuppress-resources
 
+<p><a id="serviceapirouter"></a></p>
 ## ServiceAPIRouter
 
 ### GET `/api/service/id/:id`
@@ -609,6 +681,7 @@ unsuppressResourcesOnCluster
 getService
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -620,6 +693,7 @@ getService
 executeService
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -631,6 +705,7 @@ executeService
 suppressService
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -642,6 +717,7 @@ suppressService
 unsuppressService
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -653,6 +729,7 @@ unsuppressService
 getServiceByName
 
 #### Parameters
+
 * `host` (type: String) (provided in the URL path)
 * `name` (type: String) (provided in the URL path)
 
@@ -665,6 +742,7 @@ getServiceByName
 getServiceState
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -676,6 +754,7 @@ getServiceState
 getServiceStateByName
 
 #### Parameters
+
 * `host` (type: String) (provided in the URL path)
 * `name` (type: String) (provided in the URL path)
 
@@ -683,6 +762,7 @@ getServiceStateByName
 
     curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/service/name/:host/:name/state
 
+<p><a id="trapapirouter"></a></p>
 ## TrapAPIRouter
 
 ### GET `/api/trap/id/:id`
@@ -690,6 +770,7 @@ getServiceStateByName
 getTrap
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -701,6 +782,7 @@ getTrap
 suppressTrap
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -712,6 +794,7 @@ suppressTrap
 unsuppressTrap
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -723,6 +806,7 @@ unsuppressTrap
 getTrapByName
 
 #### Parameters
+
 * `host` (type: String) (provided in the URL path)
 * `name` (type: String) (provided in the URL path)
 
@@ -735,6 +819,7 @@ getTrapByName
 getTrapState
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -746,6 +831,7 @@ getTrapState
 getTrapStateByName
 
 #### Parameters
+
 * `host` (type: String) (provided in the URL path)
 * `name` (type: String) (provided in the URL path)
 
@@ -758,6 +844,7 @@ getTrapStateByName
 submitTrapStatus
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 * `status` (type: String) (provided as a query parameter)
 * `output` (type: String) (provided as a query parameter)
@@ -766,24 +853,15 @@ submitTrapStatus
 
     curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/trap/id/:id/submit?status=&output=
 
+<p><a id="resourceapirouter"></a></p>
 ## ResourceAPIRouter
-
-### GET `/api/resource/id/:id`
-
-getResource
-
-#### Parameters
-* `id` (type: UUID) (provided in the URL path)
-
-#### Example
-
-    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/resource/id/:id
 
 ### GET `/api/resource/id/:id/suppress`
 
 suppressResource
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -795,6 +873,7 @@ suppressResource
 unsuppressResource
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -806,6 +885,7 @@ unsuppressResource
 getResourceByName
 
 #### Parameters
+
 * `cluster` (type: String) (provided in the URL path)
 * `name` (type: String) (provided in the URL path)
 
@@ -818,6 +898,7 @@ getResourceByName
 getResourceState
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -829,6 +910,7 @@ getResourceState
 getResourceStateByName
 
 #### Parameters
+
 * `host` (type: String) (provided in the URL path)
 * `name` (type: String) (provided in the URL path)
 
@@ -836,6 +918,19 @@ getResourceStateByName
 
     curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/resource/name/:host/:name/state
 
+### GET `/api/resource/id/:id`
+
+getResource
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/resource/id/:id
+
+<p><a id="timeperiodapirouter"></a></p>
 ## TimePeriodAPIRouter
 
 ### GET `/api/time-period/id/:id`
@@ -843,6 +938,7 @@ getResourceStateByName
 getTimePeriod
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -862,12 +958,14 @@ getTimePeriods
 getTimePeriodByName
 
 #### Parameters
+
 * `name` (type: String) (provided in the URL path)
 
 #### Example
 
     curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/time-period/name/:name
 
+<p><a id="commandapirouter"></a></p>
 ## CommandAPIRouter
 
 ### GET `/api/command/id/:id`
@@ -875,6 +973,7 @@ getTimePeriodByName
 getCommand
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -894,12 +993,14 @@ getCommands
 getCommandByName
 
 #### Parameters
+
 * `name` (type: String) (provided in the URL path)
 
 #### Example
 
     curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/command/name/:name
 
+<p><a id="contactapirouter"></a></p>
 ## ContactAPIRouter
 
 ### GET `/api/contact/name-or-email/:nameOrEmail`
@@ -907,6 +1008,7 @@ getCommandByName
 getContactByNameOrEmail
 
 #### Parameters
+
 * `nameOrEmail` (type: String) (provided in the URL path)
 
 #### Example
@@ -918,6 +1020,7 @@ getContactByNameOrEmail
 getContact
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -929,6 +1032,7 @@ getContact
 getContactByName
 
 #### Parameters
+
 * `name` (type: String) (provided in the URL path)
 
 #### Example
@@ -948,12 +1052,14 @@ getContacts
 getContactByEmail
 
 #### Parameters
+
 * `email` (type: String) (provided in the URL path)
 
 #### Example
 
     curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/contact/email/:email
 
+<p><a id="teamapirouter"></a></p>
 ## TeamAPIRouter
 
 ### GET `/api/team/id/:id`
@@ -961,6 +1067,7 @@ getContactByEmail
 getTeam
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -980,6 +1087,7 @@ getTeams
 getTeamByName
 
 #### Parameters
+
 * `name` (type: String) (provided in the URL path)
 
 #### Example
@@ -991,6 +1099,7 @@ getTeamByName
 getTeamChildrenByName
 
 #### Parameters
+
 * `name` (type: String) (provided in the URL path)
 
 #### Example
@@ -1002,6 +1111,7 @@ getTeamChildrenByName
 getTeamContactsByName
 
 #### Parameters
+
 * `name` (type: String) (provided in the URL path)
 
 #### Example
@@ -1013,6 +1123,7 @@ getTeamContactsByName
 getTeamChildren
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -1024,12 +1135,14 @@ getTeamChildren
 getTeamContacts
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
 
     curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/team/id/:id/contacts
 
+<p><a id="commentsapirouter"></a></p>
 ## CommentsAPIRouter
 
 ### GET `/api/comment/id/:id`
@@ -1037,6 +1150,7 @@ getTeamContacts
 getComment
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -1048,6 +1162,7 @@ getComment
 removeComment
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
@@ -1059,6 +1174,7 @@ removeComment
 getCommentsForObject
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 * `offset` (type: Long) (provided as a query parameter)
 * `limit` (type: Long) (provided as a query parameter)
@@ -1072,6 +1188,7 @@ getCommentsForObject
 addCommentToCheck
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 * `summary` (type: String) (provided as a query parameter)
 * `comment` (type: String) (provided as a query parameter)
@@ -1085,6 +1202,7 @@ addCommentToCheck
 addCommentToAlert
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 * `summary` (type: String) (provided as a query parameter)
 * `comment` (type: String) (provided as a query parameter)
@@ -1098,6 +1216,7 @@ addCommentToAlert
 addCommentToDowntime
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 * `summary` (type: String) (provided as a query parameter)
 * `comment` (type: String) (provided as a query parameter)
@@ -1111,6 +1230,7 @@ addCommentToDowntime
 addCommentToObject
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 * `summary` (type: String) (provided as a query parameter)
 * `comment` (type: String) (provided as a query parameter)
@@ -1119,13 +1239,27 @@ addCommentToObject
 
     curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/comment/add-comment-to-object/id/:id?summary=&comment=
 
+<p><a id="downtimeapirouter"></a></p>
 ## DowntimeAPIRouter
+
+### GET `/api/downtime/id/:id/remove`
+
+removeDowntime
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/downtime/id/:id/remove
 
 ### GET `/api/downtime/for-object/id/:id`
 
 getDowntimeForObject
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 * `past` (type: Integer) (provided as a query parameter)
 * `future` (type: Integer) (provided as a query parameter)
@@ -1134,22 +1268,24 @@ getDowntimeForObject
 
     curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/downtime/for-object/id/:id?past=&future=
 
-### GET `/api/downtime/id/:id/remove`
+### GET `/api/downtime/id/:id`
 
-removeDowntime
+getDowntime
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
 
-    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/downtime/id/:id/remove
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/downtime/id/:id
 
 ### ANY `/api/downtime/add-downtime-to-check/id/:id`
 
 addDowntimeToCheck
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 * `starts` (type: Date) (provided as a query parameter)
 * `ends` (type: Date) (provided as a query parameter)
@@ -1160,17 +1296,7 @@ addDowntimeToCheck
 
     curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/downtime/add-downtime-to-check/id/:id?starts=&ends=&summary=&description=
 
-### GET `/api/downtime/id/:id`
-
-getDowntime
-
-#### Parameters
-* `id` (type: UUID) (provided in the URL path)
-
-#### Example
-
-    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/downtime/id/:id
-
+<p><a id="configapirouter"></a></p>
 ## ConfigAPIRouter
 
 ### ANY `/api/config/exists/:type/:name`
@@ -1178,6 +1304,7 @@ getDowntime
 objectExists
 
 #### Parameters
+
 * `type` (type: String) (provided in the URL path)
 * `name` (type: String) (provided in the URL path)
 
@@ -1193,6 +1320,7 @@ listIcons
 
     curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/config/icon/
 
+<p><a id="statsapirouter"></a></p>
 ## StatsAPIRouter
 
 ### ANY `/api/stats/transitions/check/id/:id`
@@ -1200,6 +1328,7 @@ listIcons
 getCheckTransitions
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 * `offset` (type: Long) (provided as a query parameter)
 * `limit` (type: Long) (provided as a query parameter)
@@ -1208,15 +1337,8 @@ getCheckTransitions
 
     curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/stats/transitions/check/id/:id?offset=&limit=
 
+<p><a id="utilapirouter"></a></p>
 ## UtilAPIRouter
-
-### GET `/api/util/version`
-
-version
-
-#### Example
-
-    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/util/version
 
 ### GET `/api/util/version/number`
 
@@ -1247,12 +1369,22 @@ newId
 newIds
 
 #### Parameters
+
 * `count` (type: Integer) (provided in the URL path)
 
 #### Example
 
     curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/util/id/new/:count
 
+### GET `/api/util/version`
+
+version
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/util/version
+
+<p><a id="lamplighterapirouter"></a></p>
 ## LamplighterAPIRouter
 
 ### ANY `/api/lamplighter/check/id/:id/readings`
@@ -1260,6 +1392,7 @@ newIds
 getReadingsByCheck
 
 #### Parameters
+
 * `id` (type: UUID) (provided in the URL path)
 
 #### Example
