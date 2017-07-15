@@ -41,16 +41,17 @@ takes the following arguments:
 
  * The site name you will use to reference this site when using the CLI
  * The API URL for this site
- * Your username
- * Your password
+ * Your API authentication token
+
+You can generate an API authentication token from your profile page, select 'Hello <your name>' from the main menu in Bergamot Monitoring.
 
 For example:
 
-    cellis@cedesktop:~> bergamot-cli config add-site 'demo.bergamot-monitoring.org' 'https://demo.bergamot-monitoring.org/api' 'op' 'bergamot'
-    Successfully connected to demo.bergamot-monitoring.org (https://demo.bergamot-monitoring.org/api) => Hello World
+    cellis@cedesktop:~> bergamot-cli config add-site 'demo.bergamot-monitoring.org' 'https://demo.bergamot-monitoring.org/' 'QUIqzeQYNe7glNuS1nDGyPDDL6zRp2MIREwS7tRQ2ACpsbSlwZDDKLcjxIGei9mfSuorDGIxcGsO5hqW2cM4sKbhIHHntYfCWzDLJSOg'
+    Successfully connected to demo.bergamot-monitoring.org (https://demo.bergamot-monitoring.org/) => Hello World
     Sucessfully authenticated with demo.bergamot-monitoring.org
     <bergamot-cli>
-        <site auth-token="QUIqzeQYNe7glNuS1nDGyPDDL6zRp2MIREwS7tRQ2ACpsbSlwZDDKLcjxIGei9mfSuorDGIxcGsO5hqW2cM4sKbhIHHntYfCWzDLJSOg" url="https://demo.bergamot-monitoring.org/api" name="demo.bergamot-monitoring.org"/>
+        <site auth-token="QUIqzeQYNe7glNuS1nDGyPDDL6zRp2MIREwS7tRQ2ACpsbSlwZDDKLcjxIGei9mfSuorDGIxcGsO5hqW2cM4sKbhIHHntYfCWzDLJSOg" url="https://demo.bergamot-monitoring.org/" name="demo.bergamot-monitoring.org"/>
     </bergamot-cli>
 
 ## Testing access to a site
