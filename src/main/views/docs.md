@@ -27,12 +27,16 @@ Documentation about how to install and use Bergamot Monitoring
     * Email
     * SMS
     * WebHook
+    * Slack
 * Workers
     * Agent
     * SNMP
     * HTTP
     * Nagios / NRPE
     * Dummy
+    * JDBC
+    * JMX
+    * SSH / SFTP
 
 ## For Developers
 
