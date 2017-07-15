@@ -55,7 +55,7 @@ The API has a couple of test resources which purely exist for test purposes.
 
 The resource `/api/test/hello/world` will respond to unauthenticated requests, as follows:
 
-    #> curl https://demo.bergamot-monitoring.org/api/test/hello/world; echo
+    #> curl https://demo.bergamot-monitoring.org/api/test/hello/world
     
     "Hello World"
 
