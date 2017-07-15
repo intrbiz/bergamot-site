@@ -5,8 +5,8 @@ Code: bash
 ---
 # Bergamot Monitoring API Reference
 
-* [AlertsAPIRouter](#alertsapirouter)
-* [HostAPIRouter](#hostapirouter)
+* [Alert API Methods](#alertsapirouter)
+* [Host API Methods](#hostapirouter)
 * [LocationAPIRouter](#locationapirouter)
 * [GroupAPIRouter](#groupapirouter)
 * [ClusterAPIRouter](#clusterapirouter)
@@ -25,39 +25,59 @@ Code: bash
 * [LamplighterAPIRouter](#lamplighterapirouter)
 
 <p><a id="alertsapirouter"></a></p>
-## AlertsAPIRouter
+## Alert API Methods
 
-### GET `/api/alert/`
+Alerts are raised when a check has reached a steady not OK state and someone or something needs to be notified.
 
-getAlerts
+### List alerts
 
-### GET `/api/alert/id/:id`
+`GET` `/api/alert/`
 
-getAlert
+Get the list of all currently active alerts, returning minimal information about each alert.
 
-#### Parameters
+#### Example
 
-* `id` (type: UUID) (provided in the URL path)
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/alert/
 
-### GET `/api/alert/for-check/id/:id`
+### getAlert
 
-getAlertsForCheck
-
-#### Parameters
-
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/alert/current/for-check/id/:id`
-
-getCurrentAlertForCheck
+`GET` `/api/alert/id/:id`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### ANY `/api/alert/id/:id/acknowledge`
+#### Example
 
-acknowledgeAlert
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/alert/id/:id
+
+### getAlertsForCheck
+
+`GET` `/api/alert/for-check/id/:id`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/alert/for-check/id/:id
+
+### getCurrentAlertForCheck
+
+`GET` `/api/alert/current/for-check/id/:id`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/alert/current/for-check/id/:id
+
+### acknowledgeAlert
+
+`ANY` `/api/alert/id/:id/acknowledge`
 
 #### Parameters
 
@@ -65,511 +85,767 @@ acknowledgeAlert
 * `summary` (type: String) (provided as a query parameter)
 * `comment` (type: String) (provided as a query parameter)
 
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/alert/id/:id/acknowledge?summary=&comment=
+
 <p><a id="hostapirouter"></a></p>
-## HostAPIRouter
+## Host API Methods
 
-### GET `/api/host/name/:name`
+Hosts represent pysical and virtual servers upon which Services run.  These API calls provide information opn configured Host checks and their current state.
 
-getHostByName
+### Get host by name
 
-#### Parameters
+`GET` `/api/host/name/:name`
 
-* `name` (type: String) (provided in the URL path)
-
-### GET `/api/host/id/:id/execute`
-
-executeHost
-
-#### Parameters
-
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/host/id/:id/execute-services`
-
-executeServicesOnHost
-
-#### Parameters
-
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/host/id/:id/suppress-services`
-
-suppressServicesOnHost
-
-#### Parameters
-
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/host/id/:id/unsuppress-services`
-
-unsuppressServicesOnHost
-
-#### Parameters
-
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/host/`
-
-getHosts
-
-### GET `/api/host/id/:id/suppress`
-
-suppress
-
-#### Parameters
-
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/host/id/:id/unsuppress`
-
-unsuppress
-
-#### Parameters
-
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/host/name/:name/state`
-
-getHostStateByName
+Get the host check for the given name, returning minimal information about the host check.
 
 #### Parameters
 
 * `name` (type: String) (provided in the URL path)
 
-### GET `/api/host/id/:id/state`
+#### Example
 
-getHostState
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/host/name/:name
+
+### executeHost
+
+`GET` `/api/host/id/:id/execute`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### GET `/api/host/name/:name/services`
+#### Example
 
-getHostServicesByName
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/host/id/:id/execute
+
+### executeServicesOnHost
+
+`GET` `/api/host/id/:id/execute-services`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/host/id/:id/execute-services
+
+### suppressServicesOnHost
+
+`GET` `/api/host/id/:id/suppress-services`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/host/id/:id/suppress-services
+
+### unsuppressServicesOnHost
+
+`GET` `/api/host/id/:id/unsuppress-services`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/host/id/:id/unsuppress-services
+
+### List hosts
+
+`GET` `/api/host/`
+
+Retreive the list of all hosts for this site, with minimal information for each host.
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/host/
+
+### suppress
+
+`GET` `/api/host/id/:id/suppress`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/host/id/:id/suppress
+
+### unsuppress
+
+`GET` `/api/host/id/:id/unsuppress`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/host/id/:id/unsuppress
+
+### Get host state by name
+
+`GET` `/api/host/name/:name/state`
+
+Get the state of the host check for the given name, returning just the check state.
 
 #### Parameters
 
 * `name` (type: String) (provided in the URL path)
 
-### GET `/api/host/id/:id/services`
+#### Example
 
-getHostServices
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/host/name/:name/state
+
+### Get host state by name
+
+`GET` `/api/host/id/:id/state`
+
+Get the state of the host check for the given id (UUID), returning just the check state.
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### GET `/api/host/name/:name/traps`
+#### Example
 
-getHostTrapsByName
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/host/id/:id/state
+
+### getHostServicesByName
+
+`GET` `/api/host/name/:name/services`
 
 #### Parameters
 
 * `name` (type: String) (provided in the URL path)
 
-### GET `/api/host/id/:id/traps`
+#### Example
 
-getHostTraps
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/host/name/:name/services
 
-#### Parameters
+### getHostServices
 
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/host/id/:id/suppress-traps`
-
-suppressTrapsOnHost
+`GET` `/api/host/id/:id/services`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### GET `/api/host/id/:id/unsuppress-traps`
+#### Example
 
-unsuppressTrapsOnHost
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/host/id/:id/services
+
+### getHostTrapsByName
+
+`GET` `/api/host/name/:name/traps`
+
+#### Parameters
+
+* `name` (type: String) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/host/name/:name/traps
+
+### getHostTraps
+
+`GET` `/api/host/id/:id/traps`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### GET `/api/host/id/:id/suppress-all`
+#### Example
 
-suppressAllOnHost
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/host/id/:id/traps
 
-#### Parameters
+### suppressTrapsOnHost
 
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/host/id/:id/unsuppress-all`
-
-unsuppressAllOnHost
+`GET` `/api/host/id/:id/suppress-traps`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### GET `/api/host/id/:id`
+#### Example
 
-getHost
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/host/id/:id/suppress-traps
+
+### unsuppressTrapsOnHost
+
+`GET` `/api/host/id/:id/unsuppress-traps`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/host/id/:id/unsuppress-traps
+
+### suppressAllOnHost
+
+`GET` `/api/host/id/:id/suppress-all`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/host/id/:id/suppress-all
+
+### unsuppressAllOnHost
+
+`GET` `/api/host/id/:id/unsuppress-all`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/host/id/:id/unsuppress-all
+
+### Get host by id
+
+`GET` `/api/host/id/:id`
+
+Get the host check for the given id (UUID), returning minimal information about the host check.
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/host/id/:id
 
 <p><a id="locationapirouter"></a></p>
 ## LocationAPIRouter
 
-### GET `/api/location/roots`
+### getRootLocations
 
-getRootLocations
+`GET` `/api/location/roots`
 
-### GET `/api/location/name/:name`
+#### Example
 
-getLocationByName
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/location/roots
 
-#### Parameters
+### getLocationByName
 
-* `name` (type: String) (provided in the URL path)
-
-### GET `/api/location/id/:id/execute-all-hosts`
-
-executeHostsInLocation
-
-#### Parameters
-
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/location/`
-
-getLocations
-
-### GET `/api/location/name/:name/children`
-
-getLocationChildrenByName
+`GET` `/api/location/name/:name`
 
 #### Parameters
 
 * `name` (type: String) (provided in the URL path)
 
-### GET `/api/location/name/:name/hosts`
+#### Example
 
-getLocationHostsByName
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/location/name/:name
+
+### executeHostsInLocation
+
+`GET` `/api/location/id/:id/execute-all-hosts`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/location/id/:id/execute-all-hosts
+
+### getLocations
+
+`GET` `/api/location/`
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/location/
+
+### getLocationChildrenByName
+
+`GET` `/api/location/name/:name/children`
 
 #### Parameters
 
 * `name` (type: String) (provided in the URL path)
 
-### GET `/api/location/id/:id/children`
+#### Example
 
-getLocationChildren
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/location/name/:name/children
+
+### getLocationHostsByName
+
+`GET` `/api/location/name/:name/hosts`
+
+#### Parameters
+
+* `name` (type: String) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/location/name/:name/hosts
+
+### getLocationChildren
+
+`GET` `/api/location/id/:id/children`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### GET `/api/location/id/:id/hosts`
+#### Example
 
-getLocationHosts
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/location/id/:id/children
+
+### getLocationHosts
+
+`GET` `/api/location/id/:id/hosts`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/location/id/:id/hosts
+
+### getLocation
+
+`GET` `/api/location/id/:id`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### GET `/api/location/id/:id`
+#### Example
 
-getLocation
-
-#### Parameters
-
-* `id` (type: UUID) (provided in the URL path)
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/location/id/:id
 
 <p><a id="groupapirouter"></a></p>
 ## GroupAPIRouter
 
-### GET `/api/group/roots`
+### getRootGroups
 
-getRootGroups
+`GET` `/api/group/roots`
 
-### GET `/api/group/name/:name`
+#### Example
 
-getGroupByName
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/group/roots
 
-#### Parameters
+### getGroupByName
 
-* `name` (type: String) (provided in the URL path)
-
-### GET `/api/group/id/:id`
-
-getGroup
-
-#### Parameters
-
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/group/id/:id/execute-all-checks`
-
-executeChecksInGroup
-
-#### Parameters
-
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/group/`
-
-getGroups
-
-### GET `/api/group/id/:id/children`
-
-getGroupChildren
-
-#### Parameters
-
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/group/id/:id/checks`
-
-getGroupChecks
-
-#### Parameters
-
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/group/name/:name/children`
-
-getGroupChildrenByName
+`GET` `/api/group/name/:name`
 
 #### Parameters
 
 * `name` (type: String) (provided in the URL path)
 
-### GET `/api/group/name/:name/checks`
+#### Example
 
-getGroupChecksByName
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/group/name/:name
+
+### getGroup
+
+`GET` `/api/group/id/:id`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/group/id/:id
+
+### executeChecksInGroup
+
+`GET` `/api/group/id/:id/execute-all-checks`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/group/id/:id/execute-all-checks
+
+### getGroups
+
+`GET` `/api/group/`
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/group/
+
+### getGroupChildren
+
+`GET` `/api/group/id/:id/children`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/group/id/:id/children
+
+### getGroupChecks
+
+`GET` `/api/group/id/:id/checks`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/group/id/:id/checks
+
+### getGroupChildrenByName
+
+`GET` `/api/group/name/:name/children`
 
 #### Parameters
 
 * `name` (type: String) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/group/name/:name/children
+
+### getGroupChecksByName
+
+`GET` `/api/group/name/:name/checks`
+
+#### Parameters
+
+* `name` (type: String) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/group/name/:name/checks
 
 <p><a id="clusterapirouter"></a></p>
 ## ClusterAPIRouter
 
-### GET `/api/cluster/name/:name`
+### getClusterByName
 
-getClusterByName
-
-#### Parameters
-
-* `name` (type: String) (provided in the URL path)
-
-### GET `/api/cluster/id/:id`
-
-getCluster
-
-#### Parameters
-
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/cluster/id/:id/suppress`
-
-suppressCluster
-
-#### Parameters
-
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/cluster/id/:id/unsuppress`
-
-unsuppressCluster
-
-#### Parameters
-
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/cluster/`
-
-getClusters
-
-### GET `/api/cluster/name/:name/state`
-
-getClusterStateByName
+`GET` `/api/cluster/name/:name`
 
 #### Parameters
 
 * `name` (type: String) (provided in the URL path)
 
-### GET `/api/cluster/id/:id/state`
+#### Example
 
-getClusterState
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/cluster/name/:name
+
+### getCluster
+
+`GET` `/api/cluster/id/:id`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### GET `/api/cluster/name/:name/resources`
+#### Example
 
-getClusterResourcesByName
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/cluster/id/:id
+
+### suppressCluster
+
+`GET` `/api/cluster/id/:id/suppress`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/cluster/id/:id/suppress
+
+### unsuppressCluster
+
+`GET` `/api/cluster/id/:id/unsuppress`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/cluster/id/:id/unsuppress
+
+### getClusters
+
+`GET` `/api/cluster/`
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/cluster/
+
+### getClusterStateByName
+
+`GET` `/api/cluster/name/:name/state`
 
 #### Parameters
 
 * `name` (type: String) (provided in the URL path)
 
-### GET `/api/cluster/id/:id/resources`
+#### Example
 
-getClusterResources
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/cluster/name/:name/state
+
+### getClusterState
+
+`GET` `/api/cluster/id/:id/state`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### GET `/api/cluster/name/:name/references`
+#### Example
 
-getClusterReferencesByName
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/cluster/id/:id/state
+
+### getClusterResourcesByName
+
+`GET` `/api/cluster/name/:name/resources`
 
 #### Parameters
 
 * `name` (type: String) (provided in the URL path)
 
-### GET `/api/cluster/id/:id/references`
+#### Example
 
-getClusterReferences
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/cluster/name/:name/resources
 
-#### Parameters
+### getClusterResources
 
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/cluster/id/:id/suppress-resources`
-
-suppressResourcesOnCluster
+`GET` `/api/cluster/id/:id/resources`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### GET `/api/cluster/id/:id/unsuppress-resources`
+#### Example
 
-unsuppressResourcesOnCluster
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/cluster/id/:id/resources
+
+### getClusterReferencesByName
+
+`GET` `/api/cluster/name/:name/references`
+
+#### Parameters
+
+* `name` (type: String) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/cluster/name/:name/references
+
+### getClusterReferences
+
+`GET` `/api/cluster/id/:id/references`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/cluster/id/:id/references
+
+### suppressResourcesOnCluster
+
+`GET` `/api/cluster/id/:id/suppress-resources`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/cluster/id/:id/suppress-resources
+
+### unsuppressResourcesOnCluster
+
+`GET` `/api/cluster/id/:id/unsuppress-resources`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/cluster/id/:id/unsuppress-resources
 
 <p><a id="serviceapirouter"></a></p>
 ## ServiceAPIRouter
 
-### GET `/api/service/id/:id`
+### getService
 
-getService
-
-#### Parameters
-
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/service/id/:id/execute`
-
-executeService
+`GET` `/api/service/id/:id`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### GET `/api/service/id/:id/suppress`
+#### Example
 
-suppressService
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/service/id/:id
 
-#### Parameters
+### executeService
 
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/service/id/:id/unsuppress`
-
-unsuppressService
+`GET` `/api/service/id/:id/execute`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### GET `/api/service/name/:host/:name`
+#### Example
 
-getServiceByName
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/service/id/:id/execute
+
+### suppressService
+
+`GET` `/api/service/id/:id/suppress`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/service/id/:id/suppress
+
+### unsuppressService
+
+`GET` `/api/service/id/:id/unsuppress`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/service/id/:id/unsuppress
+
+### getServiceByName
+
+`GET` `/api/service/name/:host/:name`
 
 #### Parameters
 
 * `host` (type: String) (provided in the URL path)
 * `name` (type: String) (provided in the URL path)
 
-### GET `/api/service/id/:id/state`
+#### Example
 
-getServiceState
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/service/name/:host/:name
+
+### getServiceState
+
+`GET` `/api/service/id/:id/state`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### GET `/api/service/name/:host/:name/state`
+#### Example
 
-getServiceStateByName
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/service/id/:id/state
+
+### getServiceStateByName
+
+`GET` `/api/service/name/:host/:name/state`
 
 #### Parameters
 
 * `host` (type: String) (provided in the URL path)
 * `name` (type: String) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/service/name/:host/:name/state
 
 <p><a id="trapapirouter"></a></p>
 ## TrapAPIRouter
 
-### GET `/api/trap/id/:id`
+### getTrap
 
-getTrap
-
-#### Parameters
-
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/trap/id/:id/suppress`
-
-suppressTrap
+`GET` `/api/trap/id/:id`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### GET `/api/trap/id/:id/unsuppress`
+#### Example
 
-unsuppressTrap
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/trap/id/:id
+
+### suppressTrap
+
+`GET` `/api/trap/id/:id/suppress`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### GET `/api/trap/name/:host/:name`
+#### Example
 
-getTrapByName
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/trap/id/:id/suppress
+
+### unsuppressTrap
+
+`GET` `/api/trap/id/:id/unsuppress`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/trap/id/:id/unsuppress
+
+### getTrapByName
+
+`GET` `/api/trap/name/:host/:name`
 
 #### Parameters
 
 * `host` (type: String) (provided in the URL path)
 * `name` (type: String) (provided in the URL path)
 
-### GET `/api/trap/id/:id/state`
+#### Example
 
-getTrapState
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/trap/name/:host/:name
 
-#### Parameters
+### getTrapStateByName
 
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/trap/name/:host/:name/state`
-
-getTrapStateByName
+`GET` `/api/trap/name/:host/:name/state`
 
 #### Parameters
 
 * `host` (type: String) (provided in the URL path)
 * `name` (type: String) (provided in the URL path)
 
-### ANY `/api/trap/id/:id/submit`
+#### Example
 
-submitTrapStatus
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/trap/name/:host/:name/state
+
+### submitTrapStatus
+
+`ANY` `/api/trap/id/:id/submit`
 
 #### Parameters
 
@@ -577,221 +853,341 @@ submitTrapStatus
 * `status` (type: String) (provided as a query parameter)
 * `output` (type: String) (provided as a query parameter)
 
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/trap/id/:id/submit?status=&output=
+
+### getTrapState
+
+`GET` `/api/trap/id/:id/state`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/trap/id/:id/state
+
 <p><a id="resourceapirouter"></a></p>
 ## ResourceAPIRouter
 
-### GET `/api/resource/id/:id/suppress`
+### suppressResource
 
-suppressResource
-
-#### Parameters
-
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/resource/id/:id/unsuppress`
-
-unsuppressResource
+`GET` `/api/resource/id/:id/suppress`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### GET `/api/resource/name/:cluster/:name`
+#### Example
 
-getResourceByName
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/resource/id/:id/suppress
+
+### unsuppressResource
+
+`GET` `/api/resource/id/:id/unsuppress`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/resource/id/:id/unsuppress
+
+### getResourceByName
+
+`GET` `/api/resource/name/:cluster/:name`
 
 #### Parameters
 
 * `cluster` (type: String) (provided in the URL path)
 * `name` (type: String) (provided in the URL path)
 
-### GET `/api/resource/id/:id/state`
+#### Example
 
-getResourceState
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/resource/name/:cluster/:name
+
+### getResourceState
+
+`GET` `/api/resource/id/:id/state`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### GET `/api/resource/name/:host/:name/state`
+#### Example
 
-getResourceStateByName
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/resource/id/:id/state
+
+### getResourceStateByName
+
+`GET` `/api/resource/name/:host/:name/state`
 
 #### Parameters
 
 * `host` (type: String) (provided in the URL path)
 * `name` (type: String) (provided in the URL path)
 
-### GET `/api/resource/id/:id`
+#### Example
 
-getResource
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/resource/name/:host/:name/state
+
+### getResource
+
+`GET` `/api/resource/id/:id`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/resource/id/:id
 
 <p><a id="timeperiodapirouter"></a></p>
 ## TimePeriodAPIRouter
 
-### GET `/api/time-period/id/:id`
+### getTimePeriod
 
-getTimePeriod
+`GET` `/api/time-period/id/:id`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### GET `/api/time-period/`
+#### Example
 
-getTimePeriods
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/time-period/id/:id
 
-### GET `/api/time-period/name/:name`
+### getTimePeriods
 
-getTimePeriodByName
+`GET` `/api/time-period/`
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/time-period/
+
+### getTimePeriodByName
+
+`GET` `/api/time-period/name/:name`
 
 #### Parameters
 
 * `name` (type: String) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/time-period/name/:name
 
 <p><a id="commandapirouter"></a></p>
 ## CommandAPIRouter
 
-### GET `/api/command/id/:id`
+### getCommand
 
-getCommand
+`GET` `/api/command/id/:id`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### GET `/api/command/`
+#### Example
 
-getCommands
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/command/id/:id
 
-### GET `/api/command/name/:name`
+### getCommands
 
-getCommandByName
+`GET` `/api/command/`
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/command/
+
+### getCommandByName
+
+`GET` `/api/command/name/:name`
 
 #### Parameters
 
 * `name` (type: String) (provided in the URL path)
 
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/command/name/:name
+
 <p><a id="contactapirouter"></a></p>
 ## ContactAPIRouter
 
-### GET `/api/contact/name-or-email/:nameOrEmail`
+### getContactByNameOrEmail
 
-getContactByNameOrEmail
+`GET` `/api/contact/name-or-email/:nameOrEmail`
 
 #### Parameters
 
 * `nameOrEmail` (type: String) (provided in the URL path)
 
-### GET `/api/contact/id/:id`
+#### Example
 
-getContact
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/contact/name-or-email/:nameOrEmail
+
+### getContact
+
+`GET` `/api/contact/id/:id`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### GET `/api/contact/name/:name`
+#### Example
 
-getContactByName
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/contact/id/:id
+
+### getContactByName
+
+`GET` `/api/contact/name/:name`
 
 #### Parameters
 
 * `name` (type: String) (provided in the URL path)
 
-### GET `/api/contact/email/:email`
+#### Example
 
-getContactByEmail
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/contact/name/:name
+
+### getContacts
+
+`GET` `/api/contact/`
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/contact/
+
+### getContactByEmail
+
+`GET` `/api/contact/email/:email`
 
 #### Parameters
 
 * `email` (type: String) (provided in the URL path)
 
-### GET `/api/contact/`
+#### Example
 
-getContacts
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/contact/email/:email
 
 <p><a id="teamapirouter"></a></p>
 ## TeamAPIRouter
 
-### GET `/api/team/id/:id`
+### getTeam
 
-getTeam
-
-#### Parameters
-
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/team/`
-
-getTeams
-
-### GET `/api/team/name/:name`
-
-getTeamByName
-
-#### Parameters
-
-* `name` (type: String) (provided in the URL path)
-
-### GET `/api/team/name/:name/children`
-
-getTeamChildrenByName
-
-#### Parameters
-
-* `name` (type: String) (provided in the URL path)
-
-### GET `/api/team/name/:name/contacts`
-
-getTeamContactsByName
-
-#### Parameters
-
-* `name` (type: String) (provided in the URL path)
-
-### GET `/api/team/id/:id/children`
-
-getTeamChildren
+`GET` `/api/team/id/:id`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### GET `/api/team/id/:id/contacts`
+#### Example
 
-getTeamContacts
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/team/id/:id
+
+### getTeams
+
+`GET` `/api/team/`
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/team/
+
+### getTeamByName
+
+`GET` `/api/team/name/:name`
+
+#### Parameters
+
+* `name` (type: String) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/team/name/:name
+
+### getTeamChildrenByName
+
+`GET` `/api/team/name/:name/children`
+
+#### Parameters
+
+* `name` (type: String) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/team/name/:name/children
+
+### getTeamContactsByName
+
+`GET` `/api/team/name/:name/contacts`
+
+#### Parameters
+
+* `name` (type: String) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/team/name/:name/contacts
+
+### getTeamChildren
+
+`GET` `/api/team/id/:id/children`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/team/id/:id/children
+
+### getTeamContacts
+
+`GET` `/api/team/id/:id/contacts`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/team/id/:id/contacts
 
 <p><a id="commentsapirouter"></a></p>
 ## CommentsAPIRouter
 
-### GET `/api/comment/id/:id`
+### getComment
 
-getComment
-
-#### Parameters
-
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/comment/id/:id/remove`
-
-removeComment
+`GET` `/api/comment/id/:id`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### GET `/api/comment/for-object/id/:id`
+#### Example
 
-getCommentsForObject
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/comment/id/:id
+
+### removeComment
+
+`GET` `/api/comment/id/:id/remove`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/comment/id/:id/remove
+
+### getCommentsForObject
+
+`GET` `/api/comment/for-object/id/:id`
 
 #### Parameters
 
@@ -799,19 +1195,13 @@ getCommentsForObject
 * `offset` (type: Long) (provided as a query parameter)
 * `limit` (type: Long) (provided as a query parameter)
 
-### ANY `/api/comment/add-comment-to-check/id/:id`
+#### Example
 
-addCommentToCheck
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/comment/for-object/id/:id?offset=&limit=
 
-#### Parameters
+### addCommentToCheck
 
-* `id` (type: UUID) (provided in the URL path)
-* `summary` (type: String) (provided as a query parameter)
-* `comment` (type: String) (provided as a query parameter)
-
-### ANY `/api/comment/add-comment-to-alert/id/:id`
-
-addCommentToAlert
+`ANY` `/api/comment/add-comment-to-check/id/:id`
 
 #### Parameters
 
@@ -819,9 +1209,27 @@ addCommentToAlert
 * `summary` (type: String) (provided as a query parameter)
 * `comment` (type: String) (provided as a query parameter)
 
-### ANY `/api/comment/add-comment-to-downtime/id/:id`
+#### Example
 
-addCommentToDowntime
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/comment/add-comment-to-check/id/:id?summary=&comment=
+
+### addCommentToAlert
+
+`ANY` `/api/comment/add-comment-to-alert/id/:id`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+* `summary` (type: String) (provided as a query parameter)
+* `comment` (type: String) (provided as a query parameter)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/comment/add-comment-to-alert/id/:id?summary=&comment=
+
+### addCommentToDowntime
+
+`ANY` `/api/comment/add-comment-to-downtime/id/:id`
 
 #### Parameters
 
@@ -829,38 +1237,42 @@ addCommentToDowntime
 * `summary` (type: String) (provided as a query parameter)
 * `comment` (type: String) (provided as a query parameter)
 
-### ANY `/api/comment/add-comment-to-object/id/:id`
+#### Example
 
-addCommentToObject
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/comment/add-comment-to-downtime/id/:id?summary=&comment=
+
+### addCommentToObject
+
+`ANY` `/api/comment/add-comment-to-object/id/:id`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 * `summary` (type: String) (provided as a query parameter)
 * `comment` (type: String) (provided as a query parameter)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/comment/add-comment-to-object/id/:id?summary=&comment=
 
 <p><a id="downtimeapirouter"></a></p>
 ## DowntimeAPIRouter
 
-### GET `/api/downtime/id/:id`
+### removeDowntime
 
-getDowntime
-
-#### Parameters
-
-* `id` (type: UUID) (provided in the URL path)
-
-### GET `/api/downtime/id/:id/remove`
-
-removeDowntime
+`GET` `/api/downtime/id/:id/remove`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
 
-### GET `/api/downtime/for-object/id/:id`
+#### Example
 
-getDowntimeForObject
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/downtime/id/:id/remove
+
+### getDowntimeForObject
+
+`GET` `/api/downtime/for-object/id/:id`
 
 #### Parameters
 
@@ -868,9 +1280,25 @@ getDowntimeForObject
 * `past` (type: Integer) (provided as a query parameter)
 * `future` (type: Integer) (provided as a query parameter)
 
-### ANY `/api/downtime/add-downtime-to-check/id/:id`
+#### Example
 
-addDowntimeToCheck
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/downtime/for-object/id/:id?past=&future=
+
+### getDowntime
+
+`GET` `/api/downtime/id/:id`
+
+#### Parameters
+
+* `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/downtime/id/:id
+
+### addDowntimeToCheck
+
+`ANY` `/api/downtime/add-downtime-to-check/id/:id`
 
 #### Parameters
 
@@ -880,28 +1308,40 @@ addDowntimeToCheck
 * `summary` (type: String) (provided as a query parameter)
 * `description` (type: String) (provided as a query parameter)
 
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/downtime/add-downtime-to-check/id/:id?starts=&ends=&summary=&description=
+
 <p><a id="configapirouter"></a></p>
 ## ConfigAPIRouter
 
-### ANY `/api/config/exists/:type/:name`
+### objectExists
 
-objectExists
+`ANY` `/api/config/exists/:type/:name`
 
 #### Parameters
 
 * `type` (type: String) (provided in the URL path)
 * `name` (type: String) (provided in the URL path)
 
-### ANY `/api/config/icon/`
+#### Example
 
-listIcons
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/config/exists/:type/:name
+
+### listIcons
+
+`ANY` `/api/config/icon/`
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/config/icon/
 
 <p><a id="statsapirouter"></a></p>
 ## StatsAPIRouter
 
-### ANY `/api/stats/transitions/check/id/:id`
+### getCheckTransitions
 
-getCheckTransitions
+`ANY` `/api/stats/transitions/check/id/:id`
 
 #### Parameters
 
@@ -909,41 +1349,69 @@ getCheckTransitions
 * `offset` (type: Long) (provided as a query parameter)
 * `limit` (type: Long) (provided as a query parameter)
 
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/stats/transitions/check/id/:id?offset=&limit=
+
 <p><a id="utilapirouter"></a></p>
 ## UtilAPIRouter
 
-### GET `/api/util/version/number`
+### versionNumber
 
-versionNumber
+`GET` `/api/util/version/number`
 
-### GET `/api/util/version/codename`
+#### Example
 
-versionCodeName
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/util/version/number
 
-### GET `/api/util/id/new`
+### versionCodeName
 
-newId
+`GET` `/api/util/version/codename`
 
-### GET `/api/util/id/new/:count`
+#### Example
 
-newIds
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/util/version/codename
+
+### newId
+
+`GET` `/api/util/id/new`
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/util/id/new
+
+### newIds
+
+`GET` `/api/util/id/new/:count`
 
 #### Parameters
 
 * `count` (type: Integer) (provided in the URL path)
 
-### GET `/api/util/version`
+#### Example
 
-version
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/util/id/new/:count
+
+### version
+
+`GET` `/api/util/version`
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/util/version
 
 <p><a id="lamplighterapirouter"></a></p>
 ## LamplighterAPIRouter
 
-### ANY `/api/lamplighter/check/id/:id/readings`
+### getReadingsByCheck
 
-getReadingsByCheck
+`ANY` `/api/lamplighter/check/id/:id/readings`
 
 #### Parameters
 
 * `id` (type: UUID) (provided in the URL path)
+
+#### Example
+
+    curl -X GET -H 'X-Bergamot-Auth: WVArodeKagxYAK0f4w61BB4XCOWcpTINgu2DQVpx4FwIFKNgCF6bEwtXhAxdeH9uT5029bXWsiA8bHv7wgR7ZGe0S-rddU3tMMUQJTFf' https://demo.bergamot-monitoring.org/api/lamplighter/check/id/:id/readings
 

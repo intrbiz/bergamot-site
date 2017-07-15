@@ -213,7 +213,7 @@ public class Discuss extends Router<BalsaApplication>
             user.setVerifiedAt(new Timestamp(System.currentTimeMillis()));
             db.setUser(user);
             // force authentication
-            balsa().session().currentPrincipal(user);
+            // TODO: balsa().session().currentPrincipal(user);
         }
         else
         {

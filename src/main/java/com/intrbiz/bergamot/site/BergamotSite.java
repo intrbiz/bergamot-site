@@ -18,12 +18,17 @@ import com.intrbiz.util.pool.database.DatabasePool;
 public class BergamotSite extends BalsaApplication
 {    
     @Override
-    protected void setup()
+    protected void setupEngines() throws Exception
     {
         // Setup Markdown support
         BalsaMarkdown.enable(this);
         // Security engine
         securityEngine(new DiscussSecurityEngine());
+    }
+    
+    @Override
+    protected void setupRouters() throws Exception
+    {
         // Setup the application routers
         // discuss
         router(new Discuss());
@@ -35,14 +40,29 @@ public class BergamotSite extends BalsaApplication
         router(new AppRouter());
     }
     
+    @Override
+    protected void setupFunctions() throws Exception
+    {
+    }
+
+    @Override
+    protected void setupActions() throws Exception
+    {        
+    }
+
+    @Override
+    protected void startApplication() throws Exception
+    {        
+    }
+
     public static void main(String[] args) throws Exception
     {
         // setup the database
         DataManager.getInstance().registerDefaultServer(
                 DatabasePool.Default.with().postgresql()
-                 .url("jdbc:postgresql://" + System.getProperty("discuss.db.host") + "/" + System.getProperty("discuss.db.name"))
-                 .username(System.getProperty("discuss.db.user"))
-                 .password(System.getProperty("discuss.db.pass"))
+                 .url("jdbc:postgresql://" + System.getProperty("discuss.db.host", "127.0.0.1") + "/" + System.getProperty("discuss.db.name", "bergamot_site"))
+                 .username(System.getProperty("discuss.db.user", "bergamot"))
+                 .password(System.getProperty("discuss.db.pass", "bergamot"))
                  .build()
         );
         // setup Discuss DB

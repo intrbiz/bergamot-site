@@ -4,14 +4,13 @@ import java.security.Principal;
 
 import org.apache.log4j.Logger;
 
-import com.intrbiz.balsa.BalsaException;
-import com.intrbiz.balsa.engine.impl.security.SecurityEngineImpl;
+import com.intrbiz.balsa.engine.impl.security.BaseSecurityEngine;
 import com.intrbiz.balsa.error.BalsaSecurityException;
 import com.intrbiz.data.DataException;
 import com.intrbiz.discuss.data.DiscussDB;
 import com.intrbiz.discuss.model.User;
 
-public class DiscussSecurityEngine extends SecurityEngineImpl
+public class DiscussSecurityEngine extends BaseSecurityEngine
 {
     private Logger logger = Logger.getLogger(DiscussSecurityEngine.class);
 
@@ -32,12 +31,25 @@ public class DiscussSecurityEngine extends SecurityEngineImpl
     }
 
     @Override
-    public void start() throws BalsaException
+    public byte[] tokenForPrincipal(Principal principal)
     {
+        return null;
     }
 
     @Override
-    protected Principal doPasswordLogin(String username, char[] password) throws BalsaSecurityException
+    public Principal principalForToken(byte[] token)
+    {
+        return null;
+    }
+
+    @Override
+    public boolean isTwoFactorAuthenticationRequiredForPrincipal(Principal principal)
+    {
+        return false;
+    }
+
+    @Override
+    public Principal doPasswordLogin(String username, char[] password) throws BalsaSecurityException
     {
         try (DiscussDB db = DiscussDB.connect())
         {
@@ -80,8 +92,14 @@ public class DiscussSecurityEngine extends SecurityEngineImpl
             User user = (User) principal;
             // admins can do anything
             if ("admin".equals(user.getRole())) return true;
-            // more detailed processing
+            // TODO: more detailed processing
         }
         return false;
+    }
+    
+    @Override
+    public boolean check(Principal principal, String permission, Object object)
+    {
+        return check(principal, permission);
     }
 }

@@ -39,6 +39,7 @@ Documentation about how to install and use Bergamot Monitoring
 Documentation about how to develop against Bergamot Monitoring, covering using 
 the REST API and the worker APIs.
 
+* [API Overview](/docs/developer/api/overview)
 * [API Reference](/docs/developer/api/reference)
 
 ## For Contributors
