@@ -28,10 +28,6 @@ Code: bash
 <p><a id="apirouter"></a></p>
 ## Authentication API Methods
 
-### handleCORSPreflight
-
-`OPTIONS` `/api**`
-
 ### Generate temporary authentication token
 
 `GET` `/api/auth-token`
