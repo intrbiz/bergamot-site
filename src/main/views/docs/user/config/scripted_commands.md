@@ -5,7 +5,7 @@ Code: javascript
 ---
 # Scripted Commands
 
-Bergamot Monitoring has a number of differing check workers, all targeted for specialised to rexecute different types of checks.  Most of these workers can be scripted using Javascript, this allows a vast range of check commands to be implemented using nothing but configuration, avoiding the need to write and distribute a Nagios style check executable.
+Bergamot Monitoring has a number of differing check workers, all specialised to execute different types of checks.  Most of these workers can be scripted using Javascript (Nashorn), this allows a vast range of check commands to be implemented using nothing but configuration, avoiding the need to write and distribute a Nagios style check executable.
 
 ## Supported Workers
 
