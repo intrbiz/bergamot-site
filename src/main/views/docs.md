@@ -18,6 +18,7 @@ Documentation about how to install and use Bergamot Monitoring
     * [Bergamot Configuration Guide](/docs/user/config/guide)
     * [Bergamot Configuration Reference](/docs/user/config/reference)
     * [Migrating From Nagios](/docs/user/config/convert)
+    * [Scripted Commands](/docs/user/config/scripted_commands)
 * Bergamot Core (Scheduling, Result Processing)
     * [Scheduling](/docs/user/general/scheduling)
     * [State Changes](/docs/user/general/state_changes)
